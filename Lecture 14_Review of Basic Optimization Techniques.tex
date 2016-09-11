@@ -26,6 +26,7 @@
 \undef{\definition}
 \theoremstyle{definition}
 \newtheorem{definition}{\translate{Definition}}
+\newtheorem{Fact}{\translate{Fact}}
 
 % Change colours for theorem-like environments
 \definecolor{mygreen1}{RGB}{0,96,0}
@@ -88,29 +89,29 @@
 
 
 
-\section{Warm-up: Basic Optimization in $ \mathbb{R}^1 $}\label{sec:R1}
+\section{Warm-up: Basic Unconstrained Optimization in $ \mathbb{R}^1 $}\label{sec:R1}
 
 \begin{frame}[fragile]
-\frametitle{Warm-up: Basic Optimization in $ \mathbb{R}^1 $}
+\frametitle{Warm-up: Basic Unconstrained Optimization in $ \mathbb{R}^1 $}
 
-\begin{block}{Fact}
-For a differentiable function $ f: \mathbb{R} \rightarrow \mathbb{R} $, a necessary condition for a local extremum is \[ f'(x) = 0. \]
-\end{block}
- \bigskip
+\begin{Fact}
+For a function $ f: \mathbb{R} \rightarrow \mathbb{R} $ differentiable at a point $ x $, a necessary condition for a local extremum at $ x $ is \[ f'(x) = 0. \]
+\end{Fact}
+\bigskip
 
-\begin{exampleblock}{Example}
+\begin{example} %{Example}
 If $ f(x) = ax^2 + bx + c $, then $ f'(x) = 2ax + b $ and the condition $ f'(x)=0 $ yields the familiar $ x=-\frac{b}{2a} $ (recall your high-school days). Depending on the sign of $ a $, this is a maximum or a minimum (What is the relationship?).
-\end{exampleblock}\bigskip
+\end{example}\bigskip
 
-\begin{exampleblock}{Example}
+\begin{example} %{Example}
 If $ f(x) = x^3 $, then $ f'(x)=3x^2 $ and $ f'(x)=0 \Rightarrow x=0$.
 
 Does the function attain a maximum or a minimum at $ x=0 $?
-\end{exampleblock}
+\end{example}
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{Warm-up: Basic Optimization in $ \mathbb{R}^1 $}
+\frametitle{Warm-up: Basic Unconstrained Optimization in $ \mathbb{R}^1 $}
 \begin{figure}
 \centering
 \includegraphics[width=0.9\linewidth]{cubicfun}
@@ -119,19 +120,26 @@ Does the function attain a maximum or a minimum at $ x=0 $?
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{Warm-up: Basic Optimization in $ \mathbb{R}^1 $}
-The answer is ``neither''! The point $ x=0 $ is not a local extremum of $ f(x)=x^3 $.
+\frametitle{Warm-up: Basic Unconstrained Optimization in $ \mathbb{R}^1 $}
+\addtocounter{theorem}{-1}
+\begin{example}[cont.]
+The answer is ``neither''! The point $ x=0 $ is not a local extremum of $ f(x)=x^3 $.\medskip
 
 This illustrates the pitfalls of using necessary conditions to find extrema -- they supply only candidates that need to be checked further.
+\end{example}
 
-\begin{alertblock}{Recipe}
+The above examples generalize in the following manner:
+\begin{Fact}
+Let a function $ f $ be $ n $ times differentiable at a point $ x $ and 
+\[ f'(x)=f''(x)=\ldots=f^{(n-1)}(x)=0,\qquad f^{(n)}\neq 0. \] \vskip -5pt
 \begin{enumerate}
-\item 
-\item 
-\item 
+\item If $ n $ is odd, $ f(x) $ does not attain an extremum at $ x $.
+\item If $ n $ is even and $ f^{(n)}(x)>0 $, the point $ x $ is a minimum.
+\item If $ n $ is even and $ f^{(n)}(x)<0 $, the point $ x $ is a maximum.
 \end{enumerate}
-\end{alertblock}
+\end{Fact}
 \end{frame}
+
 
 
 
