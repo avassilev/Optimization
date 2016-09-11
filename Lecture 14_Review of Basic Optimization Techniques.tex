@@ -95,7 +95,7 @@
 \frametitle{Warm-up: Basic Unconstrained Optimization in $ \mathbb{R}^1 $}
 
 \begin{Fact}
-For a function $ f: \mathbb{R} \rightarrow \mathbb{R} $ differentiable at a point $ x $, a necessary condition for a local extremum at $ x $ is \[ f'(x) = 0. \]
+For a function $ f: \mathbb{R} \rightarrow \mathbb{R} $ differentiable at a point $ x $, a necessary condition for a local extreme point (i.e. a maximum or a minimum) at $ x $ is \[ f'(x) = 0. \]
 \end{Fact}
 \bigskip
 
@@ -123,9 +123,9 @@ Does the function attain a maximum or a minimum at $ x=0 $?
 \frametitle{Warm-up: Basic Unconstrained Optimization in $ \mathbb{R}^1 $}
 \addtocounter{theorem}{-1}
 \begin{example}[cont.]
-The answer is ``neither''! The point $ x=0 $ is not a local extremum of $ f(x)=x^3 $.\medskip
+The answer is ``neither''! The point $ x=0 $ is not a local extreme point of $ f(x)=x^3 $.\medskip
 
-This illustrates the pitfalls of using necessary conditions to find extrema -- they supply only candidates that need to be checked further.
+This illustrates the pitfalls of using necessary conditions -- they supply only candidates that need to be checked further.
 \end{example}
 
 The above examples generalize in the following manner:
@@ -133,14 +133,47 @@ The above examples generalize in the following manner:
 Let a function $ f $ be $ n $ times differentiable at a point $ x $ and 
 \[ f'(x)=f''(x)=\ldots=f^{(n-1)}(x)=0,\qquad f^{(n)}\neq 0. \] \vskip -5pt
 \begin{enumerate}
-\item If $ n $ is odd, $ f(x) $ does not attain an extremum at $ x $.
+\item If $ n $ is odd, the point $ x $ is not an extreme point of $ f(x) $.
 \item If $ n $ is even and $ f^{(n)}(x)>0 $, the point $ x $ is a minimum.
 \item If $ n $ is even and $ f^{(n)}(x)<0 $, the point $ x $ is a maximum.
 \end{enumerate}
 \end{Fact}
 \end{frame}
 
+\section{Unconstrained Optimization in $ \mathbb{R}^n $}\label{sec:Rn}
 
+\begin{frame}[fragile]
+\frametitle{Unconstrained Optimization in $ \mathbb{R}^n $}
+\framesubtitle{Necessary conditions}
+\begin{Fact}
+For a function $ f: S \rightarrow \mathbb{R},~ S \subseteq \mathbb{R}^n$, differentiable at an interior point $ \mathbf{x} $, a necessary condition for $ \mathbf{x} $ to be a local extreme point is \[ f'(\mathbf{x}) = \mathbf{0}, \]
+where \[ \mathbf{x} = \left( \begin{array}{c}
+x_1 \\
+x_2\\
+\vdots \\
+x_n
+\end{array}\right),~\mathbf{0} = \left( \begin{array}{c}
+0 \\
+0 \\
+\vdots \\
+0
+\end{array}\right)\text{ and }  f'(\mathbf{x}) = \left( \begin{array}{c}
+\dfrac{\partial f(x_1,\ldots,x_n)}{\partial x_1}\\
+\vdots \\
+\dfrac{\partial f(x_1,\ldots,x_n)}{\partial x_n}
+\end{array}\right) \]
+\end{Fact}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Unconstrained Optimization in $ \mathbb{R}^n $}
+\begin{example}
+\[ f(x,y) = x^2 +2y^2-3x+xy \]
+\[ \frac{\partial f}{\partial x} = 2x-3+y=0\quad \Rightarrow \quad x=\frac{3-y}{2} \]
+\[ \frac{\partial f}{\partial y} = 4y+x = 0\quad \Rightarrow \quad y = -\frac{x}{4}\]
+\[ x=\frac{12}{7},~y=-\frac{3}{7} \]
+\end{example}
+\end{frame}
 
 
 \end{document}
