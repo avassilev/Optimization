@@ -162,7 +162,10 @@ x_n
 \vdots \\
 \dfrac{\partial f(x_1,\ldots,x_n)}{\partial x_n}
 \end{array}\right) \]
+\label{fc:NCsRn}
 \end{Fact}
+
+\textbf{Note:} A point where all partial derivatives vanish is called a \emph{critical point} or a \emph{stationary point} of the function $ f $. This also applies to functions on $ \mathbb{R}^1 $.
 \end{frame}
 
 \begin{frame}[fragile]
@@ -175,5 +178,46 @@ x_n
 \end{example}
 \end{frame}
 
+\begin{frame}[fragile]
+\frametitle{Unconstrained Optimization in $ \mathbb{R}^n $}
+\begin{figure}
+\centering
+\includegraphics[width=0.9\linewidth]{quadformplot}
+\label{fig:quadformplot}
+\end{figure}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Unconstrained Optimization in $ \mathbb{R}^n $}
+The necessity of the condition $  f'(\mathbf{x}) = \mathbf{0} $ has implications that are similar to the univariate case:
+
+\begin{example}
+Consider the function $ f(x,y) = x^2 - y^2 $. The NCs yield the following candidate: \[ \frac{\partial f}{\partial x} = 2x = 0\quad \Rightarrow \quad x=0, \]
+\[ \frac{\partial f}{\partial y} = -2y = 0\quad \Rightarrow \quad y = 0.\] \bigskip
+
+Let's look at the graph of the function in a neighbourhood of the point $ (0,0)' $.
+\label{ex:saddle}
+\end{example}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Unconstrained Optimization in $ \mathbb{R}^n $}
+\begin{figure}
+\centering
+\includegraphics[width=0.9\linewidth]{saddlepoint}
+\label{fig:saddlepoint}
+\end{figure}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Unconstrained Optimization in $ \mathbb{R}^n $}
+\addtocounter{theorem}{-1}
+\begin{example}[cont.]
+The critical point $ \mathbf{x} = (0,0)' $ is an example of a \emph{saddle point}. The function $ f $ (obviously) does not attain an extremum at $ \mathbf{x} $.
+\end{example}\bigskip
+
+Example \ref{ex:saddle} illustrates the need for a counterpart of ...
+
+\end{frame}
 
 \end{document}
