@@ -166,7 +166,7 @@ x_n
 \label{fc:NCsRn}
 \end{Fact}
 
-\textbf{Note:} A point where all partial derivatives vanish is called a \emph{critical point} or a \emph{stationary point} of the function $ f $. This also applies to functions on $ \mathbb{R}^1 $.
+\textbf{Note:} A point where the gradient of a function $ f $ vanishes is called a \emph{critical point} or a \emph{stationary point}. This also applies to functions on $ \mathbb{R}^1 $.
 \end{frame}
 
 \begin{frame}[fragile]
@@ -217,13 +217,31 @@ Let's look at the graph of the function in a neighbourhood of the point $ (0,0)'
 The critical point $ \mathbf{x} = (0,0)' $ is an example of a \emph{saddle point}. The function $ f $ (obviously) does not attain an extremum at $ \mathbf{x} $.
 \end{example}\bigskip
 
-Example \ref{ex:saddle} illustrates the need for a counterpart of Fact \ref{fc:SCsR1} in the $ n $-dimensional case. 
+Example \ref{ex:saddle} illustrates the need to develop a counterpart of Fact \ref{fc:SCsR1} in the $ n $-dimensional case. To this end, we have to review several concepts. \bigskip
+
+A symmetric matrix $ A $ is called \emph{positive semidefinite} if, for any vector $ \mathbf{x} $, we have \[ \mathbf{x'} A \mathbf{x} \geq 0. \]
+
+If the inequality is strict for any non-zero vector $ \mathbf{x} $, the matrix is called \emph{positive definite}.
+
+Similarly, a symmetric matrix $ A $ is called \emph{negative semidefinite} if, for any vector $ \mathbf{x} $, we have  $ \mathbf{x'} A \mathbf{x} \leq 0 $, and \emph{negative definite} in case of strict inequality for $ \mathbf{x} \neq \mathbf{0}$.
 \end{frame}
 
 \begin{frame}[fragile]
 \frametitle{Unconstrained Optimization in $ \mathbb{R}^n $}
-\begin{Fact}
+Quadratic forms ?
 
+Principal minors, leading principal minors
+
+Sylvester's criterion
+
+Hessians
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Unconstrained Optimization in $ \mathbb{R}^n $}
+\begin{Fact}
+Let a function $ f: S \rightarrow \mathbb{R},~ S \subseteq \mathbb{R}^n$ have a critical point at $ \mathbf{x} $.
 \label{fc:ScsRn}
 \end{Fact}
 \end{frame}
