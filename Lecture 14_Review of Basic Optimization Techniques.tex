@@ -147,7 +147,7 @@ Let a function $ f $ be $ n $ times differentiable at a point $ x $ and
 \frametitle{Unconstrained Optimization in $ \mathbb{R}^n $}
 \framesubtitle{Necessary conditions}
 \begin{Fact}
-For a function $ f: S \rightarrow \mathbb{R},~ S \subseteq \mathbb{R}^n$, differentiable at an interior point $ \mathbf{x} $, a necessary condition for $ \mathbf{x} $ to be a local extreme point is \[ f'(\mathbf{x}) = \mathbf{0}, \]
+For a function $ f: \mathbb{R}^n \rightarrow \mathbb{R}$, differentiable at a point $ \mathbf{x} $, a necessary condition for $ \mathbf{x} $ to be a local extreme point is \[ f'(\mathbf{x}) = \mathbf{0}, \]
 where \[ \mathbf{x} = \left( \begin{array}{c}
 x_1 \\
 x_2\\
@@ -219,24 +219,34 @@ The critical point $ \mathbf{x} = (0,0)' $ is an example of a \emph{saddle point
 
 Example \ref{ex:saddle} illustrates the need to develop a counterpart of Fact \ref{fc:SCsR1} in the $ n $-dimensional case. To this end, we have to review several concepts. \bigskip
 
-A symmetric matrix $ A $ is called \emph{positive semidefinite} if, for any vector $ \mathbf{x} $, we have \[ \mathbf{x'} A \mathbf{x} \geq 0. \]
+A symmetric square matrix $ A $ is called \emph{positive semidefinite} if, for any vector $ \mathbf{x} $, we have \[ \mathbf{x'} A \mathbf{x} \geq 0. \]
 
 If the inequality is strict for any non-zero vector $ \mathbf{x} $, the matrix is called \emph{positive definite}.
 
-Similarly, a symmetric matrix $ A $ is called \emph{negative semidefinite} if, for any vector $ \mathbf{x} $, we have  $ \mathbf{x'} A \mathbf{x} \leq 0 $, and \emph{negative definite} in case of strict inequality for $ \mathbf{x} \neq \mathbf{0}$.
+Similarly, a symmetric square matrix $ A $ is called \emph{negative semidefinite} if, for any vector $ \mathbf{x} $, we have  $ \mathbf{x'} A \mathbf{x} \leq 0 $, and \emph{negative definite} in case of strict inequality for $ \mathbf{x} \neq \mathbf{0}$.
 \end{frame}
 
 \begin{frame}[fragile]
 \frametitle{Unconstrained Optimization in $ \mathbb{R}^n $}
-Quadratic forms ?
+Incidentally, for a given square symmetric matrix $ A $, the function
+$ Q(\mathbf{x}) = \mathbf{x'} A \mathbf{x}$ is called a \emph{quadratic form}. Quadratic forms are also referred to as ``positive/negative (semi)definite'', depending on the properties of the respective matrix.\bigskip
 
-Principal minors, leading principal minors
+Recall that, for an $ n \times n $ matrix $ A $, the $ k $-th \emph{leading principal minor} ($ 1\leq k \leq n $) is the determinant of the submatrix \[ \left[ \begin{array}{l l l l}
+a_{1,1} & a_{1,2} & \cdots & a_{1,k}\\
+a_{2,1} & a_{2,2} & \cdots & a_{2,k}\\
+\vdots&\vdots& \ddots& \vdots\\
+a_{k,1} & a_{k,2} & \cdots & a_{k,k}
+\end{array} \right]. \]
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Unconstrained Optimization in $ \mathbb{R}^n $}
 
 Sylvester's criterion
 
 Hessians
 \end{frame}
-
 
 \begin{frame}[fragile]
 \frametitle{Unconstrained Optimization in $ \mathbb{R}^n $}
