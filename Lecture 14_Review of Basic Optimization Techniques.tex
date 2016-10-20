@@ -179,6 +179,7 @@ x_n
 \[ \frac{\partial f}{\partial x} = 2x-3+y=0\quad \Rightarrow \quad x=\frac{3-y}{2} \]
 \[ \frac{\partial f}{\partial y} = 4y+x = 0\quad \Rightarrow \quad y = -\frac{x}{4}\]
 \[ x=\frac{12}{7},~y=-\frac{3}{7} \]
+\label{ex:locminR2}
 \end{example}
 \end{frame}
 
@@ -328,6 +329,34 @@ Let a (twice) differentiable function $ f: \mathbb{R}^n \rightarrow \mathbb{R} $
 \end{enumerate}
 \label{fc:NcsRn}
 \end{Fact}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Unconstrained Optimization in $ \mathbb{R}^n $}
+\begin{example}[Verification of Example \ref{ex:locminR2}] Recall that:
+\[ f(x,y) = x^2 +2y^2-3x+xy \]
+\[ \frac{\partial f}{\partial x} = 2x-3+y,\quad \frac{\partial f}{\partial y} = 4y+x.\]
+We now have:
+\[ \frac{\partial^2 f}{\partial x^2} = 2, \quad \frac{\partial^2 f}{\partial y^2} = 4,\quad \frac{\partial^2 f}{\partial x \partial y} = 1, \quad  \frac{\partial^2 f}{\partial y \partial x } = 1. \]
+
+\[ D_1 = \det [2] = 2>0, \quad D_2 = \det \begin{bmatrix}
+2 & 1\\
+1 & 4
+\end{bmatrix} = 2 \cdot 4 - 1 \cdot 1 = 7 > 0. \]
+
+Since $ D_1>0,~D_2>0 $, the critical point $ x=\frac{12}{7},~y=-\frac{3}{7} $ is a minimum.
+\label{ex:locminR2cont}
+\end{example}
+
+\textbf{Homework:} Apply the same procedure to Example \ref{ex:saddle}.
+\end{frame}
+
+\section{Static Optimization with Equality Constraints. Lagrange Multipliers}\label{sec:Lagr}
+
+\begin{frame}[fragile]
+\frametitle{Static Optimization with Equality Constraints}
+\framesubtitle{Formulation}
+
 \end{frame}
 
 \end{document}
