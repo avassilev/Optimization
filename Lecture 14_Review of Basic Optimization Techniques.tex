@@ -89,9 +89,6 @@
 \tableofcontents
 \end{frame}
 
-
-
-
 \section{Warm-up: Basic Unconstrained Optimization in $ \mathbb{R}^1 $}\label{sec:R1}
 
 \begin{frame}[fragile]
@@ -356,7 +353,78 @@ Since $ D_1>0,~D_2>0 $, the critical point $ x=\frac{12}{7},~y=-\frac{3}{7} $ is
 \begin{frame}[fragile]
 \frametitle{Static Optimization with Equality Constraints}
 \framesubtitle{Formulation}
+Now we look at problems of the form
+\begin{equation}
+f(x_1,\ldots,x_n)\rightarrow \min (\max)
+\label{eq:obj}
+\end{equation}
+s.t.
+\begin{equation}
+\begin{array}{l l l}
+g_1(x_1,\ldots,x_n) = b_1\\
+g_2(x_1,\ldots,x_n) = b_2\\
+\cdots \\
+g_m(x_1,\ldots,x_n) = b_m\\
+\end{array}
+\label{eq:constr}
+\end{equation}
+where $ m<n $. (Can you explain the last requirement?) \bigskip
+
+\textbf{Note:} In what follows, all required properties of the objects in \eqref{eq:obj} and \eqref{eq:constr} like differentiability are implicitly assumed.
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Static Optimization with Equality Constraints}
+\framesubtitle{Formulation}
+Using vector notation for compactness, the objective function is:
+\[ f(\mathbf{x}) \rightarrow \min (\max) \]
+We introduce
+\[ \mathbf{g}(\mathbf{x}):= [g_1(\mathbf{x}),\ldots,g_m(\mathbf{x})]',\quad \mathbf{b} = [b_1,\ldots,b_m]' \]
+and the constraints are written as 
+\[ \mathbf{g}(\mathbf{x})=\mathbf{b}. \]
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Static Optimization with Equality Constraints}
+\framesubtitle{The Lagrangian}
+The standard approach to solving \eqref{eq:obj}-\eqref{eq:constr} starts by defining a \emph{Lagrangian}:
+
+\[ \mathcal{L}(\mathbf{x}) = f(\mathbf{x}) - \lambda_1 (g_1(\mathbf{x})-b_1) - \cdots - \lambda_m (g_m(\mathbf{x})-b_m). \]\bigskip
+
+The numbers $ \lambda_1,\ldots,\lambda_m $ are called \emph{Lagrange multipliers}.\bigskip
+
+This can also be written in vector notation:
+\[ \mathcal{L}(\mathbf{x}) = f(\mathbf{x}) - \boldsymbol{\lambda}' (\mathbf{g}(\mathbf{x})-\mathbf{b}) , \] 
+where $ \boldsymbol{\lambda }= [\lambda_1,\ldots,\lambda_m]' $ is the vector of Lagrange multipliers.
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Static Optimization with Equality Constraints}
+We can use the Lagrangian to produce necessary conditions for optimality in the following manner:
+
+\begin{block}{Algorithm}
+\begin{enumerate}
+\item Form the Lagrangian as above
+\item Differentiate it w.r.t. the variables we are optimizing over, i.e.
+\[ \dfrac{\partial \mathcal{L}}{\partial x_i} = \dfrac{\partial f(\mathbf{x})}{\partial x_i} - \sum_{j=1}^{m}\lambda_j \dfrac{\partial g_i(\mathbf{x})}{\partial x_i},~i=1,\ldots,n \]
+\item Set the resulting derivatives equal to zero, i.e.
+\[ \dfrac{\partial \mathcal{L}}{\partial x_i} = 0,~i=1,\ldots,n \]
+\item The equations in the preceding step, together with the constraints \eqref{eq:constr}, form a system of $ n+m $ equations which is solved for the unknowns $ x_i $ and $ \lambda_j $
+\end{enumerate}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Static Optimization with Equality Constraints}
+\framesubtitle{Remarks}
+\begin{itemize}
+\item Sometimes the Lagrangian is equivalently formulated as \[ \mathcal{L}(\mathbf{x}) = f(\mathbf{x}) - \lambda_1 g_1(\mathbf{x}) - \cdots - \lambda_m g_m(\mathbf{x}). \] It obviously makes no difference as to the result of the differentiation step.
+\item Let the algorithm yield a candidate $ \mathbf{x^*} $. Roughly, if the Lagrangian is convex in $ \mathbf{x} $, then the candidate $ \mathbf{x^*} $ is a minimum. If the Lagrangian is concave in $ \mathbf{x} $, then the candidate $ \mathbf{x^*} $ is a maximum. (See SHSS, p. 117, for the precise formulation.)
+\item A Lagrange multiplier is interpreted as a \emph{shadow price}, i.e. the gain (or loss) arising from relaxing the associated constraint.
+\end{itemize}
+
 
 \end{frame}
+
 
 \end{document}
