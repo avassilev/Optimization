@@ -419,12 +419,86 @@ We can use the Lagrangian to produce necessary conditions for optimality in the 
 \framesubtitle{Remarks}
 \begin{itemize}
 \item Sometimes the Lagrangian is equivalently formulated as \[ \mathcal{L}(\mathbf{x}) = f(\mathbf{x}) - \lambda_1 g_1(\mathbf{x}) - \cdots - \lambda_m g_m(\mathbf{x}). \] It obviously makes no difference as to the result of the differentiation step.
+\item One modification of the algorithm requires to also differentiate the Lagrangian w.r.t. $ \lambda_j $ and set the resulting derivatives equal to zero. This simply reproduces the constraints \eqref{eq:constr} and is covered by the last step of our algorithm.
 \item Let the algorithm yield a candidate $ \mathbf{x^*} $. Roughly, if the Lagrangian is convex in $ \mathbf{x} $, then the candidate $ \mathbf{x^*} $ is a minimum. If the Lagrangian is concave in $ \mathbf{x} $, then the candidate $ \mathbf{x^*} $ is a maximum. (See SHSS, p. 117, for the precise formulation.)
 \item A Lagrange multiplier is interpreted as a \emph{shadow price}, i.e. the gain (or loss) arising from relaxing the associated constraint.
 \end{itemize}
-
-
 \end{frame}
 
+\begin{frame}[fragile]
+\frametitle{Static Optimization with Equality Constraints}
+\begin{example}[Basic intertemporal optimization]
+\begin{itemize}
+\item An economic agent lives for two periods and supplies a fixed amount of labour in the first period of his life in exchange for monetary payment $ y $.
+\item In period $ 1 $ the agent consumes $ c_1 $ units of a good out of his income and saves the remaining $ y-c_1 $.  (For convenience we assume there is no inflation and the price of the good is normalized to one.)
+\item Savings are remunerated at an interest rate $ r $. Thus, in the second period the agent has at his disposal \[ (y-c_1)(1+r) \] to finance consumption, denoted $ c_2 $.
+\item  The agent obtains utility from consumption according to the utility function
+\[ u(c_1,c_2) = \ln c_1 + \beta \ln c_2,~\beta \in (0,1) . \]
+\item The agent seeks to maximize utility w.r.t. $ c_1,c_2 $.
+\end{itemize}
+\label{ex:intertemp}
+\end{example}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Static Optimization with Equality Constraints}
+\addtocounter{theorem}{-1}
+\begin{example}[cont.]
+The above problem can be formalized as \[  \max_{c_1,c_2} u(c_1,c_2) \]
+s.t. \[ c_2 = (y-c_1)(1+r). \]
+
+Notice that the constraint can be written equivalently as \[ c_1 + \dfrac{c_2}{1+r} = y \] to conform to the $ \mathbf{g}(\mathbf{x})=\mathbf{b} $ convention. (Can you interpret the last equation in terms of discounting to period 1 quantities?)
+
+The Lagrangian for this problem is \[ \mathcal{L} = \ln c_1 + \beta \ln c_2 - \lambda \left(  c_1 + \frac{c_2}{1+r} - y \right). \]
+\end{example}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Static Optimization with Equality Constraints}
+\addtocounter{theorem}{-1}
+\begin{example}[cont.] The solution algorithm yields
+\[ \dfrac{\partial \mathcal{L}}{\partial c_1} = \dfrac{1}{c_1} - \lambda = 0 \quad \Rightarrow \quad c_1 = \dfrac{1}{\lambda} \]
+\[ \dfrac{\partial \mathcal{L}}{\partial c_2} = \beta \dfrac{1}{c_2} - \dfrac{\lambda}{1+r} = 0 \quad \Rightarrow \quad c_2 = \dfrac{\beta (1+r)}{\lambda} \]
+
+Combining the above equations to eliminate $ \lambda $, we obtain \[ c_2 = \beta (1+r)c_1. \]
+
+Substitute the last expression in the budget constraint:
+\[ c_1 + \dfrac{\beta (1+r)c_1}{1+r} = y \quad \Rightarrow \quad c_1^* = \dfrac{y}{1+\beta}.\]
+\end{example}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Static Optimization with Equality Constraints}
+\addtocounter{theorem}{-1}
+\begin{example}[cont.] 
+We then have \[ c_2^* = \beta (1+r)c_1 =  (1+r)\dfrac{\beta}{1+\beta}y. \]
+
+Let us check how the optimal value of the utility function $u^*= u(c_1^*,c_2^*) $ changes with income: 
+\[ \begin{split}
+\dfrac{\partial u^*}{\partial y} = & \dfrac{\partial }{\partial y} \left( \ln \dfrac{y}{1+\beta} + \beta \ln  \dfrac{(1+r)\beta y}{1+\beta} \right)\\ {}\\
+= & \dfrac{1+\beta}{y}\dfrac{1}{1+\beta} + \beta \dfrac{1+\beta}{(1+r)\beta y} \dfrac{(1+r)\beta }{1+\beta} \\{}\\
+= & \dfrac{1}{y}+\dfrac{\beta}{y} = \dfrac{1+\beta}{y}  \uncover<2->{\color{red}{= \dfrac{1}{c_1^*} = \lambda. \quad \text{Interpretation?}}}
+\end{split}\] 
+\end{example}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Static Optimization with Equality Constraints}
+\textbf{Homework:} Check that the Lagrangian in Example \ref{ex:intertemp} is concave in $ c_1,c_2 $ to convince yourself that the algorithm indeed produces a maximum. \bigskip
+
+\textbf{Homework:} What are the conditions on the model parameters (i.e. on $ y,r,\beta $) in Example \ref{ex:intertemp} that ensure that consumption will be equal between the two periods? What are the conditions to have $ c_1 > c_2 $? What's the economic intuition for that?
+\end{frame}
+
+\section*{}
+\begin{frame}[fragile]
+\frametitle{Readings}
+\textbf{Main references:}
+
+Syds\ae{}ter et al. [SHSS] \emph{Further mathematics for economic analysis}. Chapter 3.\bigskip
+
+\textbf{Additional readings:}
+
+Simon and Blume. \emph{Mathematics for economists}. Chapters 17 and 18.
+\end{frame}
 
 \end{document}
