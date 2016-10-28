@@ -158,11 +158,11 @@ x_n
 0 \\
 \vdots \\
 0
-\end{array}\right)\text{ and }  f'(\mathbf{x}) = \left( \begin{array}{c}
+\end{array}\right)\text{ and }  f'(\mathbf{x})  = \left( \begin{array}{c}
 \dfrac{\partial f(x_1,\ldots,x_n)}{\partial x_1}\\
 \vdots \\
 \dfrac{\partial f(x_1,\ldots,x_n)}{\partial x_n}
-\end{array}\right) \]
+\end{array}\right)(= \nabla f(\mathbf{x})) \]
 \label{fc:NCsRn}
 \end{Fact}
 
@@ -235,7 +235,7 @@ $ Q(\mathbf{x}) = \mathbf{x'} A \mathbf{x}$ is called a \emph{quadratic form}. Q
 Recall that, for an $ n \times n $ matrix $ A $, a \emph{principal minor} of order $ k $ ($ 1\leq k \leq n $), denoted by $ \Delta_k $, is the determinant of the submatrix obtained by deleting $ n-k $ rows of the matrix and the correspondingly numbered columns, e.g.
 
 \[ \begin{tikzpicture}
-     \matrix (mat)[matrix of math nodes,left delimiter={[},right delimiter={]}]
+     \matrix (mat)[matrix of math nodes,left delimiter={(},right delimiter={)}]
       {%
 		a_{1,1}  &  a_{1,2}  &  a_{1,3}  &  \cdots  &  a_{1,n} \\
 		a_{2,1 } &  a_{2,2}  &  a_{2,3}  &  \cdots  &  a_{2,n} \\
@@ -255,12 +255,12 @@ Recall that, for an $ n \times n $ matrix $ A $, a \emph{principal minor} of ord
 
 \begin{frame}[fragile]
 \frametitle{Unconstrained Optimization in $ \mathbb{R}^n $}
-The $ k $-th \emph{leading principal minor} of a matrix $ A $ ($ 1\leq k \leq n $), denoted by $ D_k $, is the determinant of the submatrix \[  \begin{bmatrix}
+The $ k $-th \emph{leading principal minor} of a matrix $ A $ ($ 1\leq k \leq n $), denoted by $ D_k $, is the determinant of the submatrix \[  \begin{pmatrix}
 a_{1,1} & a_{1,2} & \cdots & a_{1,k}\\
 a_{2,1} & a_{2,2} & \cdots & a_{2,k}\\
 \vdots&\vdots& \ddots& \vdots\\
 a_{k,1} & a_{k,2} & \cdots & a_{k,k}
-\end{bmatrix} , \]
+\end{pmatrix} , \]
 i.e. the principal minor obtained by deleting the last $ n-k $ rows and columns and, respectively, keeping the first $ k $.
 
 \end{frame}
@@ -283,12 +283,12 @@ Note that the necessary and sufficient conditions for ``semidefiniteness'' invol
 
 \begin{frame}[fragile]
 \frametitle{Unconstrained Optimization in $ \mathbb{R}^n $}
-Let a function $ f(\mathbf{x})=f(x_1,\ldots,x_n) $ be twice differentiable. The matrix of second partial derivatives, evaluated at a point $ \mathbf{x} $, i.e. \[ \begin{bmatrix}
+Let a function $ f(\mathbf{x})=f(x_1,\ldots,x_n) $ be twice differentiable. The matrix of second partial derivatives, evaluated at a point $ \mathbf{x} $, i.e. \[ \begin{pmatrix}
 \dfrac{\partial^2 f(\mathbf{x})}{\partial x_1^2 } & \dfrac{\partial^2 f(\mathbf{x})}{\partial x_1 \partial x_2} & \cdots & \dfrac{\partial^2 f(\mathbf{x})}{\partial x_1 \partial x_n}\\[3ex]
 \dfrac{\partial^2 f(\mathbf{x})}{\partial x_2\partial x_1 } & \dfrac{\partial^2 f(\mathbf{x})}{\partial x_2^2} & \cdots & \dfrac{\partial^2 f(\mathbf{x})}{\partial x_2 \partial x_n}\\[3ex]
 \cdots & \cdots & \ddots & \cdots \\[3ex]
 \dfrac{\partial^2 f(\mathbf{x})}{\partial x_n \partial x_1 } & \dfrac{\partial^2 f(\mathbf{x})}{\partial x_n \partial x_2 } & \cdots & \dfrac{\partial^2 f(\mathbf{x})}{\partial x_n^2}
-\end{bmatrix} \] is called the \emph{Hessian (matrix)} of $ f $ at $ \mathbf{x} $.
+\end{pmatrix} \] is called the \emph{Hessian (matrix)} of $ f $ at $ \mathbf{x} $.
 \end{frame}
 
 \begin{frame}[fragile]
@@ -336,10 +336,10 @@ Let a (twice) differentiable function $ f: \mathbb{R}^n \rightarrow \mathbb{R} $
 We now have:
 \[ \frac{\partial^2 f}{\partial x^2} = 2, \quad \frac{\partial^2 f}{\partial y^2} = 4,\quad \frac{\partial^2 f}{\partial x \partial y} = 1, \quad  \frac{\partial^2 f}{\partial y \partial x } = 1. \]
 
-\[ D_1 = \det [2] = 2>0, \quad D_2 = \det \begin{bmatrix}
+\[ D_1 = \det (2) = 2>0, \quad D_2 = \det \begin{pmatrix}
 2 & 1\\
 1 & 4
-\end{bmatrix} = 2 \cdot 4 - 1 \cdot 1 = 7 > 0. \]
+\end{pmatrix} = 2 \cdot 4 - 1 \cdot 1 = 7 > 0. \]
 
 Since $ D_1>0,~D_2>0 $, the critical point $ x=\frac{12}{7},~y=-\frac{3}{7} $ is a minimum.
 \label{ex:locminR2cont}
@@ -379,7 +379,7 @@ where $ m<n $. (Can you explain the last requirement?) \bigskip
 Using vector notation for compactness, the objective function is:
 \[ f(\mathbf{x}) \rightarrow \min (\max) \]
 We introduce
-\[ \mathbf{g}(\mathbf{x}):= [g_1(\mathbf{x}),\ldots,g_m(\mathbf{x})]',\quad \mathbf{b} = [b_1,\ldots,b_m]' \]
+\[ \mathbf{g}(\mathbf{x}):= (g_1(\mathbf{x}),\ldots,g_m(\mathbf{x}))',\quad \mathbf{b} = (b_1,\ldots,b_m)' \]
 and the constraints are written as 
 \[ \mathbf{g}(\mathbf{x})=\mathbf{b}. \]
 \end{frame}
@@ -395,7 +395,7 @@ The numbers $ \lambda_1,\ldots,\lambda_m $ are called \emph{Lagrange multipliers
 
 This can also be written in vector notation:
 \[ \mathcal{L}(\mathbf{x}) = f(\mathbf{x}) - \boldsymbol{\lambda}' (\mathbf{g}(\mathbf{x})-\mathbf{b}) , \] 
-where $ \boldsymbol{\lambda }= [\lambda_1,\ldots,\lambda_m]' $ is the vector of Lagrange multipliers.
+where $ \boldsymbol{\lambda }= (\lambda_1,\ldots,\lambda_m)' $ is the vector of Lagrange multipliers.
 \end{frame}
 
 \begin{frame}[fragile]
@@ -406,7 +406,7 @@ We can use the Lagrangian to produce necessary conditions for optimality in the 
 \begin{enumerate}
 \item Form the Lagrangian as above
 \item Differentiate it w.r.t. the variables we are optimizing over, i.e.
-\[ \dfrac{\partial \mathcal{L}}{\partial x_i} = \dfrac{\partial f(\mathbf{x})}{\partial x_i} - \sum_{j=1}^{m}\lambda_j \dfrac{\partial g_i(\mathbf{x})}{\partial x_i},~i=1,\ldots,n \]
+\[ \dfrac{\partial \mathcal{L}}{\partial x_i} = \dfrac{\partial f(\mathbf{x})}{\partial x_i} - \sum_{j=1}^{m}\lambda_j \dfrac{\partial g_j(\mathbf{x})}{\partial x_i},~i=1,\ldots,n \]
 \item Set the resulting derivatives equal to zero, i.e.
 \[ \dfrac{\partial \mathcal{L}}{\partial x_i} = 0,~i=1,\ldots,n \]
 \item The equations in the preceding step, together with the constraints \eqref{eq:constr}, form a system of $ n+m $ equations which is solved for the unknowns $ x_i $ and $ \lambda_j $
