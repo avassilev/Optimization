@@ -241,7 +241,9 @@ Take the \emph{Jacobian} of the constraint function $ \mathbf{g}(\mathbf{x}) $ a
 \frametitle{An equivalent formulation of the constraint qualification}
 Thus, if $ k $ out of $ m $ constraints are not binding, we are left with a $ (m-k)\times n $ matrix of partial derivatives, evaluated at $ \mathbf{x^*} $.\bigskip
 
-The constraint qualification requires that the rank of this matrix should be equal to the number of rows $ m-k $.
+The constraint qualification requires that the rank of this matrix should be equal to the number of rows $ m-k $.\bigskip \bigskip
+
+\textbf{Remark:} While we work with a specific version of the CQ here, bear in mind that the term ``constraint qualification'' refers to a whole class of different regularity conditions used in optimization problems.
 \end{frame}
 
 \begin{frame}[fragile]
@@ -254,7 +256,23 @@ Therefore the general procedure is as follows:
 \item Use Fact \ref{fc:KT_NCs} to find a set of candidates.
 \item Find the feasible points where the CQ fails. These are also candidates.
 \item Search for the optimum over the union of the preceding two sets.
-\end{enumerate}
+\end{enumerate}\bigskip
+
+For more complicated problems one approach is to work over the various combinations of constraints (assume all are binding, one is binding etc.) and to study these cases one by one.
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Some illustrations}
+\begin{example}[Example \ref{ex:KTillustrated} revisited]
+The solution of Example \ref{ex:KTillustrated} did not make use of the CQ condition. Let us check it now: \[ g(x,y)=x^2+y^2 \quad \Rightarrow \quad \nabla g(x,y) = (2x,2y)'. \]
+
+Since any single vector except the zero vector is linearly independent in itself, the CQ fails only at $ (0,0)' $.
+
+Therefore, a strict application of Fact \ref{fc:KT_NCs} would have required to treat the case $ x=0,~y=0 $ separately, to establish the other two possibilities $ x=y=\frac{1}{\sqrt{2}} $ and $ x=y=-\frac{1}{\sqrt{2}} $, and then to compare the three cases. In working through Example  \ref{ex:KTillustrated} we obtained the first case via the K-T algorithm.
+\label{ex:revisitKTillustrated}
+\end{example}\bigskip
+
+\textbf{Homework:} Consider the problem $ \max_{x,y} f(x,y)=1-2x^2-3y^2 $ s.t. $ x\geq 5,~y \geq 6 $. Solve it using the K-T procedure. Can you guess the solution without using formal methods?
 \end{frame}
 
 \begin{frame}[fragile]
@@ -286,23 +304,288 @@ This again illustrates the need to use NCs with caution.
 \end{example}
 \end{frame}
 
+
 \begin{frame}[fragile]
-\frametitle{Some illustrations}
-\begin{example}[Example \ref{ex:KTillustrated} revisited]
-The solution of Example \ref{ex:KTillustrated} did not make use of the CQ condition. Let us check it now: \[ g(x,y)=x^2+y^2. \]
-\label{ex:revisitKTillustrated}
-\end{example}
+\frametitle{Sufficient conditions}
+The following fact provides a sufficient condition for optimality by imposing a concavity requirement on the Lagrangian.
+
+\begin{Fact}
+Let $ \mathbf{x^*} $ be an admissible point for the problem \eqref{eq:obj}-\eqref{eq:constr}. 
+
+Suppose that:\begin{enumerate}
+\item We can find a vector $ (\lambda_1,\ldots,\lambda_m)' $ which, together with $ \mathbf{x^*} $, satisfies conditions \eqref{eq:dLdX} and \eqref{eq:ComplSlack} of the K-T algorithm .
+\item The Lagrangian is concave.
+\end{enumerate}
+
+Then the point $ \mathbf{x^*} $ is optimal.
+\label{fc:SCsIneq}
+\end{Fact}
 \end{frame}
 
+
+\begin{frame}[fragile]
+\frametitle{Sufficient conditions}
+\framesubtitle{Remarks}
+\begin{itemize}
+\item The requirement of concavity or convexity of a Lagrangian or a similar object is a popular way of obtaining sufficient conditions for optimality.
+\item Rather than working directly with the definition of concavity, it is often useful to apply special results to show concavity. Examples include:
+\begin{itemize}
+\item The sum of concave functions is concave.
+\begin{itemize}
+\item As a special case, if $ f(x_1,\ldots,x_n)=\sum_{i=1}^{n}f_i(x_i) $ and $ f_i $ are concave, then $ f $ is also concave.
+\end{itemize}
+\item If $ f $ is concave and $ \alpha>0 $, then $ \alpha f $ is concave.
+\item A twice differentiable function of one variable is concave on an interval $ I $ if $ f''(x)\leq 0, ~\forall x \in I $.
+\item Let $ f(\mathbf{x}) $ be a twice differentiable function defined on an open convex set $ S\subset \mathbb{R}^n $. The function $ f(\mathbf{x}) $ is concave in $ S $ if and only if the Hessian $ \mathbf{f''(x)} $ is negative semidefinite for all $ \mathbf{x}\in S $. If the Hessian $ \mathbf{f''(x)} $ is negative definite for all $ \mathbf{x}\in S $, it follows that $ f(\mathbf{x}) $ is \emph{strictly} concave in $ S $.
+\end{itemize}
+\item Similar results hold for convex functions. See SHSS, 2.2-2.4, for more information on convex sets and concave/convex functions.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Example: utility maximization}
+Consider a consumer with income $ I $ who plans to buy certain quantities, $ x_1 $ and $ x_2 $, of two goods at prices $ p_1 $ and $ p_2 $, respectively . Obviously, we require $ p_1,p_2,I >0 $. The consumer's preferences are described via the utility function \[ U(x_1,x_2) = x_1^\alpha x_2^\beta,\quad \alpha,\beta >0,~\alpha+\beta < 0. \] 
+
+The consumer's feasible set is characterized by the budget constraint and nonnegativity constraints on the quantities:   \[ p_1 x_1 + p_2 x_2 \leq I , \]  
+\[ x_1\geq 0 , \] \[ x_2 \geq 0. \] 
+
+The consumer seeks to maximise utility subject to the above constraints.
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Example: utility maximization}
+Notice that the consumer is \textbf{not} required to spend all his income!\bigskip
+
+To cast the problem in canonical form, we rewrite the nonnegativity constraints as
+\[ -x_1\leq 0 , \qquad -x_2 \leq 0. \] \bigskip
+
+The Lagrangian is \[ \mathcal{L} = x_1^\alpha x_2^\beta - \lambda_1 ( p_1 x_1 + p_2 x_2 - I) -\lambda_2 (-x_1) - \lambda_3 (-x_2) \] and is {\color{red}concave} in $ (x_1,x_2) $.\bigskip
+
+\textbf{Homework:} Prove the concavity of $ \mathcal{L} $.
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Example: utility maximization}
+Notice that the Lagrangian is not differentiable at $ x_1=0 $ or $ x_2=0 $. However, we can exclude those cases as it is immediately seen that any feasible point with positive elements yields a positive value of the utility function (compared to the zero utility when one or both $ x_i $ is zero).\bigskip
+
+Then, we can apply the K-T algorithm:\begin{align*}
+&\dfrac{\partial \mathcal{L}}{\partial x_1} = \alpha x_1^{\alpha-1} x_2^\beta -\lambda_1 p_1 + \lambda_2 = 0, \\[4pt]
+&\dfrac{\partial \mathcal{L}}{\partial x_2} = \beta x_1^\alpha x_2^{\beta-1} -\lambda_1 p_2 + \lambda_3 = 0, \\[4pt]
+&\lambda_1 \geq 0, \quad \lambda_1 ( p_1 x_1 + p_2 x_2 - I) = 0, \\[4pt]
+&\lambda_2 \geq 0, \quad \lambda_2 x_1 = 0, \\[4pt]
+&\lambda_3 \geq 0, \quad \lambda_3 x_2 = 0. 
+\end{align*}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Example: utility maximization}
+We will work through the various possibilities for the Lagrange multipliers. 
+
+These are:
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline 
+Case & $ \lambda_1 $ & $ \lambda_2 $ & $ \lambda_3 $ \\ 
+\hline 
+1 & 0 & 0 & 0 \\ 
+\hline 
+2 & 0 & 0 & + \\ 
+\hline 
+3 & 0 & + & 0 \\ 
+\hline 
+4 & 0 & + & + \\ 
+\hline 
+5 & + & + & + \\ 
+\hline 
+6 & + & 0 & + \\ 
+\hline 
+7 & + & + & 0 \\ 
+\hline 
+8 & + & 0 & 0 \\ 
+\hline 
+\end{tabular} \end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Example: utility maximization}
+Our task is made easy by the following observation:\bigskip
+
+If either $ \lambda_2>0 $ or $ \lambda_3>0 $, then the complementary slackness conditions imply $ x_1=0 $ or $ x_2=0 $, which was excluded as a possibility. Thus, we are left to study only Cases 1 and 8.\bigskip
+
+Consider \textbf{Case 1}: $ \lambda_1=\lambda_2=\lambda_3=0 $. The complementary slackness conditions now imply $ x_1,x_2>0 $.
+
+The Lagrangian maximization conditions yield 
+\[ \alpha x_1^{\alpha-1} x_2^\beta = 0, \]
+\[ \beta x_1^\alpha x_2^{\beta-1} =0, \] which requires that at least one of $ x_1 $ or $ x_2 $ is zero, a contradiction. Therefore, we can disregard this case.
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Example: utility maximization}
+Consider next \textbf{Case 8}: $ \lambda_1>0,~\lambda_2=\lambda_3=0 $. Again the complementary slackness conditions imply $ x_1,x_2>0 $.
+
+The first complementary slackness condition now yields \[ p_1 x_1 + p_2 x_2 = I,  \]
+i.e. the budget constraint is binding.
+
+The Lagrangian maximization conditions take the form 
+\[ \alpha x_1^{\alpha-1} x_2^\beta -\lambda_1 p_1 = 0, \]
+\[ \beta x_1^\alpha x_2^{\beta-1} -\lambda_1 p_2 = 0. \] 
+
+Rearranging these to isolate $ \lambda_1 $ and equating the resulting expressions, we get
+\[ \dfrac{\alpha x_1^{\alpha-1}x_2^\beta}{p_1} = \dfrac{\beta x_1^{\alpha}x_2^{\beta-1}}{p_2} \quad \Rightarrow \quad \dfrac{\alpha}{p_1 x_1} = \dfrac{\beta}{p_2 x_2} \quad \Rightarrow \quad x_1 = \dfrac{\alpha p_2}{\beta p_1}x_2. \]
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Example: utility maximization}
+Substitute the expression for $ x_1 $ in the budget constraint: 
+\[ p_1 \dfrac{\alpha p_2}{\beta p_1}x_2 + p_2 x_2 = I. \]
+
+Solve for $ x_2 $ to obtain \[ x_2 = \dfrac{\beta}{\alpha+\beta}\dfrac{I}{p_2}. \]
+
+Next, substitute the solution for $ x_2 $ in the expression for $ x_1 $ obtained earlier:
+\[ x_1 = \dfrac{\alpha p_2}{\beta p_1}\dfrac{\beta}{\alpha+\beta}\dfrac{I}{p_2} \quad \Rightarrow \quad x_1 = \dfrac{\alpha}{\alpha+\beta}\dfrac{I}{p_1}. \]\bigskip
+
+Given that the formulas for $ x_1 $ and $ x_2 $ computed above confirm that $ x_1,x_2>0 $, one can in turn verify that $ \lambda_1 > 0 $.
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Example: utility maximization}
+\framesubtitle{Comments}
+\begin{itemize}
+\item The above analysis provides \[ x_1 = \dfrac{\alpha}{\alpha+\beta}\dfrac{I}{p_1}, \qquad x_2 = \dfrac{\beta}{\alpha+\beta}\dfrac{I}{p_2} \] as the only K-T candidate. In view of Fact \ref{fc:SCsIneq}, this is the solution to consumer's problem.
+\item The solutions for $ x_1 $ and $ x_2 $ are standard demand functions familiar from microeconomics. The quantities depend negatively on the respective prices and positively on income.
+\item We obtained the fact that the budget constraint binds in the course of solving the problem, rather than as an assumption. It was a consequence of having $ \lambda_1 > 0$ in the CS condition. The economic interpretation is that if a resource is valuable (as captured by the fact that its shadow price is positive), then it should not be wasted or left unutilized.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Wrap up on problems with inequality constraints}
+Test your understanding of the material by solving the following:
+
+\textbf{Homework:} \[ \max_{x_1,x_2} 6x_1-2 x_1^2 + 2 x_1 x_2-2x_2^2  \]
+s.t. 
+\[ 3x_1+4x_2 \leq 6, \] 
+\[ -x_1 + 4x_2^2 \leq 2, \]
+\[  x_1\geq 0,\quad x_2\geq 0. \]
+
+\textbf{Homework:} A firm produces its output using the production technology $ A q_1^a q_2^b,~a,b>0 $, where $ q_1,q_2 \geq 0 $ are the inputs used in production. The cost per unit of the first input is $ w_1 >0 $ and for the second input is $ w_2 >0$. Demand for the firm's output is $ Q>0 $. Use the K-T approach to find the input combination that minimizes costs while ensuring enough is produced to meet demand, i.e. \[ \min_{q_1,q_2} w_1 q_1 + w_2 q_2\]
+s.t. \[ A q_1^a q_2^b \geq Q,\quad q_1,q_2 \geq 0. \]
+\end{frame}
+
+\section{Static optimization with mixed constraints}\label{sec:mixed}
+
+\begin{frame}[fragile]
+\frametitle{The case of mixed inequality and equality constraints}
+\framesubtitle{Formulation}
+Sometimes an optimization problem features a combination of  equality and inequality constraints:
+
+\begin{equation}
+f(x_1,\ldots,x_n)\rightarrow \max 
+\label{eq:objmx}
+\end{equation}
+s.t.
+\begin{equation}
+\begin{array}{l l l}
+g_1(x_1,\ldots,x_n) = b_1\\
+g_2(x_1,\ldots,x_n) = b_2\\
+\cdots \\
+g_r(x_1,\ldots,x_n) = b_r\\
+h_1(x_1,\ldots,x_n) \leq c_1\\
+h_2(x_1,\ldots,x_n) \leq c_2\\
+\cdots \\
+h_s(x_1,\ldots,x_n) \leq c_s\\
+\end{array},
+\label{eq:constrmx}
+\end{equation}
+i.e. \begin{equation*}
+\max f(\mathbf{x}) \text{ s.t. } \left\{ \begin{array}{l}
+\mathbf{g}(\mathbf{x}) = \mathbf{b}\\
+\mathbf{h}(\mathbf{x})\leq \mathbf{c}
+\end{array} \right. .
+\end{equation*}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{The case of mixed inequality and equality constraints}
+\framesubtitle{Constructing the Lagrangian}
+As before, we will require that $ r<n $. \bigskip
+
+The Lagrangian for problem \eqref{eq:objmx}-\eqref{eq:constrmx} is constructed as follows:
+\[ \mathcal{L} = f(\mathbf{x}) - \sum_{i=1}^{r}\lambda_i (g_i(\mathbf{x})-b_i) - \sum_{j=1}^{s}\mu_j (h_j(\mathbf{x})-c_j). \]
+
+The Lagrange multipliers conform to the well-known principle: $ \lambda_i $ are free of sign (since they correspond to equality constraints) and $ \mu_j $ must fulfil complementary slackness conditions.
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Necessary conditions for problems with mixed constraints}
+\begin{Fact}
+Let $ \mathbf{x^*} $ be a solution to \eqref{eq:objmx}-\eqref{eq:constrmx}. Suppose all functions involved are continuously differentiable and $ r<n $. Suppose further that (without loss of generality) the first $ s_0 $ of the inequality constraints are binding at $ \mathbf{x^*} $ and that the Jacobian comprising those constraints and the equality constraints has rank $ s_0+r $.
+
+Then there exist unique numbers $ \lambda_1,\ldots,\lambda_r $ and $ \mu_1,\ldots,\mu_s $ such that \[ \nabla \mathcal{L}(\mathbf{x^*}) = \mathbf{0}, \]
+\[ \mu_j \geq 0 \text{ and } \mu_j (h_j(x^*)-c_j) = 0,~j=1,\ldots,s. \]
+\label{fc:Nsmx}
+\end{Fact}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Necessary conditions for problems with mixed constraints}
+In more detail, the Jacobian involving the equality constraints and the active inequality constraints is \[ \begin{pmatrix}
+\nabla g_1(\mathbf{x^*})\\
+\cdots \\
+\nabla g_r(\mathbf{x^*})\\
+\nabla h_1(\mathbf{x^*})\\
+\cdots \\
+\nabla h_{s_0}(\mathbf{x^*})
+\end{pmatrix} = \begin{pmatrix}
+\dfrac{\partial g_1 (\mathbf{x^*})}{\partial x_1}  &  \cdots  &  \dfrac{\partial g_1 (\mathbf{x^*})}{\partial x_n} \\
+\vdots   &  \ddots  &  \vdots \\
+\dfrac{\partial g_{r} (\mathbf{x^*})}{\partial x_1}  &  \cdots  &  \dfrac{\partial g_{r} (\mathbf{x^*})}{\partial x_n}\\
+\dfrac{\partial h_1 (\mathbf{x^*})}{\partial x_1}  &  \cdots  &  \dfrac{\partial h_1 (\mathbf{x^*})}{\partial x_n} \\
+\vdots   &  \ddots  &  \vdots \\
+\dfrac{\partial h_{s_0} (\mathbf{x^*})}{\partial x_1}  &  \cdots  &  \dfrac{\partial g_{s_0} (\mathbf{x^*})}{\partial x_n}
+\end{pmatrix}. \] 
+
+The requirement on the rank of the Jacobian is the familiar constraint qualification imposing linear independence.
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Sufficient conditions for problems with mixed constraints}
+Analogously to Fact \ref{fc:SCsIneq}, we have the following result for the case of mixed constraints:
+
+\begin{Fact}
+Let $ \mathbf{x^*} $ be an admissible point satisfying the conditions stated in Fact \ref{fc:Nsmx}.
+
+Suppose that the Lagrangian for problem \eqref{eq:objmx}-\eqref{eq:constrmx} is concave in $ \mathbf{x} $.\bigskip
+
+Then the point $ \mathbf{x^*} $ is a solution to problem \eqref{eq:objmx}-\eqref{eq:constrmx}.
+\label{fc:Scsmx}
+\end{Fact}
+\end{frame}
+
+\section{Concave programming}\label{sec:concave}
+
+\begin{frame}[fragile]
+\frametitle{Problem description}
+Consider the familiar maximization problem with inequality constraints:
+\[ f(\mathbf{x}) \rightarrow \max \]
+s.t. \[ \mathbf{g}(\mathbf{x})\leq \mathbf{b}. \]
+
+Suppose the objective function $ f $ is concave and the functions $ g_i, ~i=1,\ldots,m $, are convex. Then the optimization problem is called a \emph{concave programming problem} or simply a \emph{concave program}.
+
+\end{frame}
 
 \section*{}
 \begin{frame}[fragile]
 \frametitle{Readings}
 Main references:
 
-Syds\ae{}ter et al. \emph{Further mathematics for economic analysis}. Chapter 3.\bigskip
+Syds\ae{}ter et al. [SHSS] \emph{Further mathematics for economic analysis}. Chapter 3.\bigskip
 
 Additional readings:
+
+Simon and Blume. \emph{Mathematics for economists}. Chapters 18 and 19.
+
+Chiang and Wainwright. \emph{Fundamental methods of mathematical economics}. Chapter 13.
 \end{frame}
 
 \end{document}
