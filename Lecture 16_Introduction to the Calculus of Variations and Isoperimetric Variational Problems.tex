@@ -1,0 +1,160 @@
+% !TeX spellcheck = en_GB
+\documentclass[10pt]{beamer}
+\usetheme{CambridgeUS}
+%\usetheme{Boadilla}
+\definecolor{myred}{RGB}{163,0,0}
+%\usecolortheme[named=blue]{structure}
+\usecolortheme{dove}
+\usefonttheme[]{professionalfonts}
+\usepackage[english]{babel}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{xcolor}
+\usepackage{bm}
+\usepackage{gensymb}
+\usepackage{verbatim} 
+\usepackage{paratype}
+\usepackage{mathpazo}
+\usepackage{listings}
+\lstset{language=Python}
+
+\usepackage{tikz}
+\usetikzlibrary{matrix}
+
+\DeclareMathOperator*{\interior}{int}
+
+% Number theorem environments
+\setbeamertemplate{theorem}[ams style]
+\setbeamertemplate{theorems}[numbered]
+
+% Reset theorem-like environments so that each is numbered separately
+\usepackage{etoolbox}
+\undef{\definition}
+\theoremstyle{definition}
+\newtheorem{definition}{\translate{Definition}}
+\newtheorem{Fact}{\translate{Fact}}
+
+% Change colours for theorem-like environments
+\definecolor{mygreen1}{RGB}{0,96,0}
+\definecolor{mygreen2}{RGB}{229,239,229}
+\setbeamercolor{block title}{fg=white,bg=mygreen1}
+\setbeamercolor{block body}{fg=black,bg=mygreen2}
+
+
+
+\alt<presentation>
+{\lstset{%
+  basicstyle=\footnotesize\ttfamily,
+  commentstyle=\slshape\color{green!50!black},
+  frame = single,  
+  keywordstyle=\bfseries\color{blue!50!black},
+  identifierstyle=\color{blue},
+  stringstyle=\color{orange},
+  %escapechar=\#,
+  showstringspaces = false,
+  showtabs = false,
+  tabsize = 2,
+  emphstyle=\color{red}}
+}
+{
+  \lstset{%
+    basicstyle=\ttfamily,
+    keywordstyle=\bfseries,
+    commentstyle=\itshape,
+    escapechar=\#,
+    showtabs = false,
+	tabsize = 2,
+    emphstyle=\bfseries\color{red}
+  }
+} 
+
+\title{R401: Statistical and Mathematical Foundations}
+\subtitle{Lecture 16: Introduction to the Calculus of Variations. Isoperimetric Variational Problems.}
+\author{Andrey Vassilev}
+
+\date{2016/2017} 
+    
+\AtBeginSection{\frame{\usebeamerfont{section title}\centering\insertsection}}
+
+\begin{document}
+\maketitle
+
+
+
+\begin{frame}[fragile]
+\frametitle{Lecture Contents}
+\tableofcontents
+\end{frame}
+
+\begin{section}{An abstract look at optimization problems}\label{sec:abstr}
+\begin{frame}[fragile]
+\frametitle{What is an optimization problem, really?}
+\begin{itemize} \itemsep1em
+\item You have already seen various optimization problems.
+\item They required finding maxima or minima of functions.
+\item These functions involved one or several variables.
+\item In some cases these variables were constrained by (systems of) equations or inequalities.
+\end{itemize}\bigskip \pause
+
+\alert{What are the common features of the optimization problems that we have encountered?}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{The constituents of an optimization problem}
+From the examples of optimization problems we can extract the following:
+\begin{itemize} \itemsep1em
+\item An optimization problem requires a function to be maximized or minimized (the \emph{objective function}).
+\item In the most abstract sense, a function $ f $ is a rule of association (a mapping) between the elements of a set $ X $ and the elements of another set $ Y $:
+\[ f: X \rightarrow Y. \] The sets $ X $ (the \emph{domain} of $ f $) and $ Y $ (the \emph{codomain} of $ f $) can be of arbitrary nature.
+\item Examples of functions under this broadened definition include:
+	\begin{itemize}
+	\item The familiar functions like $ f(x) = 2x^4 $ are mappings from (subsets of) $ \mathbb{R}^1 $ to (subsets of) $ \mathbb{R}^1 $. 
+	\item Functions of $ n $ real variables are mappings from $ \mathbb{R}^n $ to  $ \mathbb{R}^1 $.
+	\item An $ m \times n $ matrix with real entries can serve to define a linear function from $ \mathbb{R}^n $ to $ \mathbb{R}^m $ via post-multiplication with vectors $ \mathbf{x} \in \mathbb{R}^n $.
+	\item The determinant maps the set of square matrices to the set of real numbers.
+	\item The definite integral can be viewed as a mapping from a suitable set of functions to the (extended) real numbers.
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{The constituents of an optimization problem}
+\begin{itemize} \itemsep1em
+\item The set of functions with domain $ X $ and codomain $ Y $ is denoted by $ Y^X $. 
+		\begin{itemize}
+		\item Thus, the well-known $ \mathbb{R}^n $ can be reinterpreted as a space of functions from the set $ \{1,2,\ldots,n\} $ to the real numbers.
+		\item Similarly, the notation $ \mathbb{R}^{m\times n} $ for the real-valued matrices with $ m $ rows and $ n $ columns tells us that a matrix can be viewed as a function from the Cartesian product of the sets $ \{1,2,\ldots,m\} $ and $ \{1,2,\ldots,n\} $ to $ \mathbb{R} $.
+		\end{itemize} 
+\item In order for a function to be suitable for use as an objective function, the elements of its codomain must be ordered (that is, we must be able to tell that one is ``larger'' or ``better'' than another).
+\item For practical purposes this means that we'll be optimizing functions having $ \mathbb{R}^1 $ as their codomain. 
+\item In contrast, the domains of the objective functions can be more diverse types of sets, as long as we have appropriate methods to choose among the different elements.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{The constituents of an optimization problem}
+\begin{itemize} \itemsep1em
+\item The elements of the domain of an objective function can be subject to various requirements -- the \emph{constraints} of the optimization problem.
+\item Typically, these constraints take the form of other functions (with the same domain as the objective function), which are used to define various equations or inequalities.
+\item This idea remains intact irrespective of the types of sets that serve as domains of the constraint functions.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Specific classes of optimization problems}
+
+\end{frame}
+
+\end{section}
+\begin{frame}[fragile]
+\frametitle{Readings}
+Main references:
+
+Elsgolts. \emph{Differential equations and the calculus of variations}. Chapters 6 and 9.\bigskip
+
+Additional readings:
+
+Syds\ae{}ter et al. [SHSS] \emph{Further mathematics for economic analysis}. Chapter 8.
+
+\end{frame}
+
+\end{document}
