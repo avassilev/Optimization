@@ -72,6 +72,8 @@
 \author{Andrey Vassilev}
 
 \date{2016/2017} 
+    
+\AtBeginSection{\frame{\usebeamerfont{section title}\centering\insertsection}}
 
 \begin{document}
 \maketitle
@@ -83,7 +85,7 @@
 \tableofcontents
 \end{frame}
 
-\section{Static optimization with inequality constraints}\label{sec:ineq}
+\begin{section}{Static optimization with inequality constraints}\label{sec:ineq}
 
 \begin{frame}[fragile]
 \frametitle{Basic formulation with inequality constraints}
@@ -210,7 +212,7 @@ While the Kuhn-Tucker algorithm in its present form provides us with candidates,
 \begin{Fact}[Kuhn-Tucker necessary conditions]
 Let $ \mathbf{x^*}=(x_1^*,\ldots,x_n^*)' $ be a solution to \eqref{eq:obj}-\eqref{eq:constr}. Suppose that the functions $ f $ and $ g_i,~i=1,\ldots,m ,$ have continuous partial derivatives on a set $ S\subseteq \mathbb{R}^n $, and $ \mathbf{x^*} \in \interior S $. Suppose also that the gradients of the constraints which are binding at $ \mathbf{x^*} $, are linearly independent, i.e. if $ K := \{k~\vert~ g_k(\mathbf{x^*})=0\} $, it is true that \[ \nabla g_k(\mathbf{x^*}),~k\in K, \text{ are linearly independent.} \]
 
-Then there exist unique numbers $ \lambda_1,\ldots,\lambda_m $ such that conditions \eqref{eq:dLdX} and \eqref{eq:ComplSlack} hold at $ \mathbf{x^*} $.
+Then there exist unique numbers $ \lambda_1^*,\ldots,\lambda_m^* $ such that equations \eqref{eq:dLdX} and \eqref{eq:ComplSlack} hold at $ \mathbf{x^*} $.
 \label{fc:KT_NCs}
 \end{Fact}\bigskip
 
@@ -313,7 +315,7 @@ The following fact provides a sufficient condition for optimality by imposing a 
 Let $ \mathbf{x^*} $ be an admissible point for the problem \eqref{eq:obj}-\eqref{eq:constr}. 
 
 Suppose that:\begin{enumerate}
-\item We can find a vector $ (\lambda_1,\ldots,\lambda_m)' $ which, together with $ \mathbf{x^*} $, satisfies conditions \eqref{eq:dLdX} and \eqref{eq:ComplSlack} of the K-T algorithm .
+\item We can find a vector $ (\lambda_1^*,\ldots,\lambda_m^*)' $ which, together with $ \mathbf{x^*} $, satisfies equations \eqref{eq:dLdX} and \eqref{eq:ComplSlack} in the K-T algorithm .
 \item The Lagrangian is concave.
 \end{enumerate}
 
@@ -361,7 +363,18 @@ To cast the problem in canonical form, we rewrite the nonnegativity constraints 
 
 The Lagrangian is \[ \mathcal{L} = x_1^\alpha x_2^\beta - \lambda_1 ( p_1 x_1 + p_2 x_2 - I) -\lambda_2 (-x_1) - \lambda_3 (-x_2) \] and is {\color{red}concave} in $ (x_1,x_2) $.\bigskip
 
-\textbf{Homework:} Prove the concavity of $ \mathcal{L} $.
+\textbf{Homework:} Prove the concavity of $ \mathcal{L} $.\bigskip
+
+\textbf{Note: }The concavity of the Lagrangian depends on the concavity of $ U(x_1,x_2) $, which hinges on the assumption $ \alpha+\beta < 0 $.
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Example: utility maximization}
+\begin{figure}
+\centering
+\includegraphics[width=0.5\linewidth]{ConcF}
+\includegraphics[width=0.5\linewidth]{NonConcF}
+\end{figure}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -438,7 +451,7 @@ Rearranging these to isolate $ \lambda_1 $ and equating the resulting expression
 \begin{frame}[fragile]
 \frametitle{Example: utility maximization}
 Substitute the expression for $ x_1 $ in the budget constraint: 
-\[ p_1 \dfrac{\alpha p_2}{\beta p_1}x_2 + p_2 x_2 = I. \]
+\[ p_1 \left(\dfrac{\alpha p_2}{\beta p_1}x_2\right) + p_2 x_2 = I. \]
 
 Solve for $ x_2 $ to obtain \[ x_2 = \dfrac{\beta}{\alpha+\beta}\dfrac{I}{p_2}. \]
 
@@ -452,7 +465,7 @@ Given that the formulas for $ x_1 $ and $ x_2 $ computed above confirm that $ x_
 \frametitle{Example: utility maximization}
 \framesubtitle{Comments}
 \begin{itemize}
-\item The above analysis provides \[ x_1 = \dfrac{\alpha}{\alpha+\beta}\dfrac{I}{p_1}, \qquad x_2 = \dfrac{\beta}{\alpha+\beta}\dfrac{I}{p_2} \] as the only K-T candidate. In view of Fact \ref{fc:SCsIneq}, this is the solution to consumer's problem.
+\item The above analysis provides \[ x_1 = \dfrac{\alpha}{\alpha+\beta}\dfrac{I}{p_1}, \qquad x_2 = \dfrac{\beta}{\alpha+\beta}\dfrac{I}{p_2} \] as the only K-T candidate. In view of Fact \ref{fc:SCsIneq}, this is the solution to the consumer's problem.
 \item The solutions for $ x_1 $ and $ x_2 $ are standard demand functions familiar from microeconomics. The quantities depend negatively on the respective prices and positively on income.
 \item We obtained the fact that the budget constraint binds in the course of solving the problem, rather than as an assumption. It was a consequence of having $ \lambda_1 > 0$ in the CS condition. The economic interpretation is that if a resource is valuable (as captured by the fact that its shadow price is positive), then it should not be wasted or left unutilized.
 \end{itemize}
@@ -472,7 +485,9 @@ s.t.
 s.t. \[ A q_1^a q_2^b \geq Q,\quad q_1,q_2 \geq 0. \]
 \end{frame}
 
-\section{Static optimization with mixed constraints}\label{sec:mixed}
+\end{section}
+
+\begin{section}{Static optimization with mixed constraints}\label{sec:mixed}
 
 \begin{frame}[fragile]
 \frametitle{The case of mixed inequality and equality constraints}
@@ -521,8 +536,8 @@ The Lagrange multipliers conform to the well-known principle: $ \lambda_i $ are 
 \begin{Fact}
 Let $ \mathbf{x^*} $ be a solution to \eqref{eq:objmx}-\eqref{eq:constrmx}. Suppose all functions involved are continuously differentiable and $ r<n $. Suppose further that (without loss of generality) the first $ s_0 $ of the inequality constraints are binding at $ \mathbf{x^*} $ and that the Jacobian comprising those constraints and the equality constraints has rank $ s_0+r $.
 
-Then there exist unique numbers $ \lambda_1,\ldots,\lambda_r $ and $ \mu_1,\ldots,\mu_s $ such that \[ \nabla \mathcal{L}(\mathbf{x^*}) = \mathbf{0}, \]
-\[ \mu_j \geq 0 \text{ and } \mu_j (h_j(x^*)-c_j) = 0,~j=1,\ldots,s. \]
+Then there exist unique numbers $ \lambda_1^*,\ldots,\lambda_r^* $ and $ \mu_1^*,\ldots,\mu_s^* $ for which \[ \nabla \mathcal{L}(\mathbf{x^*}) = \mathbf{0}, \]
+\[ \mu_j^* \geq 0 \text{ and } \mu_j^* (h_j(\mathbf{x^*})-c_j) = 0,~j=1,\ldots,s. \]
 \label{fc:Nsmx}
 \end{Fact}
 \end{frame}
@@ -562,19 +577,106 @@ Then the point $ \mathbf{x^*} $ is a solution to problem \eqref{eq:objmx}-\eqref
 \end{Fact}
 \end{frame}
 
-\section{Concave programming}\label{sec:concave}
+\end{section}
+
+\begin{section}{Concave programming}\label{sec:concave}
 
 \begin{frame}[fragile]
 \frametitle{Problem description}
 Consider the familiar maximization problem with inequality constraints:
-\[ f(\mathbf{x}) \rightarrow \max \]
-s.t. \[ \mathbf{g}(\mathbf{x})\leq \mathbf{b}. \]
+\begin{equation}
+f(\mathbf{x}) \rightarrow \max
+\label{eq:objconc}
+\end{equation}
+s.t. \begin{equation}
+\mathbf{g}(\mathbf{x})\leq \mathbf{b},
+\label{eq:constrconc}
+\end{equation}
+with the additional assumptions that the objective function $ f $ is concave and the functions $ g_i, ~i=1,\ldots,m $, are convex. Then the optimization problem is called a \emph{concave programming problem} or simply a \emph{concave program}.\bigskip
 
-Suppose the objective function $ f $ is concave and the functions $ g_i, ~i=1,\ldots,m $, are convex. Then the optimization problem is called a \emph{concave programming problem} or simply a \emph{concave program}.
-
+\textbf{Note:} Recall that convex and concave functions are properly defined on \emph{convex} sets (typically convex subsets of $ \mathbb{R}^n $). This is an implicit requirement in the above formulation.
 \end{frame}
 
-\section*{}
+\begin{frame}[fragile]
+\frametitle{The concave case without constraints}
+It is useful to start with the following result for \emph{unconstrained} concave optimization problems:
+\begin{Fact}
+Let $ U $ be a convex subset of $ \mathbb{R}^n $ and $ f $ be a continuously differentiable concave function on $ U $. A point $ \mathbf{x^*} \in U $ is a \emph{global maximum} of $ f $ if and only if \[ \nabla f(\mathbf{x^*})\cdot (\mathbf{x}-\mathbf{x^*}) \leq 0,\quad \forall \mathbf{x} \in U. \]
+
+If $ U $ is open or $ \mathbf{x^*} \in \interior U$, then $ \mathbf{x^*} $ is a global maximum of $ f $ on $ U $ if and only if \[  \nabla f(\mathbf{x^*}) = 0. \]
+\label{fc:ConcaveUnconstr}
+\end{Fact}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Quasiconcavity and quasiconvexity}
+\begin{itemize}
+\item Note that for a concave program as defined above the concavity condition on the Lagrangian stated in Fact \ref{fc:SCsIneq} is fulfilled and we can apply Fact \ref{fc:SCsIneq} directly.
+\item However, in economic applications it is sometimes useful to generalize the concepts of concave and convex functions and apply them to the concave programming problem as described below.
+\item A function $ f $ defined on a convex subset $ U $ of $ \mathbb{R}^n $ is called \emph{quasiconcave} if, for any $ a \in \mathbb{R} $, the set \[ C^+_a  = \{\mathbf{x} \in U ~|~ f(\mathbf{x})\geq a \} \] is convex. A set $ C^+_a  $ is called an \emph{upper level set} for $ f $.
+\item A function $ f $ defined on a convex subset $ U $ of $ \mathbb{R}^n $ is called \emph{quasiconvex} if, for any $ a \in \mathbb{R} $, the set \[ C^-_a  = \{\mathbf{x} \in U ~|~ f(\mathbf{x})\leq a \} \] is convex. A set $ C^-_a  $ is called a \emph{lower level set} for $ f $.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Quasiconcavity and quasiconvexity}
+\begin{itemize}
+\item If $ f $ is quasiconcave, then $ -f $ is quasiconvex.\bigskip
+\item A concave function is quasiconcave and a convex function is quasiconvex.\bigskip
+\item Increasing transformations of quasiconcave (quasiconvex) functions preserve quasiconcavity (quasiconvexity).\bigskip
+\item Decreasing transformations of quasiconcave (quasiconvex) functions reverse the property (i.e. quasiconcavity turns into quasiconvexity and vice versa).\bigskip
+\item Quasiconcavity is equivalent to the statements that for all $ \mathbf{x},\mathbf{y} \in U $ and $ t \in [0,1] $: \bigskip
+
+\begin{enumerate}
+\item $ f(\mathbf{x}) \geq f(\mathbf{y})  \quad \Rightarrow \quad f(t \mathbf{x} + (1-t)\mathbf{y}) \geq f(\mathbf{y})$,\bigskip
+\item $ f(t \mathbf{x} + (1-t)\mathbf{y}) \geq \min \{f(\mathbf{x}),f(\mathbf{y})\} $.
+\end{enumerate}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Example: The Cobb-Douglas function $ A x_1^\alpha x_2^\beta $ for $ A = 0.5,~ \alpha = 2,~ \beta = 1.1 $ is quasiconcave but not concave}
+\begin{figure}
+\centering
+\includegraphics[width=1.0\linewidth]{IRCobbDougcrop}
+\end{figure}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Quasiconcavity and quasiconvexity}
+\framesubtitle{Caveats}
+\begin{itemize}
+\item A function can be both quasiconcave and quasiconvex. (Consider $ f(x) = x $.)\bigskip
+\item As a consequence of the previous property, e.g. a quasiconvex function can be concave (consider $ \ln x $ for $ x \in \mathbb{R}_{++} $).\bigskip
+\item The sum of quasiconcave functions is not necessarily quasiconcave.\bigskip
+\item A quasiconcave (quasiconvex) function can be discontinuous.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Sufficient conditions for optimality in concave programs}
+By virtue of the structure of concave programs, obtaining sufficiency results for them is more direct:
+\begin{Fact}
+Let the functions $ f $ and $ g_i,~i=1,\ldots,m $, be defined and continuously differentiable on an open convex set $ U \subseteq \mathbb{R}^n$. Let $ f $ be quasiconcave with non-vanishing gradient and $ g_i $ be quasiconvex on $ U $.
+Suppose further that the following constraint qualification, known as \emph{Slater's condition}, is true: \newline There exists a point $ \mathbf{z} \in U $ such that $ g_i(\mathbf{z})<b_i,~i=1,\ldots,m. $
+
+Consider the problem \eqref{eq:objconc}-\eqref{eq:constrconc} and form the Lagrangian in the usual manner as $ \mathcal{L}(\mathbf{x}) = f(\mathbf{x}) - \sum_{i=1}^{m}\lambda_i (g_i(\mathbf{x})-b_i) $. If there exist a feasible point $ \mathbf{x^*} $ and multipliers $ \lambda_1^*,\ldots,\lambda_m^* $ such that \[ \nabla \mathcal{L}(\mathbf{x^*}) = \mathbf{0}, \]
+\[ \lambda_i^* \geq 0 \text{ and } \lambda_i^* (g_i(\mathbf{x^*})-b_i) = 0,~i=1,\ldots,m, \]
+
+then $ \mathbf{x^*} $ is a global maximum for the problem \eqref{eq:objconc}-\eqref{eq:constrconc}.
+\label{fc:SCsConcaveConstr}
+\end{Fact}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Comments}
+\begin{itemize}
+\item If the functions $ g_i $ in Fact \ref{fc:SCsConcaveConstr} are linear, then the result is valid in the absence of Slater's condition.\bigskip
+\item The statement of Fact \ref{fc:SCsConcaveConstr} can be weakened slightly by requiring that only the \emph{active} constraints be quasiconvex.
+\end{itemize}
+\end{frame}
+
+\end{section}
 \begin{frame}[fragile]
 \frametitle{Readings}
 Main references:

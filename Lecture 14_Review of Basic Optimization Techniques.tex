@@ -71,6 +71,8 @@
 
 \date{2016/2017} 
 
+\AtBeginSection{\frame{\usebeamerfont{section title}\centering\insertsection}}
+
 \begin{document}
 \maketitle
 
@@ -89,7 +91,7 @@
 \tableofcontents
 \end{frame}
 
-\section{Warm-up: Basic Unconstrained Optimization in $ \mathbb{R}^1 $}\label{sec:R1}
+\begin{section}{Warm-up: Basic Unconstrained Optimization in $ \mathbb{R}^1 $}\label{sec:R1}
 
 \begin{frame}[fragile]
 \frametitle{Warm-up: Basic Unconstrained Optimization in $ \mathbb{R}^1 $}
@@ -141,7 +143,9 @@ Let a function $ f $ be $ n $ times differentiable at a point $ x $ and
 \end{Fact}
 \end{frame}
 
-\section{Unconstrained Optimization in $ \mathbb{R}^n $}\label{sec:Rn}
+\end{section}
+
+\begin{section}{Unconstrained Optimization in $ \mathbb{R}^n $}\label{sec:Rn}
 
 \begin{frame}[fragile]
 \frametitle{Unconstrained Optimization in $ \mathbb{R}^n $}
@@ -347,8 +351,10 @@ Since $ D_1>0,~D_2>0 $, the critical point $ x=\frac{12}{7},~y=-\frac{3}{7} $ is
 
 \textbf{Homework:} Apply the same procedure to Example \ref{ex:saddle}.
 \end{frame}
+\end{section}
 
-\section{Static Optimization with Equality Constraints. Lagrange Multipliers}\label{sec:Lagr}
+
+\begin{section}{Static Optimization with Equality Constraints. Lagrange Multipliers}\label{sec:Lagr}
 
 \begin{frame}[fragile]
 \frametitle{Static Optimization with Equality Constraints}
@@ -489,7 +495,8 @@ Let us check how the optimal value of the utility function $u^*= u(c_1^*,c_2^*) 
 \textbf{Homework:} What are the conditions on the model parameters (i.e. on $ y,r,\beta $) in Example \ref{ex:intertemp} that ensure that consumption will be equal between the two periods? What are the conditions to have $ c_1 > c_2 $? What's the economic intuition for that?
 \end{frame}
 
-\section*{}
+\end{section}
+
 \begin{frame}[fragile]
 \frametitle{Readings}
 \textbf{Main references:}
