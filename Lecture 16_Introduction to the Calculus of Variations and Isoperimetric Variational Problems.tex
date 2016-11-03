@@ -108,7 +108,7 @@ From the examples of optimization problems we can extract the following:
 \item Examples of functions under this broadened definition include:
 	\begin{itemize}
 	\item The familiar functions like $ f(x) = 2x^4 $ are mappings from (subsets of) $ \mathbb{R}^1 $ to (subsets of) $ \mathbb{R}^1 $. 
-	\item Functions of $ n $ real variables are mappings from $ \mathbb{R}^n $ to  $ \mathbb{R}^1 $.
+	\item Functions of $ n $ real variables, which are mappings from $ \mathbb{R}^n $ to  $ \mathbb{R}^1 $.
 	\item An $ m \times n $ matrix with real entries can serve to define a linear function from $ \mathbb{R}^n $ to $ \mathbb{R}^m $ via post-multiplication with vectors $ \mathbf{x} \in \mathbb{R}^n $.
 	\item The determinant maps the set of square matrices to the set of real numbers.
 	\item The definite integral can be viewed as a mapping from a suitable set of functions to the (extended) real numbers.
@@ -287,7 +287,7 @@ F'_x(t,x(t),\dot{x}(t)) - \frac{d}{dt}F'_{\dot{x}}(t,x(t),\dot{x}(t)) = 0.
 
 This differential equation is the celebrated \emph{Euler equation}.\bigskip
 
-\textbf{Note:} The Euler equation is sometimes called the Euler-Lagrange equation. Here we stick to the shorter form.
+\textbf{Note:} The Euler equation is sometimes called the Euler-Lagrange equation. Here we stick to the shorter name.
 \end{frame}
 
 \begin{frame}[fragile]
@@ -307,17 +307,118 @@ F'_x(t,x(t),\dot{x}(t)) = & F''_{t\dot{x}}(t,x(t),\dot{x}(t))+ F''_{x\dot{x}}(t,
 
 \begin{frame}[fragile]
 \frametitle{Boundary value problems}
-
+\begin{itemize}
+\item An initial value problem for a second-order differential equation has the general form
+\[ F(\ddot{x},\dot{x},x,t)=0, \quad x(t_0)=x_0,~\dot{x}(t_0)=x_1.  \]
+\item The conditions on the unknown function are imposed at one point -- the initial point $ t_0 $ -- hence the name.
+\item A boundary value problem is more flexible and can have different types of conditions. In our case it has the form 
+\[ F(\ddot{x},\dot{x},x,t)=0, \quad x(t_0)=x_0,~x(t_1)=x_1.  \]
+\item The important element is that the conditions are imposed at different points, the boundaries of the interval $ t_0 $ and $ t_1 $.
+\item A boundary value problem admits more diverse situations, including no solutions, a finite number of solutions or an infinity of solutions.
+\end{itemize}
 \end{frame}
 
+\begin{frame}[fragile]
+\frametitle{A sufficiency condition}
+The following fact is useful to establish that an extremal maximizes or minimizes the objective functional:
+\begin{Fact}
+If $ F(t,x,\dot{x}) $ is concave (convex) in $ (x,\dot{x}) $, then an admissible $ x^*(t) $ that satisfies the Euler equation yields a maximum (minimum) of the variational problem.
+\label{fc:SCs}
+\end{Fact}
+\end{frame}
 
+\end{section}
+\begin{section}{Examples}\label{sec:Ex}
 
+\begin{frame}[fragile]
+\frametitle{Examples}
+\begin{example}
+Find the extremals of the functional \[ \int_0^1 \left((\dot{x}(t))^2 +12 t x(t) \right) \,dt, \quad x(0)=0,~x(1)=1.\] \bigskip
 
+To solve the problem, we compute $ F'_x = 12t $, $ F'_{\dot{x}} = 2 \dot{x}(t) $ and $ \frac{d}{dt}F'_{\dot{x}} = 2 \ddot{x}(t) $. The Euler equation is therefore \[ 12t - 2 \ddot{x}(t) = 0\quad \Rightarrow \quad  \ddot{x}(t) - 6t = 0.\]
 
+This is equivalent to  \[ \ddot{x}(t) = 6t. \] 
+\label{ex:ex1}
+\end{example}
+\end{frame}
 
+\begin{frame}[fragile]
+\frametitle{Examples}\addtocounter{theorem}{-1}
+\begin{example}[cont.]
+We can solve the last equation as follows:
+\[ \ddot{x}(t) = 6t \quad \Leftrightarrow \quad \frac{d}{dt}\dot{x}(t) = 6t \quad \Rightarrow \quad \int \frac{d}{dt}\dot{x}(t) \,dt = \int 6t \,dt \quad \Rightarrow  \]
+\[ \dot{x}(t) = 3t^2 + C_1 \quad \Rightarrow \quad \int \dot{x}(t) \,dt = \int(3t^2 + C_1)\,dt \quad \Rightarrow \]
+\[ x(t) = t^3 + C_1 t + C_2 .\]
 
+From the boundary conditions \[ x(0)=0  \quad \Rightarrow \quad C_2 = 0. \]
+\[ x(1)=1   \quad \Rightarrow \quad 1 = 1^3 + C_1 \cdot 1+ 0\quad \Rightarrow \quad C_1 = 0.\]
 
-% EXAMPLES
+Thus, the only possible extremal is \[ x(t)=t^3. \]
+\end{example}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Examples}
+\begin{example}
+Let the state of the economy (e.g. measured by real output) be $ y(t) $ and let there be a target level denoted by $ \hat{y} $. A planner is trying to steer the economy towards the target level over a time interval $ [0,T] $. 
+
+The planner can control the rate of change $ \dot{y}(t) $ via a control $ u(t) $, so that $ \dot{y}(t)=u(t) $. Deviation form the target is undesirable but using the control is costly, with a cost measure $ c $, which gives rise to a trade-off. Thus, the planner seeks to minimize 
+\[ \int_{0}^{T}\left( (y(t)-\hat{y})^2 + c (u(t))^2 \right)\,dt \] for a given starting position $ y(0)=y_0 $ and terminal requirement $ y(T)=\hat{y} $.
+\label{ex:ex2}
+\end{example}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Examples}\addtocounter{theorem}{-1}
+\begin{example}[cont.]
+It is convenient to reformulate the problem by defining the deviation from target $ x(t):= y(t)-\hat{y} $. Clearly, $ \dot{x}(t) = \dot{y}(t) $. We also have $ x(0)=y_0-\hat{y} =: x_0 $ and $ x(T) = 0 $. The problem then becomes one of finding the minimum of 
+\[ \int_{0}^{T}\left( x(t)^2 + c (\dot{x}(t))^2 \right)\,dt, \quad x(0)=x_0,~x(T)=0. \]\bigskip
+
+To write the Euler equation for the problem, we compute (omitting the dependence on $ t $) \[ F'_x = 2x,\quad F'_{\dot{x}} = 2c\dot{x},\quad \frac{d}{dt}F'_{\dot{x}}=2c\ddot{x}. \] \[ 2x - 2c\ddot{x} = 0 \quad\Rightarrow\quad \ddot{x} - \dfrac{1}{c}x = 0. \]
+\end{example}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Examples}\addtocounter{theorem}{-1}
+\begin{example}[cont.]
+Recall that the general solution of $ \ddot{x}+a\dot{x}+bx=0 $ depends on the roots of the characteristic equation $ r^2+ar+b=0 $ as follows (SHSS, p.229):
+\begin{itemize}
+\item[(I)] If $ \frac{1}{4}a^2-b>0 $, when there are two distinct real roots, then \[ x=Ae^{r_1t}+B e^{r_2t}, \text{ where } r_{1,2}=-\frac{1}{2}a\pm \sqrt{\frac{1}{4}a^2 - b} \]
+\item[(II)] If $ \frac{1}{4}a^2-b=0 $, when there is a double real root, then
+\[ x = (A+Bt)e^{rt},\text{ where } r=-\dfrac{1}{2}a \]
+\item[(III)] If $ \frac{1}{4}a^2-b<0 $, when there are no real roots, then 
+\[ x=e^{\alpha t}(A \cos \beta t + B \sin \beta t), \quad \alpha = -\dfrac{1}{2}a,~\beta =  \sqrt{b-\dfrac{1}{4}a^2}\]
+\end{itemize}
+\end{example}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Examples}\addtocounter{theorem}{-1}
+\begin{example}[cont.]
+Applying the last result to $ \ddot{x} - \dfrac{1}{c}x = 0 $, we verify that the discriminant is positive, $ r_{1,2}=\pm\frac{1}{\sqrt{c}} $ and the solution therefore has the form \[ x(t)=A e^{rt}+B e^{-rt},\quad r=\frac{1}{\sqrt{c}}. \]
+
+To determine the constants $ A $ and $ B $, we use the boundary conditions. They yield \[ A + B = x_0, \quad A e^{rT}+B e^{-rT} = 0. \]
+
+Solving this system of two equations for $ A $ and $ B $, we obtain \[ A = -x_0 \dfrac{e^{-rT}}{e^{rT}-e^{-rT}},\quad B = x_0 \dfrac{e^{rT}}{e^{rT}-e^{-rT}}. \] 
+\end{example}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Examples}\addtocounter{theorem}{-1}
+\begin{example}[cont.]
+Substituting the result for $ A $ and $ B $ in the formula for $ x(t) $, we obtain the solution \[ x(t) = \dfrac{x_0}{e^{rT}-e^{-rT}}\left( e^{r(T-t)}-e^{-r(T-t)}\right). \]\bigskip
+
+Since $ x^2 + c \dot{x}^2 $ is convex in $ (x,\dot{x}) $, the solution $ x(t) $ minimizes the objective functional.
+\end{example}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Homework problems}
+\textbf{Homework:} Find the Euler equations for the functionals \[ J_1(x)=\int_{t_0}^{t_1} \left(2tx+3x\dot{x}+t(\dot{x})^2\right)\,dt, \]
+\[ J_2(x)=\int_{t_0}^{t_1} \left( x^2 + \dot{x}^2+2xe^t \right)\,dt. \]\bigskip
+
+\textbf{Homework:} Show that the solution to the problem \[ \int_{t_0}^{t_1} \sqrt{1-\dot{x}^2}\,dt \rightarrow \min \qquad \text{ s.t. }\qquad x(t_0)=\alpha,~x(t_1)=\beta\] is a straight line and determine its equation.
+\end{frame}
 
 
 \end{section}
