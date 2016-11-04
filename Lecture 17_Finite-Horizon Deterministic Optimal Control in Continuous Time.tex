@@ -1,0 +1,210 @@
+% !TeX spellcheck = en_GB
+\documentclass[10pt]{beamer}
+\usetheme{CambridgeUS}
+%\usetheme{Boadilla}
+\definecolor{myred}{RGB}{163,0,0}
+%\usecolortheme[named=blue]{structure}
+\usecolortheme{dove}
+\usefonttheme[]{professionalfonts}
+\usepackage[english]{babel}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{xcolor}
+\usepackage{bm}
+\usepackage{gensymb}
+\usepackage{verbatim} 
+\usepackage{paratype}
+\usepackage{mathpazo}
+\usepackage{listings}
+\lstset{language=Python}
+
+\usepackage{tikz}
+\usetikzlibrary{matrix}
+
+\DeclareMathOperator*{\interior}{int}
+
+% Number theorem environments
+\setbeamertemplate{theorem}[ams style]
+\setbeamertemplate{theorems}[numbered]
+
+% Reset theorem-like environments so that each is numbered separately
+\usepackage{etoolbox}
+\undef{\definition}
+\theoremstyle{definition}
+\newtheorem{definition}{\translate{Definition}}
+\newtheorem{Fact}{\translate{Fact}}
+
+% Change colours for theorem-like environments
+\definecolor{mygreen1}{RGB}{0,96,0}
+\definecolor{mygreen2}{RGB}{229,239,229}
+\setbeamercolor{block title}{fg=white,bg=mygreen1}
+\setbeamercolor{block body}{fg=black,bg=mygreen2}
+
+
+
+\alt<presentation>
+{\lstset{%
+  basicstyle=\footnotesize\ttfamily,
+  commentstyle=\slshape\color{green!50!black},
+  frame = single,  
+  keywordstyle=\bfseries\color{blue!50!black},
+  identifierstyle=\color{blue},
+  stringstyle=\color{orange},
+  %escapechar=\#,
+  showstringspaces = false,
+  showtabs = false,
+  tabsize = 2,
+  emphstyle=\color{red}}
+}
+{
+  \lstset{%
+    basicstyle=\ttfamily,
+    keywordstyle=\bfseries,
+    commentstyle=\itshape,
+    escapechar=\#,
+    showtabs = false,
+	tabsize = 2,
+    emphstyle=\bfseries\color{red}
+  }
+} 
+
+\title{R401: Statistical and Mathematical Foundations}
+\subtitle{Lecture 17: Deterministic Optimal Control in Continuous Time: The Finite Horizon Case}
+\author{Andrey Vassilev}
+
+\date{2016/2017} 
+    
+\AtBeginSection{\frame{\usebeamerfont{section title}\centering\insertsection}}
+
+\begin{document}
+\maketitle
+
+
+
+\begin{frame}[fragile]
+\frametitle{Lecture Contents}
+\tableofcontents
+\end{frame}
+
+\begin{section}{Introduction to optimal control}\label{sec:intr}
+
+\begin{frame}[fragile]
+\frametitle{From calculus of variations to optimal control}
+\begin{itemize}\itemsep1em
+\item We are already familiar with the basic variational problem
+\[ \max_{x(t)} \left(\min_{x(t)}\right) \int_{t_0}^{t_1}F(t,x,\dot{x})\,dt, \qquad x(t_0)=x_0,~x(t_1)=x_1. \]
+\item It involved choosing directly the function $ x(t) $. Sometimes this is precisely the object we are interested in and we are happy to work with it directly.
+\item In many economic situations, however, we are unable to change the variables of interest directly but only through changing other variables.
+\item The calculus of variations setup is less suitable for handling this case and some modifications are required.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{From calculus of variations to optimal control}
+\begin{itemize}\itemsep1em
+\item The modifications lead to the class of \emph{optimal control} problems.
+\item There are different formulations of optimal control problems with varying levels of complexity but the basic ingredients are as follows.
+\item The variables that can be changed directly are called \emph{control variables} or \emph{controls} (we can control the evolution of the system through them).
+\item The variables that can be influenced only indirectly, via the controls, are called \emph{state variables} or simply \emph{states}. In standard formulations the state variables are described by differential or difference equations (depending on whether time is discrete or continuous) featuring the controls.
+\item Similarly to the calculus of variations setup, the objective functional is typically in integral or series form and involves the states and the controls.
+\end{itemize}\bigskip
+
+\textbf{Note:} In this lecture we shall work with the continuous time case.
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{From calculus of variations to optimal control}
+\begin{itemize}\itemsep1em
+\item Optimal control problems usually have constraints on the controls and, in more involved cases, constraints on the state variables or on functions of both the controls and the state variables.
+\item Sometimes state variables may be required to lie in a certain set at the end of the horizon.
+\item The horizon of an optimal control problem -- i.e. the interval on which the respective functions are defined and over which we seek a solution -- may be finite or infinite.
+\item In the finite horizon case the objective functional may have an additional term capturing the state of the system at the end of the horizon.
+\end{itemize} \bigskip \pause
+
+\alert{We now turn to making these descriptions precise.}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{A basic optimal control problem}
+\begin{itemize}\itemsep1em
+\item Time is continuous and finite, represented by the interval $ [0,T] $.
+\item The state of the system at time $ t \in [0,T] $ is described by means of $ n $ variables and is denoted by $ x(t)\in \mathbb{R}^n $.
+\item There are $ m $ control variables, denoted $ u(t)\in \mathbb{R}^m $ at time $ t $. 
+\item Usually controls at time $ t $ are constrained to lie in some set: $ u(t)\in \Omega (t) \subset \mathbb{R}^m $. Controls are assumed to be piecewise continuous.
+\item The state of the system at time $ 0 $ is given: $ x(0)=x_0 $.
+\item For a fixed admissible control $ u(t),~t\in [0,T] $, the evolution of the system is described by the (vector) differential equation  \begin{equation}
+\dot{x}(t)=f(x(t),u(t),t),\qquad x(0)=x_0.
+\label{eq:state}
+\end{equation} The function $ f $ is assumed to be continuously differentiable.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{A basic optimal control problem}
+\begin{itemize}\itemsep1em
+\item The objective functional to be optimized takes the form \begin{equation}
+J = \int_{0}^{T}F(x(t),u(t),t)\,dt + S[x(T),T].
+\label{eq:objF}
+\end{equation}
+\item The literature differs on what the functions $ F $ and $ S $ should be called. Depending on the problem, $ F $ may be called ``instantaneous utility'', ``instantaneous profit'' or ``running cost'', while $ S $ may be called ``scrap value'', ``salvage value'' or ``terminal cost''.
+\item In any case, the idea is that we would like to measure \textcolor{red}{running performance} (as captured by the integral term) but also take into account the \textcolor{blue}{final state of the system} (as captured by the salvage value).
+\item The functions $ F $ and $ S $ are also assumed continuously differentiable.
+\item For the sake of brevity, we shall be working with the problem of maximizing the functional \eqref{eq:objF}.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{A basic optimal control problem}
+The basic optimal control problem is 
+\begin{equation}
+\begin{split}
+& \max_{u(t)} J = \int_{0}^{T}F(x(t),u(t),t)\,dt + S[x(T),T] \\
+&\text{s.t.}\\
+& u(t)\in \Omega(t) ,\\
+& \dot{x}(t)=f(x(t),u(t),t),\qquad x(0)=x_0.
+\end{split}
+\label{eq:basicOC}
+\end{equation}\bigskip
+
+An admissible control $ u^*(t) $ that solves problem \eqref{eq:basicOC} is called an \emph{optimal control}. The associated solution of the state equation $ x^*(t) $ is called the \emph{optimal trajectory} or the \emph{optimal path}.
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{A basic optimal control problem}
+\begin{itemize}\itemsep1em
+\item When the optimal control problem is formulated using the functional \eqref{eq:objF}, it is said to be in \emph{Bolza form}.
+\item In the special case when $ S\equiv 0 $, i.e. there is no salvage value, the problem is said to be in \emph{Lagrange form}.
+\item In the special case when $ F\equiv 0 $, i.e. there is no measure of running performance, the problem is said to be in \emph{Mayer form}. If in addition $ S $ is linear in $ x(T) $, i.e. $ J=c x(T) $, the problem is said to be in \emph{linear Mayer form}.
+\end{itemize}\bigskip\pause
+
+\alert{It can be shown that all these forms can be converted to linear Mayer form (see ST, Chapter 2).}
+\end{frame}
+\end{section}
+
+\begin{section}{The maximum principle}\label{sec:max}
+
+\begin{frame}[fragile]
+\frametitle{General comments}
+
+\end{frame}
+
+
+
+
+
+
+
+
+\end{section}
+\begin{frame}[fragile]
+\frametitle{Readings}
+Main references:
+
+Sethi and Thompson [ST]. Optimal control theory: applications to management science and economics. Chapters 1 and 2.\bigskip
+
+Additional readings:
+
+Syds\ae{}ter et al. [SHSS] \emph{Further mathematics for economic analysis}. Chapters 9 and 10.
+
+\end{frame}
+
+\end{document}
