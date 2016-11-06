@@ -105,7 +105,7 @@
 \item There are different formulations of optimal control problems with varying levels of complexity but the basic ingredients are as follows.
 \item The variables that can be changed directly are called \emph{control variables} or \emph{controls} (we can control the evolution of the system through them).
 \item The variables that can be influenced only indirectly, via the controls, are called \emph{state variables} or simply \emph{states}. In standard formulations the state variables are described by differential or difference equations (depending on whether time is discrete or continuous) featuring the controls.
-\item Similarly to the calculus of variations setup, the objective functional is typically in integral or series form and involves the states and the controls.
+\item Similar to the calculus of variations setup, the objective functional is typically in integral or series form and involves the states and the controls.
 \end{itemize}\bigskip
 
 \textbf{Note:} In this lecture we shall work with the continuous time case.
@@ -194,12 +194,71 @@ An admissible control $ u^*(t) $ that solves problem \eqref{eq:basicOC} is calle
 
 \begin{frame}[fragile]
 \frametitle{The Hamiltonian}
-\[ H(x,u,\lambda,t) = F(x,u,t)+\lambda f(x,u,t) \]
+
+We now introduce an object similar to the Lagrangian, which is called the Hamiltonian of the optimal control problem.\bigskip
+
+The Hamiltonian is defined as
+\begin{equation}
+\begin{split}
+H(x,u,\lambda,t) =& F(x,u,t)+\lambda \cdot f(x,u,t) \\
+=&  F(x,u,t)+\sum_{i=1}^{n}\lambda_i f_i(x,u,t).
+\end{split}
+\label{eq:Hamilt}
+\end{equation}\bigskip
+
+The variables $ \lambda_i $ are called the \emph{costate variables} or \emph{adjoint variables}.
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Necessary conditions for optimality}
+We can find candidates for optimality using the following procedure.
+
+\begin{block}{Algorithm (The maximum principle)}
+\begin{enumerate}
+\item Form the Hamiltonian \eqref{eq:Hamilt} for the problem.
+\item Maximize the Hamiltonian w.r.t. $ u $, i.e. find $ u^*(t) $ such that
+\[ H(x^*(t),u^*(t),\lambda(t),t)\geq  H(x^*(t),u(t,\lambda(t),t),\quad \forall u(t)\in \Omega(t),~t \in[0,T]. \]
+\item Compute the adjoint equations together with the terminal boundary conditions:
+\[ \dot{\lambda} = -H'_x(x^*,u^*,\lambda,t),\quad \lambda(T)=S'_x(x^*(T),T).  \]
+\item Solve the two-point boundary value problem comprising the adjoint equations and terminal boundary conditions from step (3), and the state equations \[ \dot{x}^* = f(x^*,u^*,t), \quad x^*(0)=x_0. \]
+\end{enumerate}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Comments on the maximum principle}
+\begin{itemize}\itemsep1em
+\item Working with the Hamiltonian involves treating it as a function of four variables: $ x,u,\lambda,t $, without taking into account the dependence of $ x,u,\lambda $ on $ t $.
+\item In many economic applications it turns out that the maximum is attained at an interior point of the set of feasible controls. The Hamiltonian maximization condition then takes the form \[ \dfrac{\partial H}{\partial u} = 0. \]
+\item When it is unclear whether the maximum is attained at an interior point, a more general approach, e.g. using the Kuhn-Tucker conditions to solve the Hamiltonian maximization problem, is called for.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Comments on the maximum principle}
+\begin{itemize}\itemsep1em
+\item Once we have found $ u^* $, we can substitute it in the adjoint and state equations to obtain the above-mentioned two-point boundary value problem:
+\[ \begin{split}
+&\dot{\lambda}  = -H'_x(x^*,u^*,\lambda,t),\quad  \lambda(T)=S'_x(x^*(T),T),\\
+&\dot{x}^*  = f(x^*,u^*,t), \quad x^*(0)=x_0.
+\end{split} \]
+\item This is a system in $ 2n $ equations with $ n $ initial conditions (for the $ x $s)  and $ n $ terminal conditions for the $ \lambda $s.
+\item In realistic applications such a system is solved numerically.
+\item The conditions $ \lambda(T)=S'_x(x^*(T),T) $ are known as the \emph{transversality conditions}.
+\end{itemize}
 \end{frame}
 
 
+
+
+
+
+
+
 current-value vs present value Hamiltonians
+
 Sufficiency
+
 mixed constraints?
 
 
