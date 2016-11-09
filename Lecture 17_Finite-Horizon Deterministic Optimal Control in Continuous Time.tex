@@ -258,7 +258,7 @@ s.t. \[ \dot{x}(t)=u(t),\quad x(0)=x_0,~u(t)\in \mathbb{R}. \]\bigskip \pause
 To solve the problem, we set up the Hamiltonian:
 \[ H = 1-t x - u^2 + \lambda u .\]
 
-Because of the form of the Hamiltonian (what is it?), its maximum can be found via \[ \dfrac{\partial H}{\partial u} = -2u+\lambda = 0 \quad \Rightarrow \quad u = \dfrac{\lambda}{2}. \]
+Because of the form of the Hamiltonian (what is it?), its maximum can be found via \[ \dfrac{\partial H}{\partial u} = -2u+\lambda = 0 \quad \Rightarrow \quad u^* = \dfrac{\lambda}{2}. \]
 \label{ex:simpleOC}
 \end{example}
 \end{frame}
@@ -289,7 +289,7 @@ x(t) & = \int \dfrac{1}{4}t^2 \,dt + \int \dfrac{1}{2}C_1\,dt \quad
 \end{split}   \]
 
 Since $ x(0)=x_0 $, we get $ C_2 = x_0 $ and 
-\[ x(t) = \dfrac{1}{12}t^3 - \dfrac{T^2}{4}t + x_0. \]
+\[ x^*(t) = \dfrac{1}{12}t^3 - \dfrac{T^2}{4}t + x_0. \]
 \end{example}
 \end{frame}
 
@@ -333,9 +333,107 @@ In this example $ S\equiv 0 $, leading to the transversality condition \[ \lambd
 
 The transversality condition in turn implies that $ 0=1+C_1 $, thus $ C_1=-1 $ and \[ \lambda(t)=t-1. \]
 
-Since $ t\in [0,1] $, it follows that $ \lambda(t)\leq 0 $.
+Since $ t\in [0,1] $, it follows that $ \lambda(t)\leq 0 $. More precisely, this implies that $ u^*(t)=-1 $ for $ t\in[0,1) $. As $ u^* $ is undetermined for $ \lambda = 0 $, we can also define it to be $ -1 $ when $ t=1 $.
 \end{example}
 \end{frame}
+
+\begin{frame}[fragile]
+\frametitle{The maximum principle in action}
+\addtocounter{theorem}{-1}
+\begin{example}[cont.]
+With $ u^*(t)=-1,~t\in[0,1] $, we have \[ \dot{x}=-1 \quad \Rightarrow \quad x(t) = -t+C_2. \]
+
+We can then determine $ C_2 $ from the initial condition $ x(0)=1 $: \[ 1=0+C_2 \quad \Rightarrow \quad C_2 = 1.\]
+
+We arrive at the solution of the state equation \[ x^*(t)=1-t. \]
+\end{example}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{The maximum principle in action}
+\begin{example}
+Consider a consumer with a planning horizon $ T $ and initial wealth $ w(0)=w_0>0 $, who wants to maximize time-discounted utility from consumption $ c(t) $. The consumer finances consumption out of wealth, discounting future utility with a discount factor $ \rho > 0 $, and the stock of wealth earns an interest at the rate $ r>0 $. The consumer also values the residual wealth that will be left at the end of his planning horizon.\bigskip \pause
+
+The above can be formalized by means of an optimal control problem as follows:
+\[ \max_{c(t)}\int_{0}^{T}e^{-\rho t}\ln c(t)\,dt + \xi e^{-\rho T}\ln w(T) \qquad (\xi>0)\]
+s.t. \[ \dot{w}(t)=rw(t)-c(t),\qquad w(0)=w_0. \]
+\label{ex:OptC}
+\end{example}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{The maximum principle in action}
+\addtocounter{theorem}{-1}
+\begin{example}[cont.]
+The Hamiltonian\ for the problem is 
+\[ H = e^{-\rho t}\ln c+\lambda (rw-c). \]
+
+\textbf{Note:} It can be shown using alternative arguments that the optimal $ c(t) $ and $ w(T) $ are positive, so the logarithms are well-defined and we can apply the maximum principles. Here we take it for granted.\bigskip
+
+The Hamiltonian maximization condition then takes the form \[ \dfrac{\partial H}{\partial c} = e^{-\rho t}\dfrac{1}{c}-\lambda = 0 \quad \Rightarrow \quad c = \dfrac{e^{-\rho t}}{\lambda}.\]
+
+Since $ \partial H / \partial w  = r\lambda$, we obtain the adjoint equation \[ \dot{\lambda} = -r\lambda. \]
+\end{example}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{The maximum principle in action}
+\addtocounter{theorem}{-1}
+\begin{example}[cont.]
+\textbf{Homework:} Show that the solution of the adjoint equation is given by \[ \lambda(t)=\lambda_0 e^{-rt}. \]\bigskip
+
+The transversality condition $ \lambda(T)=S'_x(w(T),T) $ takes the form \[ \lambda(T) = \xi e^{-\rho T}\dfrac{1}{w(T)}. \]
+
+Combining the transversality condition with the solution of the adjoint equation, we get \[ \lambda_0 e^{-rT} = \xi e^{-\rho T}\dfrac{1}{w(T)} \quad \Rightarrow \quad \lambda_0 = \dfrac{\xi e^{-(\rho-r)T}}{w(T)}. \]
+\end{example}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{The maximum principle in action}
+\addtocounter{theorem}{-1}
+\begin{example}[cont.]
+Therefore \[ \lambda(t)=\dfrac{\xi e^{-(\rho-r)T}}{w(T)} e^{-rt} \] and \[ c(t) = \dfrac{e^{-\rho t}}{\lambda_0 e^{-rt}} = \dfrac{w(T)}{\xi}e^{(\rho-r)(T-t)}.  \]\bigskip
+
+The equation $ \dot{w} - rw = -c $ is a first-order linear differential equation with variable right-hand side. Its solution, after substituting the expression for $ c(t) $, is 
+\[ w(t) = w_0 e^{rt} + \dfrac{w(T)}{\xi \rho}e^{(\rho-r)T}\left( e^{(r-\rho)t}-e^{rt} \right). \]
+
+\textbf{Homework:} Using the results from SHSS, p. 202, verify the last assertion.
+\end{example}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{The maximum principle in action}
+\addtocounter{theorem}{-1}
+\begin{example}[cont.]
+Note that the expression for $ w(t) $ is not entirely clean, since it is self-referential --- the variable $ w(t) $ depends on the terminal value of wealth $ w(T) $. This is a consequence of the transversality condition and is actually the two-point boundary value problem in somewhat disguised form. Thus, we need to determine $ w(T) $. \bigskip
+
+To this end, we evaluate the expression for $ w(t) $ at $ t=T $ to obtain
+\[ w(T) = w_0 e^{rT} + \dfrac{w(T)}{\xi \rho}e^{(\rho-r)T}\left( e^{(r-\rho)T}-e^{rT} \right). \]
+
+Solving for $ w(T) $ and simplifying, we obtain (verify it!):
+\[ w(T) = \dfrac{\xi \rho e^{rT}}{\xi \rho + e^{\rho T}-1}w_0. \]
+\end{example}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{The maximum principle in action}
+\addtocounter{theorem}{-1}
+\begin{example}[cont.]
+\begin{itemize}\itemsep1em
+\item Now $ w(T) $ is expressed as a function of the model parameters only. 
+\item Consequently, we have a proper solution for $ w(t) $.
+\item Similarly, the formulae for $ c(t) $ and $ \lambda(t) $ become functions of the model parameters and time.
+\item Note that the costate variable retains the familiar interpretation of a shadow price, generalised here to a dynamic setting.
+\item By virtue of having a salvage value term in the problem, we end with positive terminal wealth. Without the salvage value, it would not be optimal to leave any wealth behind.
+\end{itemize}
+
+\end{example}
+\end{frame}
+
+
+
+
+
 
 
 
@@ -355,7 +453,11 @@ current-value vs present value Hamiltonians
 
 CoV problems as special cases of OC problems
 
+The transversality condition: why is it called so, graphical illustration?
+
 Sufficiency
+
+Homework
 
 mixed constraints?
 
