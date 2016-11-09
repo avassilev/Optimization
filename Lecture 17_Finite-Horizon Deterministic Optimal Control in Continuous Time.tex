@@ -131,7 +131,7 @@
 \item There are $ m $ control variables, denoted $ u(t)\in \mathbb{R}^m $ at time $ t $. 
 \item Usually controls at time $ t $ are constrained to lie in some set: $ u(t)\in \Omega (t) \subset \mathbb{R}^m $. Controls are assumed to be piecewise continuous.
 \item The state of the system at time $ 0 $ is given: $ x(0)=x_0 $.
-\item For a fixed admissible control $ u(t),~t\in [0,T] $, the evolution of the system is described by the (vector) differential equation  \begin{equation}
+\item For a fixed admissible control $ u(t),~t\in [0,T] $, the evolution of the system is described by the (vector) differential equation (\emph{state equation})  \begin{equation}
 \dot{x}(t)=f(x(t),u(t),t),\qquad x(0)=x_0.
 \label{eq:state}
 \end{equation} The function $ f $ is assumed to be continuously differentiable.
@@ -242,10 +242,99 @@ We can find candidates for optimality using the following procedure.
 &\dot{\lambda}  = -H'_x(x^*,u^*,\lambda,t),\quad  \lambda(T)=S'_x(x^*(T),T),\\
 &\dot{x}^*  = f(x^*,u^*,t), \quad x^*(0)=x_0.
 \end{split} \]
-\item This is a system in $ 2n $ equations with $ n $ initial conditions (for the $ x $s)  and $ n $ terminal conditions for the $ \lambda $s.
+\item This is a system in $ 2n $ equations with $ n $ initial conditions (for the $ x $s)  and $ n $ terminal conditions (for the $ \lambda $s).
 \item In realistic applications such a system is solved numerically.
 \item The conditions $ \lambda(T)=S'_x(x^*(T),T) $ are known as the \emph{transversality conditions}.
 \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{The maximum principle in action}
+\begin{example}
+Find the NCs for the problem
+\[ \max \int_{0}^{T}(1-tx(t)-u(t)^2)\,dt \]
+s.t. \[ \dot{x}(t)=u(t),\quad x(0)=x_0,~u(t)\in \mathbb{R}. \]\bigskip \pause
+
+To solve the problem, we set up the Hamiltonian:
+\[ H = 1-t x - u^2 + \lambda u .\]
+
+Because of the form of the Hamiltonian (what is it?), its maximum can be found via \[ \dfrac{\partial H}{\partial u} = -2u+\lambda = 0 \quad \Rightarrow \quad u = \dfrac{\lambda}{2}. \]
+\label{ex:simpleOC}
+\end{example}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{The maximum principle in action}\addtocounter{theorem}{-1}
+\begin{example}[cont.]
+Since $ \partial H/\partial x = -t $, we obtain \[ \dot{\lambda} = t \quad \Rightarrow \quad \lambda (t) = \dfrac{1}{2}t^2 + C_1. \]
+
+For this example the salvage value is $ S \equiv 0 $, thus the transversality condition takes the form $ \lambda(T) = 0 $.
+
+This can be used to compute $ C_1 $:
+\[ \lambda (T) = \dfrac{1}{2}T^2 + C_1 = 0 \quad \Rightarrow \quad C_1 =-\dfrac{1}{2}T^2. \]
+
+Therefore, we have \[ \lambda (t) = \dfrac{1}{2}t^2-\dfrac{1}{2}T^2. \]
+\end{example}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{The maximum principle in action}\addtocounter{theorem}{-1}
+\begin{example}[cont.]
+The state equation takes the form \[ \dot{x} = \frac{1}{2}\left(\frac{1}{2}t^2 + C_1 \right). \]
+
+Integrating, we obtain \[ \begin{split}
+x(t) & = \int \dfrac{1}{4}t^2 \,dt + \int \dfrac{1}{2}C_1\,dt \quad
+= \quad  \dfrac{1}{4\cdot 3}t^3 - \dfrac{1}{2}\dfrac{T^2}{2}t + C_2\\
+& =  \dfrac{1}{12}t^3 - \dfrac{T^2}{4}t + C_2.
+\end{split}   \]
+
+Since $ x(0)=x_0 $, we get $ C_2 = x_0 $ and 
+\[ x(t) = \dfrac{1}{12}t^3 - \dfrac{T^2}{4}t + x_0. \]
+\end{example}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{The maximum principle in action}
+\begin{example}
+Find the NCs for the problem
+\[ \max \int_{0}^{1}-x\,dt \]
+s.t. \[ \dot{x}=u,\quad x(0)=1,~u\in \Omega = [-1,1]. \]\bigskip \pause
+
+The Hamiltonian is
+\[ H = -x + \lambda u .\]\bigskip \pause
+
+\textcolor{red}{As the Hamiltonian is linear w.r.t. the control, its maximum will in general be attained at a corner point of the feasible set $ \Omega $.}
+\label{ex:bangbang}
+\end{example}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{The maximum principle in action}
+\addtocounter{theorem}{-1}
+\begin{example}[cont.]
+Thus, the solution for $ u $ will depend on the sign of the adjoint variable $ \lambda $ as follows:
+\[ u^* = \left\{\begin{array}{cll}
+ 1 &\text{ for }&\lambda>0,\\
+ -1 &\text{ for }&\lambda<0,\\
+\text{can take any value in }\Omega&\text{ for }&\lambda=0.
+\end{array}\right. \]\bigskip
+
+\alert{Controls that switch between the bounds of the feasible set are known as \emph{bang-bang controls}.}
+\end{example}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{The maximum principle in action}
+\addtocounter{theorem}{-1}
+\begin{example}[cont.]
+We have $ \partial H/\partial x = -1 $, and hence the adjoint equation is \[ \dot{\lambda} = 1 \quad \Rightarrow \quad \lambda (t) = t + C_1. \]
+
+In this example $ S\equiv 0 $, leading to the transversality condition \[ \lambda(1)=0. \]
+
+The transversality condition in turn implies that $ 0=1+C_1 $, thus $ C_1=-1 $ and \[ \lambda(t)=t-1. \]
+
+Since $ t\in [0,1] $, it follows that $ \lambda(t)\leq 0 $.
+\end{example}
 \end{frame}
 
 
@@ -255,7 +344,16 @@ We can find candidates for optimality using the following procedure.
 
 
 
+
+
+
+
+
+
+
 current-value vs present value Hamiltonians
+
+CoV problems as special cases of OC problems
 
 Sufficiency
 
