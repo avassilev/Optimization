@@ -523,7 +523,7 @@ The situation is analogous to that of Example \ref{ex:SCsimpleOC} in that the re
 
 \begin{frame}[fragile]
 \frametitle{End-constrained optimal control problems}
-It is possible to have optimal control problems which have no salvage value term but instead impose end-point constraints on the state variables. The formulation of such problems is the following: \bigskip
+It is possible to have optimal control problems which have no salvage value term but instead impose end-point constraints on the state variables. The formulation of such problems is the following: 
 
 \begin{equation}
 \begin{split}
@@ -565,30 +565,58 @@ The modification of the maximum principle for the end-constrained problem \eqref
 \frametitle{Calculus of variations problems as optimal control problems}
 We are now in a position to show that the basic variational problem can be represented and solved as an optimal control problem. \bigskip
 
-Consider the problem of maximizing the functional \begin{equation*}
-\int_{0}^{T} F(t,x,\dot{x})\,dt,\quad x(t_0)=x_0, ~x(t_1)=x_1
+Consider the variational problem of maximizing the functional \begin{equation*}
+\int_{0}^{T} F(t,x,\dot{x})\,dt,\quad x(0)=x_0, ~x(T)=x_1.
+\end{equation*}\bigskip
+
+We can use the substitution $ u = \dot{x} $. The problem then becomes one of maximizing \begin{equation*}
+\int_{0}^{T} F(t,x,u)\,dt.
 \end{equation*}
+s.t. \[ \dot{x}=u,\quad x(0)=x_0, ~x(T)=x_1. \]
 \end{frame}
 
+\begin{frame}[fragile]
+\frametitle{Calculus of variations problems as optimal control problems}
+The reformulated problem is an end-constrained optimal control problem (up to an immaterial reordering of the positions of the respective variables to conform to the original variational formulation).
 
+The Hamiltonian is \[ H=F(t,x,u)+\lambda u. \]
 
+The maximization condition w.r.t. $ u $ yields \[ H'_u = F'_{\dot{x}}(t,x,u)+\lambda = 0. \]
+This can further be differentiated w.r.t. $ t $ to get \begin{equation}\label{eq:E1}
+\frac{d}{dt}F'_{\dot{x}}(t,x,u)+\dot{\lambda} = 0.\tag{$ \star $}
+\end{equation} 
+\end{frame}
 
+\begin{frame}[fragile]
+\frametitle{Calculus of variations problems as optimal control problems}
+We also have $ H'_x = F'_x(t,x,u) $, leading to the adjoint equation \begin{equation}\label{eq:E2}
+\dot{\lambda} = -F'_x(t,x,u).\tag{$ \star \star$}
+\end{equation}  
 
+The transversality condition for $ \lambda $ in this case merely states that $ \lambda(T) $ is unrestricted.
 
+Combining \eqref{eq:E1} and \eqref{eq:E2}, multiplying by $ -1 $ and substituting back $ \dot{x} $ for $ u $, we obtain \[ F'_x(t,x,\dot{x})-\frac{d}{dt}F'_{\dot{x}}(t,x,\dot{x}) = 0. \]
+
+This is the familiar Euler equation from calculus of variations.\bigskip
+
+\textbf{Note:} While we studied variational problems in the simplest univariate case, the above formulation and computations directly carry over to the multivariate case even without modifying the notation, showing how one can obtain a system of Euler equations.
+\end{frame}
 
 \end{section}
 
 
 \begin{frame}[fragile]
-\frametitle{Homework}
+\frametitle{Homework problems}
+\textbf{Homework:} Derive and solve the NCs for the problem \[ \max_{u(t)\in \mathbb{R}}\int_{0}^{2}[e^t x(t)-u(t)^2]\,dt \] s.t. \[ \dot{x}(t)=-u(t),\quad x(0) = 0. \] \bigskip
 
+\textbf{Homework:} Derive and solve the NCs for the problem \[ \max_{u(t)\in \mathbb{R}}\int_{0}^{1}[x(t)+u(t)^2]\,dt \] s.t. \[ \dot{x}(t)=-u(t),\quad x(0) = 0. \]
 \end{frame}
 
 \begin{frame}[fragile]
 \frametitle{Readings}
 Main references:
 
-Sethi and Thompson [ST]. Optimal control theory: applications to management science and economics. Chapters 1 and 2.\bigskip
+Sethi and Thompson [ST]. \emph{Optimal control theory: applications to management science and economics}. Chapters 1 and 2.\bigskip
 
 Additional readings:
 
@@ -597,8 +625,3 @@ Syds\ae{}ter et al. [SHSS] \emph{Further mathematics for economic analysis}. Cha
 
 \end{document}
 
-CoV problems as special cases of OC problems
-
-The transversality condition: why is it called so, graphical illustration?
-
-mixed constraints?
