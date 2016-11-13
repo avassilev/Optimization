@@ -85,12 +85,63 @@
 \tableofcontents
 \end{frame}
 
-\begin{section}{}\label{sec:}
+\begin{section}{Introduction}\label{sec:intro}
 
 \begin{frame}[fragile]
-\frametitle{}
-
+\frametitle{The rationale behind infinite horizons}
+\begin{itemize}\itemsep1em
+\item We now start studying an important class of optimal control problems for which there is no finite terminal time $ T $. Thus, the objective functional will look like \[ \int_{0}^{\infty} F(x(t),u(t),t)\,dt \] or a version thereof.\pause
+\item \alert{Why do we need the infinite planning horizon?}\pause
+\item After all, people are mortal and we'll stop planning one day...
+\end{itemize}
 \end{frame}
+
+\begin{frame}[fragile]
+\frametitle{The rationale behind infinite horizons}
+\begin{itemize}\itemsep1em
+\item There are two (related) economic reasons why an infinite-horizon formulation might be appropriate:
+\begin{enumerate}
+\item Entities such as households and firms may exist indefinitely despite turnover in their composition (i.e. family members dying or moving, employees changing jobs etc.).
+\item Often there is uncertainty about the end of the planning horizon. This can be conveniently modelled as an infinite horizon, especially when it is reasonable to assume that the true, finite horizon is sufficiently distant.
+\end{enumerate}
+\item A technical complication with finite planning horizons arises when state variables represent economically valuable resources (wealth, capital). In these common cases we need to either:
+	\begin{itemize}
+	\item exhaust the respective resource fully as required by optimality if there is no scrap value,  which is often implausible, or
+	\item specify an appropriate scrap value term in the objective function, which may be difficult.
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{The rationale behind infinite horizons}
+\begin{itemize}\itemsep1em
+\item Apart from matters of interpretation, an infinite-horizon formulation eliminates some mathematical difficulties (one generally obtains simpler and cleaner expressions).
+\item However, this is not costless, as certain other complications arise.
+\item More specifically, we need to modify appropriately our definition of optimality to capture situations that arise in the case of an infinite horizon.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{The basic problem}
+The problem we shall be studying is the following:
+\begin{equation}\begin{split}
+&\max_{u(t)\in \Omega(t)}~\int_{0}^{\infty}F(x(t),u(t),t)\,dt\\
+&\text{s.t.}\\
+&\dot{x}(t)=f(x(t),u(t),t),\quad x(0)=x_0.
+\end{split}
+\label{eq:InfHorOCproblem}
+\end{equation}
+
+Sometimes problem \eqref{eq:InfHorOCproblem} is replaced by a simplified version that reflects the structure of typical economic problems:
+\begin{equation}\begin{split}
+&\max_{u(t)\in \Omega(t)}~\int_{0}^{\infty}e^{-\rho t} \phi(x(t),u(t))\,dt\\
+&\text{s.t.}\\
+&\dot{x}(t)=f(x(t),u(t)),\quad x(0)=x_0.
+\end{split}
+\label{eq:simpleInfHorOCproblem}
+\end{equation}
+\end{frame}
+
 
 
 \end{section}
@@ -99,13 +150,13 @@
 \frametitle{Readings}
 Main references:\bigskip
 
-Sethi and Thompson [ST]. \emph{Optimal control theory: applications to management science and economics}. Chapter 3.
+Seierstad and Syds\ae{}ter [SS]. \emph{Optimal control theory with economic applications}. Chapter 3.
 
 Syds\ae{}ter et al. [SHSS] \emph{Further mathematics for economic analysis}. Chapter 9.\bigskip
 
 Additional readings:
 
-
+Sethi and Thompson [ST]. \emph{Optimal control theory: applications to management science and economics}. Chapter 3.
 \end{frame}
 
 \end{document}
