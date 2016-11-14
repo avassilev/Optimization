@@ -134,7 +134,7 @@ The problem we shall be studying is the following:
 
 Sometimes problem \eqref{eq:InfHorOCproblem} is replaced by a simplified version that reflects the structure of typical economic problems:
 \begin{equation}\begin{split}
-&\max_{u(t)\in \Omega(t)}~\int_{0}^{\infty}e^{-\rho t} \phi(x(t),u(t))\,dt\\
+&\max_{u(t)\in \Omega(t)}~\int_{0}^{\infty}e^{-\rho t} \phi(x(t),u(t))\,dt, \quad \rho>0,\\
 &\text{s.t.}\\
 &\dot{x}(t)=f(x(t),u(t)),\quad x(0)=x_0.
 \end{split}
@@ -142,6 +142,14 @@ Sometimes problem \eqref{eq:InfHorOCproblem} is replaced by a simplified version
 \end{equation}
 \end{frame}
 
+\begin{frame}[fragile]
+\frametitle{Specifics of the infinite-horizon setting}
+\begin{itemize}\itemsep1em
+\item One obvious requirement in order to have a well-defined problem is for the improper integral forming the objective functional to converge for every admissible state-control pair.
+\item This leads to a relatively simple case, obtainable for instance for problem \eqref{eq:simpleInfHorOCproblem} when \[ |\phi(x(t),u(t))|\leq M,~\forall (x,u). \]
+\item Unfortunately many problems do not admit such a clean characterization, necessitating a generalization of optimality criteria.
+\end{itemize}
+\end{frame}
 
 
 \end{section}
