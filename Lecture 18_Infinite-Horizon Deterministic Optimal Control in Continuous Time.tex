@@ -154,22 +154,84 @@ Sometimes problem \eqref{eq:InfHorOCproblem} is replaced by a simplified version
 \begin{frame}[fragile]
 \frametitle{Specificities of the infinite-horizon setting}
 \begin{itemize}\itemsep1em
-\item It is possible to have situations in which the objective functional does not converge, yet for some state-control pair its value is greater than the value of every alternative state-control pair for every finite time horizon.
-\item In such cases it is natural to think of the ``dominant'' state-control pair as optimal, even though the verification is more complex than comparing two numbers
+\item It is possible to have situations in which the objective functional does not converge, yet for some state-control pair its value is greater than the value for every alternative state-control pair for every finite time horizon.
+\item In such cases it is natural to think of the ``dominant'' state-control pair as optimal, even though the verification is more complex than comparing two numbers.
+\item Other possibilities for defining optimality exist as well.
 \end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
 \frametitle{Optimality criteria in infinite-horizon problems}
-
+Among popular optimality criteria when the integral in \eqref{eq:InfHorOCproblem} or \eqref{eq:simpleInfHorOCproblem} does not converge, the most permissive definition is the following:
+\begin{definition}[Piecewise (PW) optimality]
+An admissible pair $ (x^*(t),u^*(t)) $ is \emph{piecewise optimal} if for every $ T\geq 0 $, the restriction of $ (x^*(t),u^*(t)) $ to $ [0,T] $ is optimal for the corresponding fixed horizon problem with terminal condition $ x(T)=x^*(T) $ and $ \int_{0}^{T}F(x(t),u(t),t)\,dt $ as the objective functional.
+\label{def:PWopt}
+\end{definition}
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{Pitfalls of the transversality condition in infinite-horizon problems}
+\frametitle{Optimality criteria in infinite-horizon problems}
+In contrast, one of the stricter definitions is that of overtaking optimality.
 
+We need to define the quantity \[ D(t):= \int_{0}^{t}F(x^*(\tau),u^*(\tau),\tau)\,d\tau - \int_{0}^{t}F(x(\tau),u(\tau),\tau)\,d\tau.\]
+
+\begin{definition}[Overtaking (OT) optimality]
+An admissible pair $ (x^*(t),u^*(t)) $ is \emph{overtaking optimal} if there exists a number $ t' $ such that $ D(t)\geq 0,~ \forall t\geq t'. $
+\label{def:OTopt}
+\end{definition}\bigskip
+
+It can be shown that overtaking optimality implies piecewise optimality.\bigskip
+
+There are definitions of optimality that take an intermediate position between PW optimality and OT optimality in terms of strictness.
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Pitfalls of applying the transversality condition in infinite-horizon problems}
+\begin{itemize}\itemsep1em
+\item In the finite-horizon setting the transversality conditions impose constraints on the terminal values of the adjoint variables $ \lambda(T) $. 
+\item In the absence of a salvage value term they take the form $ \lambda(T)=0 $.
+\item One is tempted to conjecture that the natural extension of this requirement to the infinite-horizon setting would be \[ \lim\limits_{T\rightarrow \infty}\lambda(T)=0 . \]
+\item Unfortunately there are counterexamples showing that in general this is not the case and additional modifications are required to obtain NCs or SCs for optimality.
+\end{itemize}
+\end{frame}
+\end{section}
+
+\begin{section}{Optimality conditions in the infinite-horizon setting}\label{sec:NCsSCs}
+
+\begin{frame}[fragile]
+\frametitle{Necessary conditions for PW optimality}
+The following result by H. Halkin provides NCs at the expense of a slight complication of the formulation of the Hamiltonian.
+
+\begin{Fact}[Halkin]
+Let $ (x^*(t),u^*(t) ) $ be a PW-optimal state-control pair for the problem \eqref{eq:InfHorOCproblem} and define the Hamiltonian as \[ H = \textcolor{red}{\lambda_0} F(x,u,t) + \sum_{i=1}^{n}\lambda_i f_i(x,u,t). \]
+
+Then there exist a constant $ \lambda_0 $ and (piecewise) continuously differentiable functions $ \lambda_i(t),~i=1,\ldots,n $, such that for all $ t $
+\begin{enumerate}
+\item $ (\lambda_0,\lambda(t)) \neq (0,\ldots,0)$,
+\item $ H(x^*(t),u^*(t),\lambda(t),t )\geq H(x^*(t),u(t),\lambda(t),t ),~\forall u(t)\in \Omega(t) $,
+\item $ \dot{\lambda}(t) = -H'_x(x^*(t),u^*(t),\lambda(t),t) $.
+\end{enumerate}
+
+Moreover, either $ \lambda_0=0 $ or $ \lambda_0=1 $.
+\label{fc:HalkinNCs}
+\end{Fact}
 \end{frame}
 
 
+
+
+
+
+
+
+
+Sufficient conditions for optimality
+
+A comment on necessary conditions
+
+Example
+
+State-space analysis
 
 \end{section}
 
