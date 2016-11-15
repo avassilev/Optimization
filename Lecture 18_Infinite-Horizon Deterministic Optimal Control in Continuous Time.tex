@@ -143,13 +143,32 @@ Sometimes problem \eqref{eq:InfHorOCproblem} is replaced by a simplified version
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{Specifics of the infinite-horizon setting}
+\frametitle{Specificities of the infinite-horizon setting}
 \begin{itemize}\itemsep1em
 \item One obvious requirement in order to have a well-defined problem is for the improper integral forming the objective functional to converge for every admissible state-control pair.
-\item This leads to a relatively simple case, obtainable for instance for problem \eqref{eq:simpleInfHorOCproblem} when \[ |\phi(x(t),u(t))|\leq M,~\forall (x,u). \]
+\item This leads to a relatively simple case, obtainable for instance for problem \eqref{eq:simpleInfHorOCproblem} when \[ |\phi(x,u)|\leq M,~\forall (x,u). \]
 \item Unfortunately many problems do not admit such a clean characterization, necessitating a generalization of optimality criteria.
 \end{itemize}
 \end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Specificities of the infinite-horizon setting}
+\begin{itemize}\itemsep1em
+\item It is possible to have situations in which the objective functional does not converge, yet for some state-control pair its value is greater than the value of every alternative state-control pair for every finite time horizon.
+\item In such cases it is natural to think of the ``dominant'' state-control pair as optimal, even though the verification is more complex than comparing two numbers
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Optimality criteria in infinite-horizon problems}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Pitfalls of the transversality condition in infinite-horizon problems}
+
+\end{frame}
+
 
 
 \end{section}
