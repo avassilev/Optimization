@@ -203,7 +203,10 @@ There are definitions of optimality that take an intermediate position between P
 The following result by H. Halkin provides NCs at the expense of a slight complication of the formulation of the Hamiltonian.
 
 \begin{Fact}[Halkin]
-Let $ (x^*(t),u^*(t) ) $ be a PW-optimal state-control pair for the problem \eqref{eq:InfHorOCproblem} and define the Hamiltonian as \[ H = \textcolor{red}{\lambda_0} F(x,u,t) + \sum_{i=1}^{n}\lambda_i f_i(x,u,t). \]
+Let $ (x^*(t),u^*(t) ) $ be a PW-optimal state-control pair for the problem \eqref{eq:InfHorOCproblem} and define the Hamiltonian as \begin{equation}
+H = \textcolor{red}{\lambda_0} F(x,u,t) + \sum_{i=1}^{n}\lambda_i f_i(x,u,t).
+\label{eq:HamiltP0}
+\end{equation}
 
 Then there exist a constant $ \lambda_0 $ and (piecewise) continuously differentiable functions $ \lambda_i(t),~i=1,\ldots,n $, such that for all $ t $
 \begin{enumerate}
@@ -217,6 +220,32 @@ Moreover, either $ \lambda_0=0 $ or $ \lambda_0=1 $.
 \end{Fact}
 \end{frame}
 
+\begin{frame}[fragile]
+\frametitle{Sufficient conditions for OT optimality}
+\begin{Fact}[Mangasarian-type sufficiency]
+Consider the problem \eqref{eq:InfHorOCproblem}, assuming that the set $ \Omega $ is convex and $ F,f $ are continuously differentiable with respect to $ u $. Suppose $ (x^*,u^*) $ is an admissible pair and there exists a continuous function $ \lambda(t) $ such that, using the Hamiltonian \eqref{eq:HamiltP0}, for $ \lambda_0=1 $ and $ t\geq 0 $ we have
+\begin{enumerate}
+\item $ u^*(t) $ maximizes $ H(x^*(t),u(t),\lambda(t),t )$ for $ u(t)\in \Omega $,
+\item $ \dot{\lambda}(t) = -H'_x(x^*(t),u^*(t),\lambda(t),t) $,
+\item $ H(x,u,\lambda(t),t ) $ is concave in $ (x,u),~\forall t \geq 0 $.
+\end{enumerate}
+
+Then the following transversality condition guarantees that $ (x^*,u^*) $ is overtaking optimal:
+
+For all admissible $ x(t) $ there exists a number $ t' $ such that \[ \lambda(t)\cdot (x(t)-x^*(t))\geq 0,\quad t\geq t'. \]
+\label{fc:SCsOT}
+\end{Fact}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Comments on the SCs for OT optimality}
+\begin{itemize}\itemsep1em
+\item Fact \ref{fc:SCsOT} provides sufficiency conditions for a fairly general problem and strict definition of optimality.
+\item The price we pay is that the transversality condition is rather cumbersome to check, as it requires us to compare a candidate trajectory $ x^* $ to all feasible alternatives $ x $.
+\item This is realistic only in special cases.
+\item As a result, the usual approach in economic applications is to resort to conditions that are easier to check but are applicable to less general problems.
+\end{itemize}
+\end{frame}
 
 
 
@@ -225,9 +254,11 @@ Moreover, either $ \lambda_0=0 $ or $ \lambda_0=1 $.
 
 
 
-Sufficient conditions for optimality
 
-A comment on necessary conditions
+
+Sufficient conditions for optimality SHSS Th 9.11.1
+
+A comment on necessary conditions - growth conditions, pitfalls etc
 
 Example
 
