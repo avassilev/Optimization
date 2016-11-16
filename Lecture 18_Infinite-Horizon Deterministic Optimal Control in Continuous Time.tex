@@ -222,6 +222,8 @@ Moreover, either $ \lambda_0=0 $ or $ \lambda_0=1 $.
 
 \begin{frame}[fragile]
 \frametitle{Sufficient conditions for OT optimality}
+Fact \ref{fc:HalkinNCs} is relatively easy to check but often provides too many candidates. Using sufficiency results is a partial solution to this. \pause
+
 \begin{Fact}[Mangasarian-type sufficiency]
 Consider the problem \eqref{eq:InfHorOCproblem}, assuming that the set $ \Omega $ is convex and $ F,f $ are continuously differentiable with respect to $ u $. Suppose $ (x^*,u^*) $ is an admissible pair and there exists a continuous function $ \lambda(t) $ such that, using the Hamiltonian \eqref{eq:HamiltP0}, for $ \lambda_0=1 $ and $ t\geq 0 $ we have
 \begin{enumerate}
@@ -232,7 +234,8 @@ Consider the problem \eqref{eq:InfHorOCproblem}, assuming that the set $ \Omega 
 
 Then the following transversality condition guarantees that $ (x^*,u^*) $ is overtaking optimal:
 
-For all admissible $ x(t) $ there exists a number $ t' $ such that \[ \lambda(t)\cdot (x(t)-x^*(t))\geq 0,\quad t\geq t'. \]
+For all admissible $ x(t) $ there exists a number $ t' $ such that \newline
+${} \qquad \qquad \lambda(t)\cdot (x(t)-x^*(t))\geq 0,\quad t\geq t'. $ 
 \label{fc:SCsOT}
 \end{Fact}
 \end{frame}
@@ -240,10 +243,49 @@ For all admissible $ x(t) $ there exists a number $ t' $ such that \[ \lambda(t)
 \begin{frame}[fragile]
 \frametitle{Comments on the SCs for OT optimality}
 \begin{itemize}\itemsep1em
-\item Fact \ref{fc:SCsOT} provides sufficiency conditions for a fairly general problem and strict definition of optimality.
-\item The price we pay is that the transversality condition is rather cumbersome to check, as it requires us to compare a candidate trajectory $ x^* $ to all feasible alternatives $ x $.
+\item Fact \ref{fc:SCsOT} provides sufficiency conditions for a fairly general problem and a strict definition of optimality.
+\item One can resort to a more permissive definition of optimality (e.g. the so-called \emph{catching up optimality}, see SS, Ch. 3, or SHSS, Sec. 10.3) at the expense of additional mathematical complications.
+\item The price we pay in any case is that the transversality condition is rather cumbersome to check, as it requires us to compare a candidate trajectory $ x^* $ to all feasible alternatives $ x $.
 \item This is realistic only in special cases.
-\item As a result, the usual approach in economic applications is to resort to conditions that are easier to check but are applicable to less general problems.
+\item As a result, a typical approach in economic applications is to resort to conditions that are easier to check but are applicable to less general problems.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{A sufficiency result in a less general setting}
+\begin{itemize}\itemsep1em
+\item Suppose we have a simplified version of problem \eqref{eq:simpleInfHorOCproblem} with only \textbf{one} state variable $ x(t) $ and \textbf{one} control variable $ u(t) $ taking values in a constant region $ \Omega $:\begin{equation}\begin{split}
+&\max_{u(t)}~\int_{0}^{\infty}e^{-\rho t} \phi(x(t),u(t))\,dt, \quad \rho>0,\\
+&\text{s.t.}\\
+&\dot{x}(t)=f(x(t),u(t)),\quad x(0)=x_0,\quad u(t)\in \Omega.
+\end{split}
+\label{eq:simplerInfHorOCproblem}
+\end{equation}
+\item Suppose also that the integral in \eqref{eq:simplerInfHorOCproblem} converges for all admissible $ (x,u) $.
+\item We therefore can employ the conventional definition of optimality.
+\item Also, because of the specific discounting structure, we can work in a current-value setting.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{A sufficiency result in a less general setting}
+\begin{itemize}\itemsep1em
+\item Construct the current-value Hamiltonian \[ H^c (x,u,\lambda) = \lambda_0 \phi(x,u) + \lambda f(x,u). \]
+
+\begin{Fact}
+Let an admissible pair $ (x^*(t),u^*(t)) $ for problem \eqref{eq:simplerInfHorOCproblem} satisfy the following conditions for some $ \lambda(t),~\forall t \geq 0 $, with $ \lambda_0=1 $:
+\begin{enumerate}
+\item $ u^*(t) $ maximizes $ H^c(x^*, u, \lambda) $ w.r.t. $ u \in \Omega $,
+\item $ \dot{\lambda}(t) -\rho \lambda(t) = -\frac{\partial}{\partial x}H^c(x^*(t),u^*(t),\lambda(t)) $,
+\item $ H^c(x,u,\lambda(t)) $ is concave w.r.t. $ (x,u) $,
+\item $ \lim\limits_{t\rightarrow \infty} \lambda(t)e^{-\rho t}(x(t)-x^*(t)) \geq 0$ for all admissible $ x(t) $.
+\end{enumerate}
+
+Then the pair $ (x^*(t),u^*(t)) $ is optimal.
+\label{fc:simpleSC}
+\end{Fact}
+
+
 \end{itemize}
 \end{frame}
 
@@ -253,10 +295,6 @@ For all admissible $ x(t) $ there exists a number $ t' $ such that \[ \lambda(t)
 
 
 
-
-
-
-Sufficient conditions for optimality SHSS Th 9.11.1
 
 A comment on necessary conditions - growth conditions, pitfalls etc
 
