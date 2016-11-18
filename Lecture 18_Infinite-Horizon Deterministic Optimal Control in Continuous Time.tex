@@ -257,7 +257,7 @@ ${} \qquad \qquad \lambda(t)\cdot (x(t)-x^*(t))\geq 0,\quad t\geq t'. $
 \item One can resort to a more permissive definition of optimality (e.g. the so-called \emph{catching up optimality}, see SS, Ch. 3, or SHSS, Sec. 10.3) at the expense of additional mathematical complications.
 \item The price we pay in any case is that the transversality condition is rather cumbersome to check, as it requires us to compare a candidate trajectory $ x^* $ to all feasible alternatives $ x $.
 \item This is realistic only in special cases.
-\item As a result, a typical approach in economic applications is to resort to conditions that are easier to check but are applicable to less general problems.
+\item As a result, a typical approach in economic applications is to resort to conditions that are somewhat easier to check but are applicable to less general problems.
 \end{itemize}
 \end{frame}
 
@@ -297,18 +297,61 @@ Then the pair $ (x^*(t),u^*(t)) $ is optimal.
 \end{itemize}
 \end{frame}
 
+\begin{frame}[fragile]
+\frametitle{Further comments}
+\begin{itemize}\itemsep1em
+\item While the condition $ \lim\limits_{t\rightarrow \infty}\lambda(t)=0 $ is not correct in a strict mathematical sense as an optimality condition, it does turn out to hold in many economic models when there are no constraints on $ x(t) $ for $ t\rightarrow \infty $.
+\item Fact \ref{fc:simpleSC} is somewhat easier to check because of the presence of the exponential term $ e^{-\rho t} $ in the transversality condition, yet some care is still needed.
+\item One situation in which the transversality condition may be shown to hold is the following:
+	\begin{itemize}\itemsep1em
+	\item $ x(t)\geq 0,~\forall t$,
+	\item $ \lim\limits_{t\rightarrow \infty} \lambda(t)e^{-\rho t} = 0 $,
+	\item $ \lim\limits_{t\rightarrow \infty} \lambda(t)e^{-\rho t}x^*(t) = 0 $,
+	\item $ \lambda(t)\geq 0 $ for $ t $ large enough.
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Further comments}
+\begin{itemize}\itemsep1em
+\item An even more specific instance of the previous case would be a situation in which:
+	\begin{itemize}\itemsep1em
+	\item  $ x(t)\geq 0,~\forall t$ (This is the case when the state variables are naturally nonnegative economic quantities such as capital or gross wealth.),
+	\item $ \lim\limits_{t\rightarrow \infty} x^*(t) = \bar{x} \geq 0 $,
+	\item $ \lim\limits_{t\rightarrow \infty} \lambda(t) = \bar{\lambda} \geq 0 $.
+	\end{itemize}
+\item Apart from ensuring that the transversality condition holds, this situation is convenient from an economic standpoint: it can be interpreted as the system tending toward a \emph{(stationary) equilibrium}.
+\item This points to the need to be able to say something about the behaviour of the differential equations system for $ x(t) $ and $ \lambda(t) $ even in cases when it is not explicitly solvable.
+\end{itemize}
+\end{frame}
+\end{section}
+
+\begin{section}{State-space analysis}\label{sec:sspace}
+
+\begin{frame}[fragile]
+\frametitle{General facts about state-space analysis}
+\begin{itemize}\itemsep1em
+\item State-space analysis is a method for studying a system of differential equations in qualitative terms. 
+\item Roughly, this means we establish where the system is going under certain conditions rather than computing specific quantities or functional forms.
+\item In the context of optimal control, we can use it to improve our understanding of how the system of state and adjoint variables behaves.
+\item State-space analysis works well in two dimensions (the geometry there is obvious) but becomes unwieldy for problems of higher dimensionality.
+\item It is also readily applicable to systems that do not depend explicitly on time, i.e. autonomous systems.
+\item Consequently, we can tackle Problem \eqref{eq:simplerInfHorOCproblem} by means of state-space analysis.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{The setup}
+\begin{itemize}\itemsep1em
+\item Notice that the Hamiltonian maximization condition
+\item 
+\item 
+\end{itemize}
+\end{frame}
 
 
 
-
-
-
-
-
-
-Example
-
-State-space analysis
 
 \end{section}
 
