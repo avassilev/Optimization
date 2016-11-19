@@ -327,28 +327,96 @@ Then the pair $ (x^*(t),u^*(t)) $ is optimal.
 \end{frame}
 \end{section}
 
-\begin{section}{State-space analysis}\label{sec:sspace}
+\begin{section}{Phase-space analysis}\label{sec:phspace}
 
 \begin{frame}[fragile]
-\frametitle{General facts about state-space analysis}
+\frametitle{General facts about phase-space analysis}
 \begin{itemize}\itemsep1em
-\item State-space analysis is a method for studying a system of differential equations in qualitative terms. 
+\item Phase-space analysis is a method for studying a system of differential equations in qualitative terms. 
 \item Roughly, this means we establish where the system is going under certain conditions rather than computing specific quantities or functional forms.
 \item In the context of optimal control, we can use it to improve our understanding of how the system of state and adjoint variables behaves.
-\item State-space analysis works well in two dimensions (the geometry there is obvious) but becomes unwieldy for problems of higher dimensionality.
+\item Phase-space analysis works well in two dimensions (the geometry there is obvious) but becomes unwieldy for problems of higher dimensionality.
 \item It is also readily applicable to systems that do not depend explicitly on time, i.e. autonomous systems.
-\item Consequently, we can tackle Problem \eqref{eq:simplerInfHorOCproblem} by means of state-space analysis.
+\item Consequently, we can tackle Problem \eqref{eq:simplerInfHorOCproblem} by means of such methods.
 \end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
 \frametitle{The setup}
 \begin{itemize}\itemsep1em
-\item Notice that the Hamiltonian maximization condition
-\item 
-\item 
+\item Notice that a solution to the Hamiltonian maximization problem 
+\[ \max_{u\in \Omega} \left \{\phi (x,u)+\lambda f(x,u)\right \} \] is a function of $ x $ and $ \lambda $, i.e. $ u=u(x,\lambda) $.
+\item This means that \[ \dot{x}=f(x,u)\textcolor{red}{=F(x,\lambda)} \] and \[\dot{\lambda} = \rho \lambda - \frac{\partial}{\partial x}H^c (x,u,\lambda) \textcolor{red}{= G(x,\lambda)}. \]
+\item We shall study the case where $ F $ and $ G $ are $ C^1 $ functions.
+\end{itemize}
+\end{frame} 
+
+\begin{frame}[fragile]
+\frametitle{The setup}
+\begin{itemize}\itemsep1em
+\item The system \begin{equation}\label{eq:phsystem}
+\begin{split}
+& \dot{x}=F(x,\lambda),\\
+& \dot{\lambda} = G(x,\lambda)
+\end{split} \end{equation} defines a family of curves in $ x\lambda $ space, the \emph{phase-space} of the system.
+\item For any point in $ x\lambda $ space, the system \eqref{eq:phsystem} defines a velocity vector $ (\dot{x},\dot{\lambda}) $.
+\item The velocity vectors form the \emph{vector field} of the system.
 \end{itemize}
 \end{frame}
+
+\begin{frame}[fragile]
+\frametitle{A first look at the phase space}
+\begin{columns}
+\column{.4\textwidth}
+\begin{itemize}\itemsep1em
+\item One can represent the properties of the state space through the components of the velocity vectors (the black pairs of arrows)...
+\item ...or directly through the resulting vector (\textcolor{red}{the red arrows}).
+\item They both show parts of the vector field, indicating the direction of movement that will take place if we are at a particular point $ (x,\lambda) $.
+\end{itemize}
+\column{.4\textwidth}
+\begin{center}
+\input{SS1input.tex}
+\end{center}
+\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{A first look at the phase space}
+\begin{columns}
+\column{.4\textwidth}
+\begin{itemize}\itemsep1em
+\item Sometimes instead of the vector field we draw examples of \emph{solution paths} (\emph{trajectories}).
+\item They are also called \emph{integral }curves and are drawn with arrows indicating the direction in which a particular curve is traversed over time.
+\end{itemize}
+\column{.4\textwidth}
+\begin{center}
+\input{SS2input.tex}
+\end{center}
+\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{The structure of the phase space}
+\begin{itemize}\itemsep1em
+\item One important characteristic of the phase space is the set of points where the right-hand side of one of the equations in \eqref{eq:phsystem} vanishes.
+\item These define (possibly complicated looking) curves that partition the phase space into regions via the equations $ F(x,\lambda)=0 $ and $ G(x,\lambda)=0 $. 
+\item The curves correspond to positions where movement in one (or both) variable(s) stops.
+\item Any point in the intersection of those sets, i.e. a solution $ (\bar{x},\bar{\lambda}) $ of the algebraic system \[ F(x,\lambda)=0,\qquad G(x,\lambda)=0, \] is called a \emph{stationary point} or an \emph{equilibrium point}.
+\item An equilibrium point is also a (constant) solution of the system of differential equations \eqref{eq:phsystem}.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{An example of a phase portrait (SS, p. 252)}
+\begin{center}
+\input{SS3input.tex}
+\end{center}
+\end{frame}
+
+
+
+
+
 
 
 
