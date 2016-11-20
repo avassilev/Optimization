@@ -224,8 +224,8 @@ Moreover, either $ \lambda_0=0 $ or $ \lambda_0=1 $.
 \frametitle{A comment on necessary conditions}
 \begin{itemize}\itemsep1em
 \item Halkin's necessary conditions encompass a broad range of candidates and may create difficulties in filtering potential solutions.
-\item There exist other versions of necessary conditions which one may try to apply (see SS, Sec. 3.9).
-\item However, they tend to be rather cumbersome to apply.
+\item There exist other versions of necessary conditions which one may try to apply (see e.g. SS, Sec. 3.9).
+\item However, some of them are rather cumbersome to apply.
 \item As a result, using appropriate sufficient conditions for a well-structured problem may be your best bet.
 \end{itemize}
 \end{frame}
@@ -321,7 +321,7 @@ Then the pair $ (x^*(t),u^*(t)) $ is optimal.
 	\item $ \lim\limits_{t\rightarrow \infty} x^*(t) = \bar{x} \geq 0 $,
 	\item $ \lim\limits_{t\rightarrow \infty} \lambda(t) = \bar{\lambda} \geq 0 $.
 	\end{itemize}
-\item Apart from ensuring that the transversality condition holds, this situation is convenient from an economic standpoint: it can be interpreted as the system tending toward a \emph{(stationary) equilibrium}.
+\item Apart from ensuring that the transversality condition holds, this situation is convenient from an economic standpoint: it can be interpreted as the system tending to a \emph{(stationary) equilibrium}.
 \item This points to the need to be able to say something about the behaviour of the differential equations system for $ x(t) $ and $ \lambda(t) $ even in cases when it is not explicitly solvable.
 \end{itemize}
 \end{frame}
@@ -333,7 +333,7 @@ Then the pair $ (x^*(t),u^*(t)) $ is optimal.
 \frametitle{General facts about phase-space analysis}
 \begin{itemize}\itemsep1em
 \item Phase-space analysis is a method for studying a system of differential equations in qualitative terms. 
-\item Roughly, this means we establish where the system is going under certain conditions rather than computing specific quantities or functional forms.
+\item Roughly, this means we establish where the system is going under certain conditions rather than look for explicit solutions.
 \item In the context of optimal control, we can use it to improve our understanding of how the system of state and adjoint variables behaves.
 \item Phase-space analysis works well in two dimensions (the geometry there is obvious) but becomes unwieldy for problems of higher dimensionality.
 \item It is also readily applicable to systems that do not depend explicitly on time, i.e. autonomous systems.
@@ -344,9 +344,9 @@ Then the pair $ (x^*(t),u^*(t)) $ is optimal.
 \begin{frame}[fragile]
 \frametitle{The setup}
 \begin{itemize}\itemsep1em
-\item Notice that a solution to the Hamiltonian maximization problem 
-\[ \max_{u\in \Omega} \left \{\phi (x,u)+\lambda f(x,u)\right \} \] is a function of $ x $ and $ \lambda $, i.e. $ u=u(x,\lambda) $.
-\item This means that \[ \dot{x}=f(x,u)\textcolor{red}{=F(x,\lambda)} \] and \[\dot{\lambda} = \rho \lambda - \frac{\partial}{\partial x}H^c (x,u,\lambda) \textcolor{red}{= G(x,\lambda)}. \]
+\item Notice that a solution $ u^* $ to the Hamiltonian maximization problem 
+\[ \max_{u\in \Omega} \left \{\phi (x,u)+\lambda f(x,u)\right \} \] is a function of $ x $ and $ \lambda $, i.e. $ u^*=u(x,\lambda) $.
+\item This means that \[ \dot{x}=f(x,u^*)\textcolor{red}{=F(x,\lambda)} \] and \[\dot{\lambda} = \rho \lambda - \frac{\partial}{\partial x}H^c (x,u^*,\lambda) \textcolor{red}{= G(x,\lambda)}. \]
 \item We shall study the case where $ F $ and $ G $ are $ C^1 $ functions.
 \end{itemize}
 \end{frame} 
@@ -358,7 +358,7 @@ Then the pair $ (x^*(t),u^*(t)) $ is optimal.
 \begin{split}
 & \dot{x}=F(x,\lambda),\\
 & \dot{\lambda} = G(x,\lambda)
-\end{split} \end{equation} defines a family of curves in $ x\lambda $ space, the \emph{phase-space} of the system.
+\end{split} \end{equation} defines a family of curves in $ x\lambda $ space, the \emph{phase space} of the system.
 \item For any point in $ x\lambda $ space, the system \eqref{eq:phsystem} defines a velocity vector $ (\dot{x},\dot{\lambda}) $.
 \item The velocity vectors form the \emph{vector field} of the system.
 \end{itemize}
@@ -370,7 +370,7 @@ Then the pair $ (x^*(t),u^*(t)) $ is optimal.
 \column{.4\textwidth}
 \begin{itemize}\itemsep1em
 \item One can represent the properties of the state space through the components of the velocity vectors (the black pairs of arrows)...
-\item ...or directly through the resulting vector (\textcolor{red}{the red arrows}).
+\item ...or directly through the resulting vectors (\textcolor{red}{the red arrows}).
 \item They both show parts of the vector field, indicating the direction of movement that will take place if we are at a particular point $ (x,\lambda) $.
 \end{itemize}
 \column{.4\textwidth}
@@ -385,8 +385,9 @@ Then the pair $ (x^*(t),u^*(t)) $ is optimal.
 \begin{columns}
 \column{.4\textwidth}
 \begin{itemize}\itemsep1em
-\item Sometimes instead of the vector field we draw examples of \emph{solution paths} (\emph{trajectories}).
-\item They are also called \emph{integral }curves and are drawn with arrows indicating the direction in which a particular curve is traversed over time.
+\item Sometimes instead of the vector field we draw examples of \emph{solution paths} (\emph{trajectories})
+\item SS call these \emph{integral curves} although the literature seems to differ on the use of the term.
+\item They are often drawn with arrows indicating the direction in which a particular curve is traversed over time.
 \end{itemize}
 \column{.4\textwidth}
 \begin{center}
@@ -408,18 +409,64 @@ Then the pair $ (x^*(t),u^*(t)) $ is optimal.
 
 \begin{frame}[fragile]
 \frametitle{An example of a phase portrait (SS, p. 252)}
+\begin{columns}
+\column{.25\textwidth}
+\textbf{Highlights:}
+\begin{itemize}\itemsep1em
+\item There are 2 curves ($ \dot{x}=0 $ and $ \dot{\lambda}=0 $) dividing the plane into 4 regions (I-IV)
+\item Each region has a specific direction of the vector field
+\end{itemize}
+\column{.7\textwidth}
 \begin{center}
 \input{SS3input.tex}
 \end{center}
+\end{columns}
 \end{frame}
 
+\begin{frame}[fragile]
+\frametitle{The same phase portrait with the corresponding solution trajectories (SS, p. 252)}
+\begin{center}
+\input{SS4input.tex}
+\end{center}
+\end{frame}
 
+\begin{frame}[fragile]
+\frametitle{Characteristics of the phase portrait}
+\begin{itemize}\itemsep1em
+\item The last phase portrait illustrates a situation typical of many economic models.
+\item The equilibrium point $ E $ is of a special kind called a \emph{saddle point}.
+\item There are only two trajectories (the red lines) that converge to the equilibrium.
+\item Notice that in an optimal control context these curves will be natural candidates to check in order to verify that the transversality condition holds.
+\item Unfortunately the phase portrait is only suggestive and the nature of the equilibrium point has to be established through formal means.
+\item The next result provides a more precise characterization.
+\end{itemize}
+\end{frame}
 
+\begin{frame}[fragile]
+\frametitle{A local saddle point result}
+\begin{Fact}
+Consider the system \eqref{eq:phsystem} and take an equilibrium point of this system $ (\bar{x},\bar{\lambda}) $. Compute the Jacobian of the system and evaluate it at the equilibrium point:
+\[ \begin{pmatrix}
+F'_x(\bar{x},\bar{\lambda})& F'_{\lambda}(\bar{x},\bar{\lambda})\\
+G'_x(\bar{x},\bar{\lambda})& G'_{\lambda}(\bar{x},\bar{\lambda})
+\end{pmatrix} .\]
 
+Let the eigenvalues of the above matrix be real and of opposite signs, i.e. \[ (F'_x + G'_\lambda)^2-4(F'_x G'_\lambda - F'_{\lambda} G'_x) >0,\qquad F'_x G'_\lambda - F'_{\lambda} G'_x < 0. \]
 
+Then $ (\bar{x},\bar{\lambda}) $ is a \emph{saddle point}, which means that there exist exactly two solutions $ (x_1(t),\lambda_1(t)) $ and $ (x_2(t),\lambda_2(t)) $ defined on an interval $ [t_0,\infty) $ and converging to $ (\bar{x},\bar{\lambda}) $ from opposite directions. These solutions are tangent to a line through $ (\bar{x},\bar{\lambda}) $ that has the same direction as the eigenvector corresponding to the negative eigenvalue.
+\label{fc:locsaddlept}
+\end{Fact}
+\end{frame}
 
-
-
+\begin{frame}[fragile]
+\frametitle{Further comments}
+\begin{itemize}\itemsep1em
+\item Fact \ref{fc:locsaddlept} is useful as a clean characterization of a saddle point but it might prove too restrictive for optimal control applications because of its local nature.
+\item The risk is that the two solutions might be defined only in a small neighbourhood of the saddle point. However, we only have one degree of freedom (for the initial $ \lambda $) while the initial value of $ x $ is fixed at $ x_0 $.
+\item Fortunately there exist global saddle point results which overcome this deficiency. See SS, p. 256.
+\item While we framed the results in $ x\lambda $ space, sometimes it proves useful to replace the adjoint equation with a suitable differential equation for the control $ u $ derived from the maximum condition and study the resulting system in $ xu $ space.
+\end{itemize}
+\end{frame}
 
 \end{section}
 
