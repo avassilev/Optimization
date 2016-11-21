@@ -126,27 +126,93 @@
 	\end{itemize}
 \end{itemize}
 \end{frame}
-
-
 \end{section}
+
 
 \begin{section}{Problems in variational form}\label{sec:varprob}
 
 \begin{frame}[fragile]
 \frametitle{Formulation}
-\framesubtitle{}
+A dynamic optimization problem in variational form is defined as follows:
+\begin{equation}\label{eq:OCvarform} 
+\begin{split}
+ \max&_{\{x_{t+1}\}_{t=0}^\infty} \sum_{t=0}^{\infty}\beta^t F(x_t,x_{t+1})\\
+\text{s.t. } & x_{t+1}\in \Gamma(x_t),\quad t=0,1,2\ldots, \\
+& x_0\in X \text{ -- given}
+\end{split}
+\end{equation}
 
+The problem is characterized by the following:
+\begin{itemize}
+\item We choose directly the sequence $ \{x_t\}_{t=1}^\infty $. For any element $ x_t $ we have $ x_t\in X $, where $ X $ is the set of states.
+\item At any point in time $ x_t $ defines a set $ \Gamma(x_t) $ of admissible values for $ x $ in the following period. 
+\item The number $ \beta $ is called  the \emph{discount factor} and $ \beta \in (0,1) $.
+\item We shall assume differentiability of the function $ F $ as needed.
+\item We write $ \max $ everywhere with some sacrifice of mathematical precision.
+\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{The Euler equation}
-\framesubtitle{}
+\frametitle{Additional information on problems in variational form}
+\framesubtitle{The Bellman equation}
+\begin{itemize}\itemsep1em
+\item A problem of the form given in \eqref{eq:OCvarform} has an associated equation of the form \begin{equation}\label{eq:BellmanVarOC}
+v(x) = \max_{y\in \Gamma(x)}\left \{ F(x,y)+\beta v(y)  \right \},\quad \forall x \in X.
+\end{equation}
+\item  The equation is called the \emph{Bellman equation}.
+\item  The Bellman equation is a \emph{functional} equation: it involves finding an unknown function $ v $.
+\item The Bellman equation may not have a solution or it may have multiple solutions.
+\item Notice that solving the Bellman equation (however it may be done) involves finding the maximizing value $ y^*\in \Gamma(x) $.
+\end{itemize}
+\end{frame}
 
+\begin{frame}[fragile]
+\frametitle{Additional information on problems in variational form}
+\framesubtitle{The value function}
+\begin{itemize}\itemsep1em
+\item Denote the set of all feasible sequences $  \{x_t\}_{t=0}^{\infty}$ starting from $ x_0 $ by $ \Pi(x_0) $.
+\item Define the function $ v^*(x_0) $ as \[ v^*(x_0):= \max_{\{x_t\}\in \Pi(x_0)}\sum_{t=0}^{\infty}\beta^t F(x_t,x_{t+1}). \]
+\item This function is known as the \emph{value function}.
+\item It can be shown that the value function is (one) solution to the Bellman equation.
+\item Moreover, $ v^* $ is the only solution to the Bellman equation that satisfies the boundedness condition \[ \lim\limits_{t\rightarrow \infty} \beta^t v^*(x_t) \text{ for all }(x_0,x_1,\ldots)\in \Pi(x_0)\text{ and all }x_0\in X. \]
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Additional information on problems in variational form}
+\begin{itemize}\itemsep1em
+\item It can also be shown that an optimal sequence $ \{x_t\} $ for problem \eqref{eq:OCvarform} satisfies the relations \[ v^*(x_t^*) = F(x_t^*,x_{t+1}^*)+\beta v^*(x_{t+1}^*),\quad t=0,1,2,\ldots \] \pause
+\item \alert{The above statements are only indicative. The precise formulations require specific assumptions on the mathematical structure of the problem.} \pause
+\item The Bellman equation approach is quite general. However, it often leads to situations which are analytically intractable and computationally demanding.
+\item For this reason it is typical to resort to more restrictive but tractable approaches.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{The Euler equations}
+\framesubtitle{}
+\begin{itemize}\itemsep1em
+\item One approach that is essentially the discrete-time counterpart of the Euler equation from the calculus of variations can be used to provide necessary conditions for optimality.
+\item Because of this similarity, the resulting necessary conditions are also called \emph{Euler equations}.
+\item They take the form
+\begin{equation}\label{eq:Euler}
+F_y(x_t,x_{t+1})+\beta F_x(x_{t+1},x_{t+2})=0.
+\end{equation}
+\item Notice that they lead to a second-order difference equation (or, more precisely, a system of second-order difference equations), just like the Euler equation for the continuous-time variational problem produced a second-order ODE.
+\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
 \frametitle{Sufficiency}
 \framesubtitle{}
+\begin{itemize}\itemsep1em
+\item The Euler equations can be supplemented with appropriate transversality conditions to obtain sufficient conditions for optimality.
+\item The precise formulation requires technical concepts and assumptions that are beyond this course (see Stokey and Lucas, Ch. 4).
+\item The main assumptions are that $ X $ is a convex subset of $ \mathbb{R}^n_{+} $, $ \Gamma (x) $ is nonempty and compact, $ F $ is bounded, concave, differentiable and strictly increasing in $ x_t $. There are additional assumptions and qualifications.
+\item The essence of the sufficiency result is that, under the required assumptions, a feasible sequence $ \{x^*_t\}_{t=0}^{\infty} $ satisfying the Euler equations \eqref{eq:Euler} and the transversality condition \[ \lim\limits_{t\rightarrow \infty}\beta^t F'_x(x_t^*,x_{t+1}^*)\cdot x^*_t = 0 \] is optimal for problem \eqref{eq:OCvarform}.
+\end{itemize}
+
 
 \end{frame}
 
@@ -156,12 +222,10 @@
 \frametitle{Example: NCs for a problem in variational form}
 Compute the NCs for the problem:
 \[ \max_{\{c_t\}} \sum_{t=0}^{\infty}\beta^t \ln c_t  \]
-\[ k_{t+1} = (1-\delta)k_t + y_t - c_t,\quad k_0>0 \text{ -- given} \] \[ y_t=A k_t^\alpha , \quad 0<\underline{\epsilon} \leq c_t \leq \overline{\epsilon}, \quad \alpha,\beta \in (0,1), \quad A>0\]
+\[ k_{t+1} = (1-\delta)k_t + y_t - c_t,\quad k_0>0 \text{ -- given} \] \[ y_t=A k_t^\alpha , \quad 0<\underline{\epsilon} \leq c_t \leq \overline{\epsilon}, \quad \alpha,\beta \in (0,1), \quad A>0\]\bigskip \pause
 
-NCs: 
+To write the NCs we transform the problem in variational form: 
 \[ \sum_{t=0}^{\infty}\beta^t \underbrace{\ln ((1-\delta)k_t + A k_t^\alpha - k_{t+1})}_{= F(x_t,x_{t+1})}. \]
-
-{\color{red}Euler equation: \[ F_y(x_t,x_{t+1})+\beta F_x(x_{t+1},x_{t+2})=0 \]}
 \end{frame}
 
 
@@ -169,7 +233,7 @@ NCs:
 \begin{frame}[fragile]
 \frametitle{Example: NCs for a problem in variational form}
 Applying the Euler equation, we get:
-\[ \frac{-1}{(1-\delta)k_t +A k_t^\alpha -k_{t+1}} + \beta \frac{(1-\delta) + \alpha A k_{t+1}^{\alpha -1}}{(1-\delta)k_{t+1} +A k_{t+1}^\alpha -k_{t+2}} = 0 \]
+\[ \frac{-1}{(1-\delta)k_t +A k_t^\alpha -k_{t+1}} + \beta \frac{(1-\delta) + \alpha A k_{t+1}^{\alpha -1}}{(1-\delta)k_{t+1} +A k_{t+1}^\alpha -k_{t+2}} = 0. \]
 
 The last result has the form 
 \[ G(x_{t+2},x_{t+1},x_t)=0, \]
@@ -185,13 +249,15 @@ i.e. a nonlinear second-order difference equation.
 
 \begin{frame}[fragile]
 \frametitle{Formulation of the problem with explicit controls}
-$X \subset \mathbb{R}^n$  -- \emph{state space}, the state variables are $x=(x^1,\ldots,x^n)$. \bigskip
+It is also possible to introduce controls explicitly, as a direct counterpart of the continuous-time formulation. This is done as follows.\bigskip
+
+Let $X \subset \mathbb{R}^n$ be the \emph{state space} for a model, where the state variables are $x=(x^1,\ldots,x^n)$. \bigskip
 
 We assume that $\forall x \in X,~ \exists U(x) \subset \mathbb{R}^m, U(x)\neq \emptyset$. The elements of $u=(u^1,\ldots,u^m)$ are our \emph{controls}. \bigskip
 
-Objective function (instantaneous): $f^0(x,u)$ за $x \in X$, $u \in U(x)$ \bigskip
+The (instantaneous) objective function is $F(x,u)$ за $x \in X$, $u \in U(x)$ \bigskip
 
-State equations:
+The state equations are
 \begin{equation}
 x_{t+1}=f(x_t,u_t),\quad x_0 \text{ -- given} \label{eq:state}
 \end{equation}
@@ -205,14 +271,12 @@ where $f(x,u)$ is a vector function taking values in $X$, for $x \in X$, $u \in 
 
 We need to find a sequence of admissible controls $\mathbf{u} = \{u_t\}$, $t=0,1,2,\ldots,$
 which determine a sequence of state variables $\{ x_{t+1} \}$, $t=0,1,2,\ldots$ via \eqref{eq:state} for which \begin{equation}
-j(x_0,\mathbf{u})=\sum_{t=0}^\infty
-\beta^t f^0(x_t,u_t)\label{eq:obj}
+J(x_0,\mathbf{u})=\sum_{t=0}^\infty
+\beta^t F(x_t,u_t)\label{eq:obj}
 \end{equation} attains a maximum \begin{equation}
-v(x_0)=\sup_{\mathbf{u}} j(x_0,\mathbf{u}).  
+v(x_0)=\sup_{\mathbf{u}} J(x_0,\mathbf{u}).  
 \label{eq:objMax}
 \end{equation} 
-
-We refer to the above problem as \emph{Problem A}.
 \end{frame}
 
 
@@ -225,7 +289,7 @@ Denote by $\textrm{FC}(x_0)$ the set of all feasible control sequences $\{ u_t\}
 satisfies \eqref{eq:state} for $ u_t \in U(x_t)$, $t=0,1,2,\ldots,$
 and a given $x_0$. \bigskip
 
-We denote the optimal sequence of pairs of state variables and controls for Problem A by $\{x^*_{t+1},u^*_t\},~t=0,1,2,\ldots$, i.e. $\{u^*_t\} \in \textrm{FC}(x_0)$, and $$v(x_0)=j(x_0,\mathbf{u^*}),~\mathbf{u^*}=\{u^*_t\}.$$
+We denote the optimal sequence of pairs of state variables and controls for problem \eqref{eq:state}-\eqref{eq:objMax} by $\{x^*_{t+1},u^*_t\},~t=0,1,2,\ldots$, i.e. $\{u^*_t\} \in \textrm{FC}(x_0)$, and $$v(x_0)=J(x_0,\mathbf{u^*}),~\mathbf{u^*}=\{u^*_t\}.$$
 \end{frame}
 
 
@@ -235,7 +299,7 @@ We denote the optimal sequence of pairs of state variables and controls for Prob
 A variation of the familiar approach for problems of this type is the following:\begin{enumerate}
 \item Construct the Lagrangian
 \[\mathcal{L}(x_1,x_2,\ldots,u_0,u_1,\ldots) =
- \sum_{t=0}^{\infty}\beta^t \left[ f^0(x_t,u_t) + \lambda'_t \cdot
+ \sum_{t=0}^{\infty}\beta^t \left[ F(x_t,u_t) + \lambda'_t \cdot
 [f(x_t,u_t)-x_{t+1}] \right],  \] where $\lambda_t=(\lambda^1_t,\ldots,\lambda^n_t)$, $t=0,1,2,\ldots,$ are the Lagrange multipliers and the dot ($ \cdot $) denotes a matrix product or a scalar product: $$\lambda'_t \cdot [f(x_t,u_t)-x_{t+1}]
 = \sum_{i=1}^n \lambda_t^i [f^i(x_t,u_t)-x^i_{t+1}].$$
 \end{enumerate}
@@ -247,8 +311,8 @@ A variation of the familiar approach for problems of this type is the following:
 \frametitle{Necessary conditions for optimality}
 \begin{enumerate} \setcounter{enumi}{1}
 \item Differentiate $\mathcal{L}$ w.r.t. $x_t$ and $u_t$, set the resulting expressions equal to zero and obtain first-order necessary conditions for optimality: \begin{equation}\begin{split}
-& \beta \left[ f^0_{x_t^k}(x_t,u_t)+\sum_{i=1}^n \lambda_t^i f^i_{x_t^k}(x_t,u_t)\right] = \lambda^k_{t-1},~ k=1,\ldots,n, \\
-& f^0_{u_t^j}(x_t,u_t)+ \sum_{i=1}^n \lambda_t^i f^i_{u_t^j}(x_t,u_t) = 0,~ j=1,\ldots,m.
+& \beta \left[ F_{x_t^k}(x_t,u_t)+\sum_{i=1}^n \lambda_t^i f^i_{x_t^k}(x_t,u_t)\right] = \lambda^k_{t-1},~ k=1,\ldots,n, \\
+& F_{u_t^j}(x_t,u_t)+ \sum_{i=1}^n \lambda_t^i f^i_{u_t^j}(x_t,u_t) = 0,~ j=1,\ldots,m.
 \end{split}
 \label{eq:FOCs}
 \end{equation}
@@ -261,14 +325,14 @@ $\{x_{t+1},u_t\}_{t=0}^\infty$. (It is common to find a stationary point of the 
 \begin{frame}[fragile]
 \frametitle{Necessary conditions for optimality}
 In matrix notation the above takes that form:
-\[ \mathcal{L}_x = \beta^t f^0_x(x_t,u_t)+\beta^t f'_x(x_t,u_t)\cdot \lambda_t - \beta^{t-1}\lambda_{t-1} = 0 \Rightarrow \]
+\[ \mathcal{L}_x = \beta^t F_x(x_t,u_t)+\beta^t f'_x(x_t,u_t)\cdot \lambda_t - \beta^{t-1}\lambda_{t-1} = 0 \Rightarrow \]
 \begin{equation}
-\beta ( f^0_x(x_t,u_t)+ f'_x(x_t,u_t)\cdot \lambda_t ) = \lambda_{t-1}.
+\beta ( F_x(x_t,u_t)+ f'_x(x_t,u_t)\cdot \lambda_t ) = \lambda_{t-1}.
 \label{eq:LagrX}
 \end{equation}  \bigskip
-\[ \mathcal{L}_u = \beta^t f^0_u (x_t,u_t)+ \beta^t f'_u(x_t,u_t)\cdot \lambda_t = 0 \Rightarrow \]
+\[ \mathcal{L}_u = \beta^t F_u (x_t,u_t)+ \beta^t f'_u(x_t,u_t)\cdot \lambda_t = 0 \Rightarrow \]
 \begin{equation}
-f^0_u (x_t,u_t)+ f'_u(x_t,u_t)\cdot \lambda_t = 0
+F_u (x_t,u_t)+ f'_u(x_t,u_t)\cdot \lambda_t = 0
 \label{eq:LagrU}
 \end{equation}
 \end{frame}
@@ -279,10 +343,10 @@ f^0_u (x_t,u_t)+ f'_u(x_t,u_t)\cdot \lambda_t = 0
 \frametitle{Necessary conditions for optimality}
 \textbf{Why is this algorithm valid?}\bigskip \bigskip
 
-The value function for Problem A satisfies a version of the Bellman equation:
+The value function for problem \eqref{eq:state}-\eqref{eq:objMax} satisfies a version of the Bellman equation:
 \begin{equation}
 v(x) = \sup_{u \in U(x)}  \left[
-f^0(x,u)+\beta v(f(x,u)) \right]. \label{eq:Bellman}
+F(x,u)+\beta v(f(x,u)) \right]. \label{eq:Bellman}
 \end{equation}
 
 
@@ -294,22 +358,22 @@ Let the supremum in \eqref{eq:Bellman} be attained on the interior of the set $ 
 \begin{frame}[fragile]
 \frametitle{Necessary conditions for optimality}
 We have \begin{equation}
- v(x) = f^0(x,\nu(x)) + \beta v(f(x,\nu(x))) .
+ v(x) = F(x,\nu(x)) + \beta v(f(x,\nu(x))) .
 \label{eq:Bellman1}
 \end{equation}
 
 Also the extremum condition is \begin{equation}
-f^0_u(x,\nu(x)) + \beta f'_u(x,\nu(x)) \cdot v_x(f(x,\nu(x))) = 0.
+F_u(x,\nu(x)) + \beta f'_u(x,\nu(x)) \cdot v_x(f(x,\nu(x))) = 0.
 \label{eq:diffCntrl}
 \end{equation} 
 
 Differentiating \eqref{eq:Bellman1} w.r.t. $ x $, we obtain
 \begin{equation*}
 \begin{split}
- v_x(x) = & f^0_x(x,\nu(x)) +  \nu'_x(x) \cdot f^0_u(x,\nu(x)) + \\
+ v_x(x) = & F_x(x,\nu(x)) +  \nu'_x(x) \cdot F_u(x,\nu(x)) + \\
  & \beta \left[ f'_x(x,\nu(x)) + \nu'_x(x) \cdot f'_u(x,\nu(x))  \right]\cdot v_x(f(x,\nu(x)))\\
- = & f^0_x(x,\nu(x)) + \beta  f'_x(x,\nu(x))\cdot v_x(f(x,\nu(x))) + \\
- &  \underbrace{\nu'_x(x) \cdot f^0_u(x,\nu(x)) + \beta \nu'_x(x) \cdot f'_u(x,\nu(x)) \cdot v_x(f(x,\nu(x)))}_{=0 \text{ in view of \eqref{eq:diffCntrl}}}.
+ = & F_x(x,\nu(x)) + \beta  f'_x(x,\nu(x))\cdot v_x(f(x,\nu(x))) + \\
+ &  \underbrace{\nu'_x(x) \cdot F_u(x,\nu(x)) + \beta \nu'_x(x) \cdot f'_u(x,\nu(x)) \cdot v_x(f(x,\nu(x)))}_{=0 \text{ in view of \eqref{eq:diffCntrl}}}.
 \end{split}
 \end{equation*}
 \end{frame}
@@ -318,16 +382,16 @@ Differentiating \eqref{eq:Bellman1} w.r.t. $ x $, we obtain
 \begin{frame}[fragile]
 \frametitle{Necessary conditions for optimality}
 We thus get \begin{equation}
-v_x(x) = f^0_x(x,\nu(x)) + \beta  f'_x(x,\nu(x))\cdot v_x(f(x,\nu(x))).
+v_x(x) = F_x(x,\nu(x)) + \beta  f'_x(x,\nu(x))\cdot v_x(f(x,\nu(x))).
 \label{eq:Bellman1dx1}
 \end{equation}
 For $ x=x^*_t $ and $ u^*_t = \nu(x^*_t) $, equations \eqref{eq:diffCntrl} and \eqref{eq:Bellman1dx1} take the form
 \begin{equation}
-f^0_u(x^*_t,u^*_t) + \beta f'_u(x^*_t,u^*_t) \cdot v_x(x^*_{t+1}) = 0,
+F_u(x^*_t,u^*_t) + \beta f'_u(x^*_t,u^*_t) \cdot v_x(x^*_{t+1}) = 0,
 \label{eq:diffCntrlA} 
 \end{equation}
 \begin{equation}
-v_x(x^*_t) = f^0_x(x^*_t,u^*_t) + \beta  f'_x(x^*_t,u^*_t)\cdot v_x(x^*_{t+1}).
+v_x(x^*_t) = F_x(x^*_t,u^*_t) + \beta  f'_x(x^*_t,u^*_t)\cdot v_x(x^*_{t+1}).
 \label{eq:Bellman1dx1A}
 \end{equation}
 
@@ -341,14 +405,14 @@ Set $ \lambda_t := \beta v_x(x^*_{t+1}) $ in \eqref{eq:diffCntrlA} and \eqref{eq
 $t=0,1,2,\ldots,$ be obtained by using \eqref{eq:state}
 and \eqref{eq:FOCs}. If 
 	\begin{enumerate}
-	\item The functions $f^0(x,u)$ and $f(x,u)$
+	\item The functions $F(x,u)$ and $f(x,u)$
 	are concave in $(x,u)$,
 	\item The Lagrange multipliers $\lambda_t^1,\ldots,\lambda_t^n,
 	~t=0,1,2,\ldots$ are nonnegative,
 	\item The state space $X$ is a subset of $\mathbb{R}^n_+$ and the following transversality condition is valid $$\lim_{T\rightarrow \infty} \beta^T \lambda'_T \cdot
 	x^*_{T+1}=0,$$
 	\end{enumerate} 
-then the sequence $\{x^*_{t+1},u^*_t\}$ (for a given $x_0$) is optimal for Problem A.
+then the sequence $\{x^*_{t+1},u^*_t\}$ (for a given $x_0$) is optimal for problem  \eqref{eq:state}-\eqref{eq:objMax}.
 \label{fc:sufficiency}\end{Fact}
 \end{frame}
 
@@ -359,13 +423,13 @@ We shall verify the validity of Fact \ref{fc:sufficiency}.\bigskip
 
 Recall that \eqref{eq:FOCs} in matrix terms is given by \eqref{eq:LagrX} and \eqref{eq:LagrU}.
 
-Consider \[ \mathcal{L}_T(x_t,u_t) = \sum_{t=0}^{T}\beta^t \left\{ f^0(x_t,u_t) + \lambda'_t \cdot [f(x_t,u_t)-x_{t+1}] \right\} .\]
+Consider \[ \mathcal{L}_T(x_t,u_t) = \sum_{t=0}^{T}\beta^t \left\{ F(x_t,u_t) + \lambda'_t \cdot [f(x_t,u_t)-x_{t+1}] \right\} .\]
 
 We have \begin{equation}
 \begin{split}
 & D := \mathcal{L}_T (x_t,u_t) - \mathcal{L}_T(x^*_t,u^*_t) = \sum_{t=0}^{T}\beta^t \lambda'_t \cdot (x^*_{t+1} - x_{t+1} )+  \\
-& \sum_{t=0}^{T}\beta^t [ f^0(x_t,u_t) + \lambda'_t \cdot f(x_t,u_t) 
-- f^0(x^*_t,u^*_t) - \lambda'_t \cdot f(x^*_t,u^*_t) ].
+& \sum_{t=0}^{T}\beta^t [ F(x_t,u_t) + \lambda'_t \cdot f(x_t,u_t) 
+- F(x^*_t,u^*_t) - \lambda'_t \cdot f(x^*_t,u^*_t) ].
 \end{split}
 \label{eq:LagrDiff}
 \end{equation}
@@ -421,8 +485,9 @@ $\{x^*_{t+1},u^*_t\}$.
 
 \begin{frame}[fragile]
 \frametitle{Readings}
-Main references:\bigskip
 Additional readings:\bigskip
+
+Stokey, Lucas and Prescott. 1989. \emph{Recursive methods in economic dynamics}. Chapters 2 and 4.\bigskip
 
 Syds\ae{}ter et al. [SHSS] \emph{Further mathematics for economic analysis}. Chapter 12.\bigskip
 \end{frame}
