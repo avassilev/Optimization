@@ -174,7 +174,7 @@ v(x) = \max_{y\in \Gamma(x)}\left \{ F(x,y)+\beta v(y)  \right \},\quad \forall 
 \item Define the function $ v^*(x_0) $ as \[ v^*(x_0):= \max_{\{x_t\}\in \Pi(x_0)}\sum_{t=0}^{\infty}\beta^t F(x_t,x_{t+1}). \]
 \item This function is known as the \emph{value function}.
 \item It can be shown that the value function is (one) solution to the Bellman equation.
-\item Moreover, $ v^* $ is the only solution to the Bellman equation that satisfies the boundedness condition \[ \lim\limits_{t\rightarrow \infty} \beta^t v^*(x_t) \text{ for all }(x_0,x_1,\ldots)\in \Pi(x_0)\text{ and all }x_0\in X. \]
+\item Moreover, $ v^* $ is the only solution to the Bellman equation that satisfies the boundedness condition \[ \lim\limits_{t\rightarrow \infty} \beta^t v^*(x_t) =0 \text{ for all }(x_0,x_1,\ldots)\in \Pi(x_0)\text{ and all }x_0\in X. \]
 \end{itemize}
 \end{frame}
 
@@ -296,19 +296,23 @@ We denote the optimal sequence of pairs of state variables and controls for prob
 
 \begin{frame}[fragile]
 \frametitle{Necessary conditions for optimality}
-A variation of the familiar approach for problems of this type is the following:\begin{enumerate}
+A variation of the familiar approach for problems of this type is the following:
+\begin{block}{Algorithm}
+\begin{enumerate}
 \item Construct the Lagrangian
 \[\mathcal{L}(x_1,x_2,\ldots,u_0,u_1,\ldots) =
  \sum_{t=0}^{\infty}\beta^t \left[ F(x_t,u_t) + \lambda'_t \cdot
 [f(x_t,u_t)-x_{t+1}] \right],  \] where $\lambda_t=(\lambda^1_t,\ldots,\lambda^n_t)$, $t=0,1,2,\ldots,$ are the Lagrange multipliers and the dot ($ \cdot $) denotes a matrix product or a scalar product: $$\lambda'_t \cdot [f(x_t,u_t)-x_{t+1}]
 = \sum_{i=1}^n \lambda_t^i [f^i(x_t,u_t)-x^i_{t+1}].$$
 \end{enumerate}
+\end{block}
 \end{frame}
 
 
 
 \begin{frame}[fragile]
 \frametitle{Necessary conditions for optimality}
+\begin{block}{Algorithm (cont.)}
 \begin{enumerate} \setcounter{enumi}{1}
 \item Differentiate $\mathcal{L}$ w.r.t. $x_t$ and $u_t$, set the resulting expressions equal to zero and obtain first-order necessary conditions for optimality: \begin{equation}\begin{split}
 & \beta \left[ F_{x_t^k}(x_t,u_t)+\sum_{i=1}^n \lambda_t^i f^i_{x_t^k}(x_t,u_t)\right] = \lambda^k_{t-1},~ k=1,\ldots,n, \\
@@ -317,8 +321,11 @@ A variation of the familiar approach for problems of this type is the following:
 \label{eq:FOCs}
 \end{equation}
 \item Equations \eqref{eq:state} and \eqref{eq:FOCs} are solved as a system and we obtain a candidate solution $\{u_t\}_{t=0}^\infty$ or, more precisely, a sequence
-$\{x_{t+1},u_t\}_{t=0}^\infty$. (It is common to find a stationary point of the system \eqref{eq:state} and \eqref{eq:FOCs}, and work with a linearised version of the system around that point.)
+$\{x_{t+1},u_t\}_{t=0}^\infty$. 
 \end{enumerate}
+\end{block}\bigskip
+
+\textbf{Note:} It is common to find a stationary point of the system \eqref{eq:state} and \eqref{eq:FOCs}, and work with a linearised version of the system around that point.
 \end{frame}
 
 
@@ -396,6 +403,32 @@ v_x(x^*_t) = F_x(x^*_t,u^*_t) + \beta  f'_x(x^*_t,u^*_t)\cdot v_x(x^*_{t+1}).
 \end{equation}
 
 Set $ \lambda_t := \beta v_x(x^*_{t+1}) $ in \eqref{eq:diffCntrlA} and \eqref{eq:Bellman1dx1A}, to obtain precisely \eqref{eq:LagrX} and \eqref{eq:LagrU}.
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Example: NCs for a problem with explicit controls}
+Compute the NCs for the problem:
+\[ \max_{\{c_t\}} \sum_{t=0}^{\infty}\beta^t \ln c_t  \]
+\[ k_{t+1} = (1-\delta)k_t + y_t - c_t,\quad k_0>0 \text{ -- given} \] \[ y_t=A k_t^\alpha , \quad 0<\underline{\epsilon} \leq c_t \leq \overline{\epsilon}, \quad \alpha,\beta \in (0,1), \quad A>0\]\bigskip \pause
+
+The Lagrangian for the problem is \[ \mathcal{L} = \sum_{t=0}^{\infty}\beta^t \left[\ln c_t + \lambda_t ((1-\delta)k_t + Ak_t^\alpha - c_t -k_{t+1}) \right]. \]
+
+\[ \dfrac{\partial \mathcal{L}}{\partial c_t} = \beta^t \dfrac{1}{c_t}- \beta^t \lambda_t = 0 \quad \Rightarrow \quad \lambda_t = \dfrac{1}{c_t}. \]
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Example: NCs for a problem with explicit controls}
+\[\begin{split}
+\dfrac{\partial \mathcal{L}}{\partial k_t} =& \beta^t \lambda_t (1-\delta + \alpha A k_t^{\alpha-1}) - \beta^{t-1}\lambda_{t-1} = 0 \quad \Rightarrow \quad \\
+&\lambda_{t-1} = \beta \lambda_t (1-\delta + \alpha A k_t^{\alpha-1}).
+\end{split} \]
+
+Substituting the $ 1/c_t $ for $ \lambda_t $, we obtain \[ c_t = \beta c_{t-1} (1-\delta + \alpha A k_t^{\alpha-1}). \]
+
+This is a version of a \emph{consumption Euler equation} showing how consumption changes between two periods.\bigskip \pause
+
+\textbf{Homework:} Use the state equation for the model to eliminate $ c_t $ from the above consumption Euler equation and obtain a difference equation involving only $ k $. How does this result differ from the result for the same example in variational form?
 \end{frame}
 
 
@@ -479,7 +512,12 @@ $\{x^*_{t+1},u^*_t\}$.
 \begin{frame}[fragile]
 \frametitle{Homework}
 \framesubtitle{}
+Derive the NCs for the problem 
+\[ \sum_{t=0}^{\infty}\beta^t \ln (x_t-u_t) \]
+s.t.
+\[ x_{t+1}=u_t,\qquad x_0>0,\quad u_t>0. \]
 
+Express the result as a system of difference equations for $ x $ and $ \lambda $.
 \end{frame}
 
 
