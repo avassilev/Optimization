@@ -200,7 +200,7 @@ We now introduce an object similar to the Lagrangian, which is called the Hamilt
 The Hamiltonian is defined as
 \begin{equation}
 \begin{split}
-H(x,u,\lambda,t) =& F(x,u,t)+\lambda \cdot f(x,u,t) \\
+H(x,u,\lambda,t) =& F(x,u,t)+\lambda' f(x,u,t) \\
 =&  F(x,u,t)+\sum_{i=1}^{n}\lambda_i f_i(x,u,t).
 \end{split}
 \label{eq:Hamilt}
@@ -219,7 +219,7 @@ We can find candidates for optimality using the following procedure.
 \item Maximize the Hamiltonian w.r.t. $ u $, i.e. find $ u^*(t) $ such that
 \[ H(x^*(t),u^*(t),\lambda(t),t)\geq  H(x^*(t),u(t),\lambda(t),t),\quad \forall u(t)\in \Omega(t),~t \in[0,T]. \]
 \item Compute the adjoint equations together with the terminal boundary conditions:
-\[ \dot{\lambda} = -H'_x(x^*,u^*,\lambda,t),\quad \lambda(T)=S'_x(x^*(T),T).  \]
+\[ \dot{\lambda} = -\nabla_x H(x^*,u^*,\lambda,t),\quad \lambda(T)=\nabla_x S(x^*(T),T).  \]
 \item Solve the two-point boundary value problem (TPBVP) comprising the adjoint equations and terminal boundary conditions from step (3), and the state equations \[ \dot{x}^* = f(x^*,u^*,t), \quad x^*(0)=x_0. \]
 \end{enumerate}
 \end{block}
@@ -239,12 +239,12 @@ We can find candidates for optimality using the following procedure.
 \begin{itemize}\itemsep1em
 \item Once we have found $ u^* $, we can substitute it in the adjoint and state equations to obtain the above-mentioned two-point boundary value problem:
 \[ \begin{split}
-&\dot{\lambda}  = -H'_x(x^*,u^*,\lambda,t),\quad  \lambda(T)=S'_x(x^*(T),T),\\
+&\dot{\lambda}  = - \nabla_x H(x^*,u^*,\lambda,t),\quad  \lambda(T)=\nabla_x S(x^*(T),T),\\
 &\dot{x}^*  = f(x^*,u^*,t), \quad x^*(0)=x_0.
 \end{split} \]
 \item This is a system in $ 2n $ equations with $ n $ initial conditions (for the $ x $s)  and $ n $ terminal conditions (for the $ \lambda $s).
 \item In realistic applications such a system is solved numerically.
-\item The conditions $ \lambda(T)=S'_x(x^*(T),T) $ are known as the \emph{transversality conditions}.
+\item The conditions $ \lambda(T)=\nabla_x S(x^*(T),T) $ are known as the \emph{transversality conditions}.
 \end{itemize}
 \end{frame}
 
@@ -454,21 +454,21 @@ The common structure we have is the following:
 
 \begin{frame}[fragile]
 \frametitle{Present-value vs. current-value Hamiltonians}
-The familiar Hamiltonian is \[  H = e^{-\rho t}\phi(x,u) + \lambda \cdot f(x,u,t) . \]
+The familiar Hamiltonian is \[  H = e^{-\rho t}\phi(x,u) + \lambda' f(x,u,t) . \]
 
 Because of the discounting it is sometimes called the present-value Hamiltonian.\bigskip
 
 Instead of working with the present-value Hamiltonian, one approach would be to define a transformed Hamiltonian as follows:
-\[ H^c := e^{\rho t}H = \phi (x,u)+ \underbrace{e^{\rho t} \lambda}_{=:~ \lambda^c} \cdot f(x,u,t), \] with $ \lambda^c $ being the current-value adjoint variables.
+\[ H^c := e^{\rho t}H = \phi (x,u)+ \underbrace{e^{\rho t} \lambda'}_{=:~ \lambda^{c \prime}} f(x,u,t), \] with $ \lambda^c $ being the current-value adjoint variables.
 
 Since $ e^{\rho t} > 0 $, maximizing $ H $ w.r.t. $ u $ would be equivalent to maximizing $ H^c $ w.r.t. $ u $.
 \end{frame}
 
 \begin{frame}[fragile]
 \frametitle{Present-value vs. current-value Hamiltonians}
-The standard adjoint equation is $ \dot{\lambda} = -H'_x =  -e^{-\rho t}\phi'_x(x,u) - \lambda \cdot f'_x(x,u,t) $.\bigskip
+The standard adjoint equation is $ \dot{\lambda} = -\nabla_x H =  -e^{-\rho t}\nabla_x\phi(x,u) - \lambda'  \nabla_x f(x,u,t) $.\bigskip
 
-Multiplying this by $ e^{\rho t} $, we obtain \[  e^{\rho t} \dot{\lambda} =-\phi'_x(x,u) - \lambda^c \cdot f'_x(x,u,t) \quad \left(=-\nabla_x H^c\right). \]
+Multiplying this by $ e^{\rho t} $, we obtain \[  e^{\rho t} \dot{\lambda} =- \nabla_x \phi(x,u) - \lambda^{c \prime} \nabla_x f(x,u,t) \quad \left(=-\nabla_x H^c\right). \]
 
 From the definition of the current-value adjoint variables $ \lambda^c = e^{\rho t} \lambda $, we compute \[ \dot{\lambda}^c = \rho e^{\rho t} \lambda + e^{\rho t} \dot{\lambda} \quad \Leftrightarrow \quad  \dot{\lambda}^c - \rho \lambda^c = e^{\rho t} \dot{\lambda}. \]
 
@@ -477,15 +477,15 @@ Substituting the expression for $ e^{\rho t} \dot{\lambda} $ in the transformed 
 
 \begin{frame}[fragile]
 \frametitle{Present-value vs. current-value Hamiltonians}
-Finally, the standard transversality condition $ \lambda(T) = e^{-\rho T} \sigma'(x(T)) $ can be replaced by the transformed transversality condition 
-\[ \lambda^c (T) = \sigma '(x(T)) . \] \bigskip \pause
+Finally, the standard transversality condition $ \lambda(T) = e^{-\rho T} \nabla \sigma(x(T)) $ can be replaced by the transformed transversality condition 
+\[ \lambda^c (T) = \nabla \sigma (x(T)) . \] \bigskip \pause
 
 To summarise, problems with discounting of the form stated above can be approached using a current-value formulation in the following manner:
 \begin{enumerate}
 \item Form the current-value Hamiltonian $ H^c $.
 \item Maximize $ H^c $ w.r.t. $ u\in \Omega(t) $.
 \item Construct the modified adjoint equations 
-\[ \dot{\lambda}^c = \rho \lambda^c - \nabla_x H^c \] and compute the transversality condition \[ \lambda^c (T) = \sigma '(x(T)) . \]
+\[ \dot{\lambda}^c = \rho \lambda^c - \nabla_x H^c \] and compute the transversality condition \[ \lambda^c (T) = \nabla\sigma (x(T)) . \]
 \item Solve the corresponding TPBVP.
 \end{enumerate}
 \end{frame}
@@ -547,7 +547,7 @@ The modification of the maximum principle for the end-constrained problem \eqref
 \begin{enumerate}
 \item Form the Hamiltonian for the problem.
 \item Maximize the Hamiltonian w.r.t. $ u \in \Omega(t) $.
-\item Compute the adjoint equations $ \dot{\lambda} = -H'_x(x^*,u^*,\lambda,t) $.
+\item Compute the adjoint equations $ \dot{\lambda} = -\nabla_x H(x^*,u^*,\lambda,t) $.
 \item Compute the transversality conditions:
 \begin{equation*}
 \begin{array}{ll}
@@ -581,7 +581,7 @@ The reformulated problem is an end-constrained optimal control problem (up to an
 
 The Hamiltonian is \[ H=F(t,x,u)+\lambda u. \]
 
-The maximization condition w.r.t. $ u $ yields \[ H'_u = F'_{\dot{x}}(t,x,u)+\lambda = 0. \]
+The maximization condition w.r.t. $ u $ yields \[ \nabla_u H = F'_{\dot{x}}(t,x,u)+\lambda = 0. \]
 This can further be differentiated w.r.t. $ t $ to get \begin{equation}\label{eq:E1}
 \frac{d}{dt}F'_{\dot{x}}(t,x,u)+\dot{\lambda} = 0.\tag{$ \star $}
 \end{equation} 
@@ -589,7 +589,7 @@ This can further be differentiated w.r.t. $ t $ to get \begin{equation}\label{eq
 
 \begin{frame}[fragile]
 \frametitle{Calculus of variations problems as optimal control problems}
-We also have $ H'_x = F'_x(t,x,u) $, leading to the adjoint equation \begin{equation}\label{eq:E2}
+We also have $ \nabla_x H = F'_x(t,x,u) $, leading to the adjoint equation \begin{equation}\label{eq:E2}
 \dot{\lambda} = -F'_x(t,x,u).\tag{$ \star \star$}
 \end{equation}  
 

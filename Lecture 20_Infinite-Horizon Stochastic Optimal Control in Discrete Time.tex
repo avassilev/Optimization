@@ -167,8 +167,8 @@ $$x_{s+t+1}=f_{s+t}(x_{s+t},u_{s+t},\epsilon_{s+t}),\quad x_s\textrm{ --
 given},$$ where $x_{s+t}\in \mathbb{R}^n$ and $u_{s+t}\in \mathbb{R}^m$.
 
 As usual, we construct the Lagrangian $$\mathcal{L}=E_s\sum_{t=0}^\infty \beta^t
-\left\{ F(x_{s+t},u_{s+t}) + \langle \lambda_{s+t},
-f_{s+t}(x_{s+t},u_{s+t},\epsilon_{s+t})-x_{s+t+1} \rangle \right\}$$
+\left\{ F(x_{s+t},u_{s+t}) + \lambda'_{s+t}
+(f_{s+t}(x_{s+t},u_{s+t},\epsilon_{s+t})-x_{s+t+1}) \right\}$$
 
 \end{frame}
 
@@ -314,8 +314,8 @@ We ultimately get \[ \frac{W_t}{P_t} = -\frac{U_{n,t}}{U_{c,t}}, \quad Q_t = \be
 \begin{itemize}\itemsep1em
 \item Taking logs (for positive variables):
 \[ \frac{W_t}{P_t} = C_t^\sigma N_t^\varphi \quad\Longrightarrow\quad w_t - p_t = \sigma c_t + \varphi n_t, \] where $ w_t := \ln W_t $, $ p_t := \ln P_t $ etc. 
-\item Direct linearization using Taylor's formula 
-\item Log-linearization (we study that next)
+\item Direct linearization using Taylor's formula (we'll work it out as needed)
+\item Log-linearization (we'll study that next)
 \end{itemize}
 \end{frame}
 
@@ -333,7 +333,9 @@ In view of $$\ln (1+z)\approx \ln (1+z_0)+ \frac{1}{1+z_0}(z-z_0),$$ taking $z_0
 \begin{frame} \frametitle{Log-linearization}
 Let $y_t=f(x_t,z_t)$, where $f$ is differentiable. \bigskip
 
-Then $$\hat{y}_t = \frac{f_x(\bar{x},\bar{z})\bar{x}}{f(\bar{x},\bar{z})}\hat{x}_t + \frac{f_z(\bar{x},\bar{z})\bar{z}}{f(\bar{x},\bar{z})}\hat{z}_t$$
+Then \begin{equation}\label{eq:mainLLin}
+\hat{y}_t = \frac{f_x(\bar{x},\bar{z})\bar{x}}{f(\bar{x},\bar{z})}\hat{x}_t + \frac{f_z(\bar{x},\bar{z})\bar{z}}{f(\bar{x},\bar{z})}\hat{z}_t .
+\end{equation}
 
 We have:
 
@@ -343,6 +345,17 @@ We have:
   \item $y_t=x_t + z_t \quad \Rightarrow \quad \hat{y}_t = \frac{\bar{x}}{\bar{y}}\hat{x}_t + \frac{\bar{z}}{\bar{y}}\hat{z}_t ,$
   \item $g(x_t,y_t)=0 \quad \Rightarrow \quad \hat{y}_t = - \frac{g_x(\bar{x},\bar{y})\bar{x}}{g_y(\bar{x},\bar{y})\bar{y}}\hat{x}_t .$
 \end{enumerate}
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Log-linearization: an example}
+Log-linearize the equation \[ A_{t+1} = (1+r_t)A_t + Y_t - P_t C_t. \] \bigskip \pause
+
+We have \[ \hat{A}_{t+1} = \dfrac{(1+r)A}{A}\widehat{(1+r_t)A_t} + \dfrac{Y}{A}\hat{Y}_t - \dfrac{PC}{A}\widehat{P_t C_t} \Rightarrow \]
+\[ \hat{A}_{t+1} = (1+r)(\widehat{(1+r_t)}+\hat{A}_t) + \dfrac{Y}{A}\hat{Y}_t - \dfrac{PC}{A}(\hat{P}_t + \hat{C}_t)  \Rightarrow \]
+\[ \hat{A}_{t+1} = (1+r)\left (\dfrac{r}{1+r}\hat{r}_t+\hat{A}_t\right ) + \dfrac{Y}{A}\hat{Y}_t - \dfrac{PC}{A}(\hat{P}_t + \hat{C}_t)  \Rightarrow \]
+\[ \hat{A}_{t+1} = r\hat{r}_t + (1+r)\hat{A}_t + \dfrac{Y}{A}\hat{Y}_t - \dfrac{PC}{A}(\hat{P}_t + \hat{C}_t)  . \]
 \end{frame}
 
 

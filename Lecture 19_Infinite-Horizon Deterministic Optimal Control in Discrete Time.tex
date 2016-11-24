@@ -210,7 +210,7 @@ v(x) = \max_{y\in \Gamma(x)}\left \{ F(x,y)+\beta v(y)  \right \},\quad \forall 
 \item The Euler equations can be supplemented with appropriate transversality conditions to obtain sufficient conditions for optimality.
 \item The precise formulation requires technical concepts and assumptions that are beyond this course (see Stokey and Lucas, Ch. 4).
 \item The main assumptions are that $ X $ is a convex subset of $ \mathbb{R}^n_{+} $, $ \Gamma (x) $ is nonempty and compact, $ F $ is bounded, concave, differentiable and strictly increasing in $ x_t $. There are additional assumptions and qualifications.
-\item The essence of the sufficiency result is that, under the required assumptions, a feasible sequence $ \{x^*_t\}_{t=0}^{\infty} $ satisfying the Euler equations \eqref{eq:Euler} and the transversality condition \[ \lim\limits_{t\rightarrow \infty}\beta^t \nabla_x F(x_t^*,x_{t+1}^*)\cdot x^*_t = 0 \] is optimal for problem \eqref{eq:OCvarform}.
+\item The essence of the sufficiency result is that, under the required assumptions, a feasible sequence $ \{x^*_t\}_{t=0}^{\infty} $ satisfying the Euler equations \eqref{eq:Euler} and the transversality condition \[ \lim\limits_{t\rightarrow \infty}\beta^t \nabla_x F(x_t^*,x_{t+1}^*) x^*_t = 0 \] is optimal for problem \eqref{eq:OCvarform}.
 \end{itemize}
 
 
@@ -274,7 +274,7 @@ which determine a sequence of state variables $\{ x_{t+1} \}$, $t=0,1,2,\ldots$ 
 J(x_0,\mathbf{u})=\sum_{t=0}^\infty
 \beta^t F(x_t,u_t)\label{eq:obj}
 \end{equation} attains a maximum \begin{equation}
-v(x_0)=\max {\mathbf{u}} J(x_0,\mathbf{u}).  
+v(x_0)=\max_{\mathbf{u}} J(x_0,\mathbf{u}).  
 \label{eq:objMax}
 \end{equation} 
 \end{frame}
@@ -301,8 +301,8 @@ A variation of the familiar approach for problems of this type is the following:
 \begin{enumerate}
 \item Construct the Lagrangian
 \[\mathcal{L}(x_1,x_2,\ldots,u_0,u_1,\ldots) =
- \sum_{t=0}^{\infty}\beta^t \left[ F(x_t,u_t) + \lambda'_t \cdot
-[f(x_t,u_t)-x_{t+1}] \right],  \] where $\lambda_t=(\lambda^1_t,\ldots,\lambda^n_t)$, $t=0,1,2,\ldots,$ are the Lagrange multipliers and the dot ($ \cdot $) denotes a matrix product or a scalar product: $$\lambda'_t \cdot [f(x_t,u_t)-x_{t+1}]
+ \sum_{t=0}^{\infty}\beta^t \left[ F(x_t,u_t) + \lambda'_t 
+[f(x_t,u_t)-x_{t+1}] \right],  \] where $\lambda_t=(\lambda^1_t,\ldots,\lambda^n_t)'$, $t=0,1,2,\ldots,$ are the Lagrange multipliers and the prime ($ ' $) denotes transposition as usual: $$\lambda'_t  [f(x_t,u_t)-x_{t+1}]
 = \sum_{i=1}^n \lambda_t^i [f^i(x_t,u_t)-x^i_{t+1}].$$
 \end{enumerate}
 \end{block}
@@ -332,14 +332,14 @@ $\{x_{t+1},u_t\}_{t=0}^\infty$.
 \begin{frame}[fragile]
 \frametitle{Necessary conditions for optimality}
 In matrix notation the above takes the form:
-\[ \mathcal{L}_x = \beta^t F_x(x_t,u_t)+\beta^t f'_x(x_t,u_t)\cdot \lambda_t - \beta^{t-1}\lambda_{t-1} = 0 \Rightarrow \]
+\[ \mathcal{L}_x = \beta^t \nabla_x F(x_t,u_t)+\beta^t \nabla'_x f(x_t,u_t) \lambda_t - \beta^{t-1}\lambda_{t-1} = 0 \Rightarrow \]
 \begin{equation}
-\beta ( F_x(x_t,u_t)+ f'_x(x_t,u_t)\cdot \lambda_t ) = \lambda_{t-1}.
+\beta ( \nabla_x F(x_t,u_t)+ \nabla'_x f(x_t,u_t) \lambda_t ) = \lambda_{t-1}.
 \label{eq:LagrX}
 \end{equation}  \bigskip
-\[ \mathcal{L}_u = \beta^t F_u (x_t,u_t)+ \beta^t f'_u(x_t,u_t)\cdot \lambda_t = 0 \Rightarrow \]
+\[ \mathcal{L}_u = \beta^t \nabla_u F (x_t,u_t)+ \beta^t \nabla'_u f(x_t,u_t) \lambda_t = 0 \Rightarrow \]
 \begin{equation}
-F_u (x_t,u_t)+ f'_u(x_t,u_t)\cdot \lambda_t = 0
+\nabla_u F (x_t,u_t)+ \nabla'_u f(x_t,u_t) \lambda_t = 0
 \label{eq:LagrU}
 \end{equation}
 \end{frame}
@@ -370,17 +370,17 @@ We have \begin{equation}
 \end{equation}
 
 Also the extremum condition is \begin{equation}
-F_u(x,\nu(x)) + \beta f'_u(x,\nu(x)) \cdot v_x(f(x,\nu(x))) = 0.
+\nabla_u F(x,\nu(x)) + \beta \nabla'_u f(x,\nu(x))  \nabla v(f(x,\nu(x))) = 0.
 \label{eq:diffCntrl}
 \end{equation} 
 
 Differentiating \eqref{eq:Bellman1} w.r.t. $ x $, we obtain
 \begin{equation*}
 \begin{split}
- v_x(x) = & F_x(x,\nu(x)) +  \nu'_x(x) \cdot F_u(x,\nu(x)) + \\
- & \beta \left[ f'_x(x,\nu(x)) + \nu'_x(x) \cdot f'_u(x,\nu(x))  \right]\cdot v_x(f(x,\nu(x)))\\
- = & F_x(x,\nu(x)) + \beta  f'_x(x,\nu(x))\cdot v_x(f(x,\nu(x))) + \\
- &  \underbrace{\nu'_x(x) \cdot F_u(x,\nu(x)) + \beta \nu'_x(x) \cdot f'_u(x,\nu(x)) \cdot v_x(f(x,\nu(x)))}_{=0 \text{ in view of \eqref{eq:diffCntrl}}}.
+ \nabla v(x) = & \nabla_x F(x,\nu(x)) +  \nabla' \nu(x)  \nabla_u F(x,\nu(x)) + \\
+ & \beta \left[ \nabla'_x f(x,\nu(x)) + \nabla' \nu(x)  \nabla'_u f(x,\nu(x))  \right] \nabla v(f(x,\nu(x)))\\
+ = & \nabla_x F(x,\nu(x)) + \beta  \nabla'_x f(x,\nu(x)) \nabla v(f(x,\nu(x))) + \\
+ &  \underbrace{\nabla' \nu(x)  \nabla_u F(x,\nu(x)) + \beta \nabla' \nu(x)  \nabla'_u f(x,\nu(x)) \nabla v(f(x,\nu(x)))}_{=0 \text{ in view of \eqref{eq:diffCntrl}}}.
 \end{split}
 \end{equation*}
 \end{frame}
@@ -389,20 +389,20 @@ Differentiating \eqref{eq:Bellman1} w.r.t. $ x $, we obtain
 \begin{frame}[fragile]
 \frametitle{Necessary conditions for optimality}
 We thus get \begin{equation}
-v_x(x) = F_x(x,\nu(x)) + \beta  f'_x(x,\nu(x))\cdot v_x(f(x,\nu(x))).
+\nabla v(x) = \nabla_x F(x,\nu(x)) + \beta  \nabla'_x f(x,\nu(x)) \nabla v(f(x,\nu(x))).
 \label{eq:Bellman1dx1}
 \end{equation}
 For $ x=x^*_t $ and $ u^*_t = \nu(x^*_t) $, equations \eqref{eq:diffCntrl} and \eqref{eq:Bellman1dx1} take the form
 \begin{equation}
-F_u(x^*_t,u^*_t) + \beta f'_u(x^*_t,u^*_t) \cdot v_x(x^*_{t+1}) = 0,
+\nabla_u F(x^*_t,u^*_t) + \beta \nabla'_u f(x^*_t,u^*_t)  \nabla v(x^*_{t+1}) = 0,
 \label{eq:diffCntrlA} 
 \end{equation}
 \begin{equation}
-v_x(x^*_t) = F_x(x^*_t,u^*_t) + \beta  f'_x(x^*_t,u^*_t)\cdot v_x(x^*_{t+1}).
+\nabla v(x^*_t) = \nabla_x F(x^*_t,u^*_t) + \beta  \nabla'_x f(x^*_t,u^*_t) \nabla v(x^*_{t+1}).
 \label{eq:Bellman1dx1A}
 \end{equation}
 
-Set $ \lambda_t := \beta v_x(x^*_{t+1}) $ in \eqref{eq:diffCntrlA} and \eqref{eq:Bellman1dx1A}, to obtain precisely \eqref{eq:LagrX} and \eqref{eq:LagrU}.
+Set $ \lambda_t := \beta \nabla v(x^*_{t+1}) $ in \eqref{eq:diffCntrlA} and \eqref{eq:Bellman1dx1A}, to obtain precisely \eqref{eq:LagrX} and \eqref{eq:LagrU}.
 \end{frame}
 
 
@@ -442,7 +442,7 @@ and \eqref{eq:FOCs}. If
 	are concave in $(x,u)$,
 	\item The Lagrange multipliers $\lambda_t^1,\ldots,\lambda_t^n,
 	~t=0,1,2,\ldots$ are nonnegative,
-	\item The state space $X$ is a subset of $\mathbb{R}^n_+$ and the following transversality condition is valid $$\lim_{T\rightarrow \infty} \beta^T \lambda'_T \cdot
+	\item The state space $X$ is a subset of $\mathbb{R}^n_+$ and the following transversality condition is valid $$\lim_{T\rightarrow \infty} \beta^T \lambda'_T 
 	x^*_{T+1}=0,$$
 	\end{enumerate} 
 then the sequence $\{x^*_{t+1},u^*_t\}$ (for a given $x_0$) is optimal for problem  \eqref{eq:state}-\eqref{eq:objMax}.
@@ -456,13 +456,13 @@ We shall verify the validity of Fact \ref{fc:sufficiency}.\bigskip
 
 Recall that \eqref{eq:FOCs} in matrix terms is given by \eqref{eq:LagrX} and \eqref{eq:LagrU}.
 
-Consider \[ \mathcal{L}_T(x_t,u_t) = \sum_{t=0}^{T}\beta^t \left\{ F(x_t,u_t) + \lambda'_t \cdot [f(x_t,u_t)-x_{t+1}] \right\} .\]
+Consider \[ \mathcal{L}_T(x_t,u_t) = \sum_{t=0}^{T}\beta^t \left\{ F(x_t,u_t) + \lambda'_t  [f(x_t,u_t)-x_{t+1}] \right\} .\]
 
 We have \begin{equation}
 \begin{split}
-& D := \mathcal{L}_T (x_t,u_t) - \mathcal{L}_T(x^*_t,u^*_t) = \sum_{t=0}^{T}\beta^t \lambda'_t \cdot (x^*_{t+1} - x_{t+1} )+  \\
-& \sum_{t=0}^{T}\beta^t [ F(x_t,u_t) + \lambda'_t \cdot f(x_t,u_t) 
-- F(x^*_t,u^*_t) - \lambda'_t \cdot f(x^*_t,u^*_t) ].
+& D := \mathcal{L}_T (x_t,u_t) - \mathcal{L}_T(x^*_t,u^*_t) = \sum_{t=0}^{T}\beta^t \lambda'_t  (x^*_{t+1} - x_{t+1} )+  \\
+& \sum_{t=0}^{T}\beta^t [ F(x_t,u_t) + \lambda'_t  f(x_t,u_t) 
+- F(x^*_t,u^*_t) - \lambda'_t  f(x^*_t,u^*_t) ].
 \end{split}
 \label{eq:LagrDiff}
 \end{equation}
@@ -473,11 +473,11 @@ We have \begin{equation}
 \frametitle{Sufficient conditions}
 Then, in view of concavity, we get \begin{equation*}
 \begin{split}
-&\mathcal{L}_T (x_t,u_t) - \mathcal{L}_T(x^*_t,u^*_t) ~~(= D)~~ \leq \sum_{t=0}^{T}\beta^t \lambda'_t \cdot (x^*_{t+1} - x_{t+1} )+  \\
-&\sum_{t=0}^{T}\beta^t [ f^{0'}_x(x^*_t,u^*_t)\cdot(x_t-x_t^*) +f^{0'}_u(x^*_t,u^*_t)\cdot(u_t-u_t^*) +\\
-& \lambda'_t \cdot [f_x(x^*_t,u^*_t)\cdot(x_t-x_t^*) + f_u(x^*_t,u^*_t)\cdot (u_t-u_t^*) ]] = \\
-& \sum_{t=0}^{T}\beta^t \lambda'_t \cdot (x^*_{t+1} - x_{t+1} )+  \sum_{t=0}^{T}\beta^t \underbrace{[f^{0'}_x(x^*_t,u^*_t) + \lambda'_t \cdot f_x(x^*_t,u^*_t)]}_{=\frac{\lambda'_{t-1}}{\beta} \text{ in view of }  \eqref{eq:LagrX} }\cdot(x_t-x_t^*)\\
-& + \sum_{t=0}^{T}\beta^t \underbrace{[f^{0'}_u(x^*_t,u^*_t) + \lambda'_t \cdot f_u(x^*_t,u^*_t)]}_{=\mathbf{0}' \text{ in view of } \eqref{eq:LagrU}}\cdot(u_t-u_t^*).
+&\mathcal{L}_T (x_t,u_t) - \mathcal{L}_T(x^*_t,u^*_t) ~~(= D)~~ \leq \sum_{t=0}^{T}\beta^t \lambda'_t  (x^*_{t+1} - x_{t+1} )+  \\
+&\sum_{t=0}^{T}\beta^t [ \nabla'_x F(x^*_t,u^*_t)(x_t-x_t^*) + \nabla'_u F(x^*_t,u^*_t) (u_t-u_t^*) +\\
+& \lambda'_t  [\nabla_x f(x^*_t,u^*_t)(x_t-x_t^*) + \nabla_u f(x^*_t,u^*_t) (u_t-u_t^*) ]] = \\
+& \sum_{t=0}^{T}\beta^t \lambda'_t  (x^*_{t+1} - x_{t+1} )+  \sum_{t=0}^{T}\beta^t \underbrace{[\nabla'_x F(x^*_t,u^*_t) + \lambda'_t  \nabla_x f(x^*_t,u^*_t)]}_{=\frac{\lambda'_{t-1}}{\beta} \text{ in view of }  \eqref{eq:LagrX} } (x_t-x_t^*)\\
+& + \sum_{t=0}^{T}\beta^t \underbrace{[\nabla'_u F(x^*_t,u^*_t) + \lambda'_t  \nabla_u f(x^*_t,u^*_t)]}_{=\mathbf{0}' \text{ in view of } \eqref{eq:LagrU}} (u_t-u_t^*).
 \end{split}
 \end{equation*}
 \end{frame}
@@ -486,13 +486,13 @@ Then, in view of concavity, we get \begin{equation*}
 
 \begin{frame}[fragile]
 \frametitle{Sufficient conditions}
-I.e. \begin{equation*}
+We therefore have \begin{equation*}
 \begin{split}
- D \leq &   \sum_{t=0}^{T}\beta^t \lambda'_t \cdot (x^*_{t+1} - x_{t+1} ) +  \sum_{t=0}^{T}\beta^t \frac{\lambda'_{t-1}}{\beta}\cdot\underbrace{(x_t-x_t^*)}_{\text{N.B.: } x_0 = x^*_0} = \\
-&  \sum_{t=0}^{T}\beta^t \lambda'_t \cdot (x^*_{t+1} - x_{t+1} ) +  \sum_{t = {\color{red}1}}^{T}\beta^{t-1} \frac{\lambda'_{t-1}}{\beta}\cdot(x_t-x_t^*)= \\
-&  \sum_{t=0}^{T}\beta^t \lambda'_t \cdot (x^*_{t+1} - x_{t+1} ) +  \sum_{t = {\color{red} 0}}^{{\color{red} T-1}}\beta^{{\color{red} t}} \frac{\lambda'_{{\color{red} t}}}{\beta}\cdot(x_{{\color{red} t+1}}-x_{{\color{red} t+1}}^*)= \\
-& \underbrace{\sum_{t=0}^{{\color{red} T-1}}\beta^t \lambda'_t \cdot (x^*_{t+1} - x_{t+1}) +  \sum_{t = 0}^{T-1}\beta^{t} \frac{\lambda'_{t}}{\beta}\cdot(x_{ t+1}-x_{t+1}^*)}_{=0} + \\
-& \beta^T \lambda'_T \cdot (x^*_{T+1} - x_{T+1})  \underbrace{\leq}_{\text{since }\lambda_t,x_t \geq \mathbf{0}} \beta^T \lambda'_T \cdot x^*_{T+1}.
+ D \leq &   \sum_{t=0}^{T}\beta^t \lambda'_t  (x^*_{t+1} - x_{t+1} ) +  \sum_{t=0}^{T}\beta^t \frac{\lambda'_{t-1}}{\beta}\underbrace{(x_t-x_t^*)}_{\text{N.B.: } x_0 = x^*_0} = \\
+&  \sum_{t=0}^{T}\beta^t \lambda'_t  (x^*_{t+1} - x_{t+1} ) +  \sum_{t = {\color{red}1}}^{T}\beta^{t-1} \frac{\lambda'_{t-1}}{\beta}(x_t-x_t^*)= \\
+&  \sum_{t=0}^{T}\beta^t \lambda'_t  (x^*_{t+1} - x_{t+1} ) +  \sum_{t = {\color{red} 0}}^{{\color{red} T-1}}\beta^{{\color{red} t}} \frac{\lambda'_{{\color{red} t}}}{\beta}(x_{{\color{red} t+1}}-x_{{\color{red} t+1}}^*)= \\
+& \underbrace{\sum_{t=0}^{{\color{red} T-1}}\beta^t \lambda'_t  (x^*_{t+1} - x_{t+1}) +  \sum_{t = 0}^{T-1}\beta^{t} \frac{\lambda'_{t}}{\beta}(x_{ t+1}-x_{t+1}^*)}_{=0} + \\
+& \beta^T \lambda'_T  (x^*_{T+1} - x_{T+1})  \underbrace{\leq}_{\text{since }\lambda_t,x_t \geq \mathbf{0}} \beta^T \lambda'_T  x^*_{T+1}.
 \end{split}
 \end{equation*}
 \end{frame}
@@ -501,7 +501,7 @@ I.e. \begin{equation*}
 \begin{frame}[fragile]
 \frametitle{Sufficient conditions}
 In view of the transversality condition, we have: \begin{equation*}
- D \leq  \beta^T \lambda'_T \cdot x^*_{T+1} ~ \mathop{\longrightarrow}_{T \rightarrow \infty} ~0 ,
+ D \leq  \beta^T \lambda'_T  x^*_{T+1} ~ \mathop{\longrightarrow}_{T \rightarrow \infty} ~0 ,
 \end{equation*}
 i.e. 
 \[  \mathcal{L}_T(x^*_t,u^*_t) - \mathcal{L}_T (x_t,u_t) \geq 0, \] which proves the optimality of the sequence

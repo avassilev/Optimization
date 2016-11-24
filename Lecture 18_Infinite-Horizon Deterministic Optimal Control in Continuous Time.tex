@@ -212,7 +212,7 @@ Then there exist a constant $ \lambda_0 $ and (piecewise) continuously different
 \begin{enumerate}
 \item $ (\lambda_0,\lambda(t)) \neq (0,\ldots,0)$,
 \item $ H(x^*(t),u^*(t),\lambda(t),t )\geq H(x^*(t),u(t),\lambda(t),t ),~\forall u(t)\in \Omega(t) $,
-\item $ \dot{\lambda}(t) = -H'_x(x^*(t),u^*(t),\lambda(t),t) $.
+\item $ \dot{\lambda}(t) = -\nabla_x H(x^*(t),u^*(t),\lambda(t),t) $.
 \end{enumerate}
 
 Moreover, either $ \lambda_0=0 $ or $ \lambda_0=1 $.
@@ -238,14 +238,14 @@ Fact \ref{fc:HalkinNCs} is relatively easy to check but often provides too many 
 Consider the problem \eqref{eq:InfHorOCproblem}, assuming that the set $ \Omega $ is convex and $ F,f $ are continuously differentiable with respect to $ u $. Suppose $ (x^*,u^*) $ is an admissible pair and there exists a continuous function $ \lambda(t) $ such that, using the Hamiltonian \eqref{eq:HamiltP0}, for $ \lambda_0=1 $ and $ t\geq 0 $ we have
 \begin{enumerate}
 \item $ u^*(t) $ maximizes $ H(x^*(t),u(t),\lambda(t),t )$ for $ u(t)\in \Omega $,
-\item $ \dot{\lambda}(t) = -H'_x(x^*(t),u^*(t),\lambda(t),t) $,
+\item $ \dot{\lambda}(t) = -\nabla_x H(x^*(t),u^*(t),\lambda(t),t) $,
 \item $ H(x,u,\lambda(t),t ) $ is concave in $ (x,u),~\forall t \geq 0 $.
 \end{enumerate}
 
 Then the following transversality condition guarantees that $ (x^*,u^*) $ is overtaking optimal:
 
 For all admissible $ x(t) $ there exists a number $ t' $ such that \newline
-${} \qquad \qquad \lambda(t)\cdot (x(t)-x^*(t))\geq 0,\quad t\geq t'. $ 
+${} \qquad \qquad \lambda'(t) (x(t)-x^*(t))\geq 0,\quad t\geq t'. $ 
 \label{fc:SCsOT}
 \end{Fact}
 \end{frame}

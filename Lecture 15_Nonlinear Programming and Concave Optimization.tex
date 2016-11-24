@@ -601,7 +601,7 @@ with the additional assumptions that the objective function $ f $ is concave and
 \frametitle{The concave case without constraints}
 It is useful to start with the following result for \emph{unconstrained} concave optimization problems:
 \begin{Fact}
-Let $ U $ be a convex subset of $ \mathbb{R}^n $ and $ f $ be a continuously differentiable concave function on $ U $. A point $ \mathbf{x^*} \in U $ is a \emph{global maximum} of $ f $ if and only if \[ \nabla f(\mathbf{x^*})\cdot (\mathbf{x}-\mathbf{x^*}) \leq 0,\quad \forall \mathbf{x} \in U. \]
+Let $ U $ be a convex subset of $ \mathbb{R}^n $ and $ f $ be a continuously differentiable concave function on $ U $. A point $ \mathbf{x^*} \in U $ is a \emph{global maximum} of $ f $ if and only if \[ \nabla' f(\mathbf{x^*}) (\mathbf{x}-\mathbf{x^*}) \leq 0,\quad \forall \mathbf{x} \in U. \]
 
 If $ U $ is open or $ \mathbf{x^*} \in \interior U$, then $ \mathbf{x^*} $ is a global maximum of $ f $ on $ U $ if and only if \[  \nabla f(\mathbf{x^*}) = 0. \]
 \label{fc:ConcaveUnconstr}
