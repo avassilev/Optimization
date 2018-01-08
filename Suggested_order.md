@@ -1,8 +1,8 @@
 # Suggested order of topics
 
 1. Numerical Linear Programming
-2. Review of Basic Optimization Techniques
-3. Numerical Optimization
+2. Introduction to Numerical Optimization
+3. Review of Basic Optimization Techniques
 4. Nonlinear Programming and Concave Optimization
 5. Introduction to the Calculus of Variations and Isoperimetric Variational Problems
 6. Finite-Horizon Deterministic Optimal Control in Continuous Time
