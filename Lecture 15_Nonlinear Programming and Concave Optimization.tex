@@ -67,11 +67,11 @@
   }
 } 
 
-\title{R401: Statistical and Mathematical Foundations}
-\subtitle{Lecture 15: Nonlinear Programming and Concave Optimization}
+\title{R401: Statistical and Mathematical Foundations \bigskip}
+\subtitle{\textcolor{myred}{Nonlinear Programming and Concave Optimization}}
 \author{Andrey Vassilev}
 
-\date{2016/2017} 
+\date{} 
     
 \AtBeginSection{\frame{\usebeamerfont{section title}\centering\insertsection}}
 
@@ -274,7 +274,7 @@ Therefore, a strict application of Fact \ref{fc:KT_NCs} would have required to t
 \label{ex:revisitKTillustrated}
 \end{example}\bigskip
 
-\textbf{Homework:} Consider the problem $ \max_{x,y} f(x,y)=1-2x^2-3y^2 $ s.t. $ x\geq 5,~y \geq 6 $. Solve it using the K-T procedure. Can you guess the solution without using formal methods?
+%\textbf{Homework:} Consider the problem $ \max_{x,y} f(x,y)=1-2x^2-3y^2 $ s.t. $ x\geq 5,~y \geq 6 $. Solve it using the K-T procedure. Can you guess the solution without using formal methods?
 \end{frame}
 
 \begin{frame}[fragile]
@@ -363,7 +363,7 @@ To cast the problem in canonical form, we rewrite the nonnegativity constraints 
 
 The Lagrangian is \[ \mathcal{L} = x_1^\alpha x_2^\beta - \lambda_1 ( p_1 x_1 + p_2 x_2 - I) -\lambda_2 (-x_1) - \lambda_3 (-x_2) \] and is {\color{red}concave} in $ (x_1,x_2) $.\bigskip
 
-\textbf{Homework:} Prove the concavity of $ \mathcal{L} $.\bigskip
+%\textbf{Homework:} Prove the concavity of $ \mathcal{L} $.\bigskip
 
 \textbf{Note: }The concavity of the Lagrangian depends on the concavity of $ U(x_1,x_2) $, which hinges on the assumption $ \alpha+\beta < 1 $.
 \end{frame}
@@ -471,19 +471,19 @@ Given that the formulas for $ x_1 $ and $ x_2 $ computed above confirm that $ x_
 \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]
-\frametitle{Wrap up on problems with inequality constraints}
-Test your understanding of the material by solving the following:
-
-\textbf{Homework:} \[ \max_{x_1,x_2} 6x_1-2 x_1^2 + 2 x_1 x_2-2x_2^2  \]
-s.t. 
-\[ 3x_1+4x_2 \leq 6, \] 
-\[ -x_1 + 4x_2^2 \leq 2, \]
-\[  x_1\geq 0,\quad x_2\geq 0. \]
-
-\textbf{Homework:} A firm produces its output using the production technology $ A q_1^a q_2^b,~a,b>0 $, where $ q_1,q_2 \geq 0 $ are the inputs used in production. The cost per unit of the first input is $ w_1 >0 $ and for the second input is $ w_2 >0$. Demand for the firm's output is $ Q>0 $. Use the K-T approach to find the input combination that minimizes costs while ensuring enough is produced to meet demand, i.e. \[ \min_{q_1,q_2} w_1 q_1 + w_2 q_2\]
-s.t. \[ A q_1^a q_2^b \geq Q,\quad q_1,q_2 \geq 0. \]
-\end{frame}
+%\begin{frame}[fragile]
+%\frametitle{Wrap up on problems with inequality constraints}
+%Test your understanding of the material by solving the following:
+%
+%\textbf{Homework:} \[ \max_{x_1,x_2} 6x_1-2 x_1^2 + 2 x_1 x_2-2x_2^2  \]
+%s.t. 
+%\[ 3x_1+4x_2 \leq 6, \] 
+%\[ -x_1 + 4x_2^2 \leq 2, \]
+%\[  x_1\geq 0,\quad x_2\geq 0. \]
+%
+%\textbf{Homework:} A firm produces its output using the production technology $ A q_1^a q_2^b,~a,b>0 $, where $ q_1,q_2 \geq 0 $ are the inputs used in production. The cost per unit of the first input is $ w_1 >0 $ and for the second input is $ w_2 >0$. Demand for the firm's output is $ Q>0 $. Use the K-T approach to find the input combination that minimizes costs while ensuring enough is produced to meet demand, i.e. \[ \min_{q_1,q_2} w_1 q_1 + w_2 q_2\]
+%s.t. \[ A q_1^a q_2^b \geq Q,\quad q_1,q_2 \geq 0. \]
+%\end{frame}
 
 \end{section}
 

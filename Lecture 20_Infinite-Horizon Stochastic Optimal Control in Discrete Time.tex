@@ -67,11 +67,11 @@
   }
 } 
 
-\title{R401: Statistical and Mathematical Foundations}
-\subtitle{Lecture 20: Infinite-Horizon Stochastic Optimal Control in Discrete Time}
+\title{R401: Statistical and Mathematical Foundations \bigskip}
+\subtitle{\textcolor{myred}{Infinite-Horizon Stochastic Optimal Control in Discrete Time}}
 \author{Andrey Vassilev}
 
-\date{2016/2017} 
+\date{} 
     
 \AtBeginSection{\frame{\usebeamerfont{section title}\centering\insertsection}}
 
@@ -244,8 +244,8 @@ We apply the expectation operator $ E_t $:
 \[ E_t \{\lambda_t\} = E_t\{\beta(1+r)\lambda_{t+1}\} \quad\Longrightarrow\quad \lambda_t = \beta(1+r)E_t\{\lambda_{t+1}\} \]
 
 Substituting $ \lambda_t = C_t^{-\sigma} $ in the last expression:
-\[ C_t^{-\sigma} = \beta (1+r)E_t \left\{C_{t+1}^{-\sigma}\right\} \] \pause
-\textbf{Homework:} Solve Example I for the case when the state equation is presented according to the convention $A_{t}=(1+r)A_{t-1} + Y_t - C_t$.
+\[ C_t^{-\sigma} = \beta (1+r)E_t \left\{C_{t+1}^{-\sigma}\right\} \] %\pause
+%\textbf{Homework:} Solve Example I for the case when the state equation is presented according to the convention $A_{t}=(1+r)A_{t-1} + Y_t - C_t$.
 \end{frame}
 
 
@@ -289,7 +289,7 @@ Substitute the expression for $ \lambda $ for times $ t $ and $ t+1 $ to obtain
 
 We ultimately get \[ \frac{W_t}{P_t} = -\frac{U_{n,t}}{U_{c,t}}, \quad Q_t = \beta E_t \left\{ \frac{U_{c,t+1}}{U_{c,t}}\frac{P_t}{P_{t+1}} \right\} \text{ for } t=0,1,2,\ldots \]
 
-\textbf{Homework:} What do the above NCs look like for the case when the utility function has the form $ U(C_t,N_t)=\frac{C_t^{1-\sigma}}{1-\sigma}-\frac{N_t^{1+\varphi}}{1+\varphi},~\sigma>0,~\varphi \geq 1 $?
+%\textbf{Homework:} What do the above NCs look like for the case when the utility function has the form $ U(C_t,N_t)=\frac{C_t^{1-\sigma}}{1-\sigma}-\frac{N_t^{1+\varphi}}{1+\varphi},~\sigma>0,~\varphi \geq 1 $?
 \end{frame}
 
 \end{section}

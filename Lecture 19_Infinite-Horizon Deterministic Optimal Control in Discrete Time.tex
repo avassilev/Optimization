@@ -67,11 +67,11 @@
   }
 } 
 
-\title{R401: Statistical and Mathematical Foundations}
-\subtitle{Lecture 19: Infinite-Horizon Deterministic Optimal Control in Discrete Time}
+\title{R401: Statistical and Mathematical Foundations \bigskip}
+\subtitle{\textcolor{myred}{Infinite-Horizon Deterministic Optimal Control in Discrete Time}}
 \author{Andrey Vassilev}
 
-\date{2016/2017} 
+\date{} 
     
 \AtBeginSection{\frame{\usebeamerfont{section title}\centering\insertsection}}
 
@@ -426,9 +426,9 @@ The Lagrangian for the problem is \[ \mathcal{L} = \sum_{t=0}^{\infty}\beta^t \l
 
 Substituting the $ 1/c_t $ for $ \lambda_t $, we obtain \[ c_t = \beta c_{t-1} (1-\delta + \alpha A k_t^{\alpha-1}). \]
 
-This is a version of a \emph{consumption Euler equation} showing how consumption changes between two periods.\bigskip \pause
+This is a version of a \emph{consumption Euler equation} showing how consumption changes between two periods.%\bigskip \pause
 
-\textbf{Homework:} Use the state equation for the model to eliminate $ c_t $ from the above consumption Euler equation and obtain a difference equation involving only $ k $. How does this result differ from the result for the same example in variational form?
+%\textbf{Homework:} Use the state equation for the model to eliminate $ c_t $ from the above consumption Euler equation and obtain a difference equation involving only $ k $. How does this result differ from the result for the same example in variational form?
 \end{frame}
 
 
@@ -509,16 +509,16 @@ $\{x^*_{t+1},u^*_t\}$.
 \end{frame}
 \end{section}
 
-\begin{frame}[fragile]
-\frametitle{Homework}
-\framesubtitle{}
-Derive the NCs for the problem 
-\[ \sum_{t=0}^{\infty}\beta^t \ln (x_t-u_t) \]
-s.t.
-\[ x_{t+1}=u_t,\qquad x_0>0,\quad u_t>0. \]
-
-Express the result as a system of difference equations for $ x $ and $ \lambda $.
-\end{frame}
+%\begin{frame}[fragile]
+%\frametitle{Homework}
+%\framesubtitle{}
+%Derive the NCs for the problem 
+%\[ \sum_{t=0}^{\infty}\beta^t \ln (x_t-u_t) \]
+%s.t.
+%\[ x_{t+1}=u_t,\qquad x_0>0,\quad u_t>0. \]
+%
+%Express the result as a system of difference equations for $ x $ and $ \lambda $.
+%\end{frame}
 
 
 \begin{frame}[fragile]

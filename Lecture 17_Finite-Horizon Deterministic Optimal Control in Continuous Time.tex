@@ -67,11 +67,11 @@
   }
 } 
 
-\title{R401: Statistical and Mathematical Foundations}
-\subtitle{Lecture 17: Deterministic Optimal Control in Continuous Time: The Finite Horizon Case}
+\title{R401: Statistical and Mathematical Foundations \bigskip}
+\subtitle{\textcolor{myred}{Deterministic Optimal Control in Continuous Time: The Finite Horizon Case}}
 \author{Andrey Vassilev}
 
-\date{2016/2017} 
+\date{} 
     
 \AtBeginSection{\frame{\usebeamerfont{section title}\centering\insertsection}}
 
@@ -380,7 +380,7 @@ Since $ \partial H / \partial w  = r\lambda$, we obtain the adjoint equation \[ 
 \frametitle{The maximum principle in action}
 \addtocounter{theorem}{-1}
 \begin{example}[cont.]
-\textbf{Homework:} Show that the solution of the adjoint equation is given by \[ \lambda(t)=\lambda_0 e^{-rt}. \]\bigskip
+%\textbf{Homework:} Show that the solution of the adjoint equation is given by \[ \lambda(t)=\lambda_0 e^{-rt}. \]\bigskip
 
 The transversality condition $ \lambda(T)=S'_x(w(T),T) $ takes the form \[ \lambda(T) = \xi e^{-\rho T}\dfrac{1}{w(T)}. \]
 
@@ -397,7 +397,7 @@ Therefore \[ \lambda(t)=\dfrac{\xi e^{-(\rho-r)T}}{w(T)} e^{-rt} \] and \[ c(t) 
 The equation $ \dot{w} - rw = -c $ is a first-order linear differential equation with variable right-hand side. Its solution, after substituting the expression for $ c(t) $, is 
 \[ w(t) = w_0 e^{rt} + \dfrac{w(T)}{\xi \rho}e^{(\rho-r)T}\left( e^{(r-\rho)t}-e^{rt} \right). \]
 
-\textbf{Homework:} Using the results from SHSS, p. 202, verify the last assertion.
+%\textbf{Homework:} Using the results from SHSS, p. 202, verify the last assertion.
 \end{example}
 \end{frame}
 
@@ -605,12 +605,12 @@ This is the familiar Euler equation from calculus of variations.\bigskip
 \end{section}
 
 
-\begin{frame}[fragile]
-\frametitle{Homework problems}
-\textbf{Homework:} Derive and solve the NCs for the problem \[ \max_{u(t)\in \mathbb{R}}\int_{0}^{2}[e^t x(t)-u(t)^2]\,dt \] s.t. \[ \dot{x}(t)=-u(t),\quad x(0) = 0. \] \bigskip
-
-\textbf{Homework:} Derive and solve the NCs for the problem \[ \max_{u(t)\in \mathbb{R}}\int_{0}^{1}[x(t)+u(t)^2]\,dt \] s.t. \[ \dot{x}(t)=-u(t),\quad x(0) = 0. \]
-\end{frame}
+%\begin{frame}[fragile]
+%\frametitle{Homework problems}
+%\textbf{Homework:} Derive and solve the NCs for the problem \[ \max_{u(t)\in \mathbb{R}}\int_{0}^{2}[e^t x(t)-u(t)^2]\,dt \] s.t. \[ \dot{x}(t)=-u(t),\quad x(0) = 0. \] \bigskip
+%
+%\textbf{Homework:} Derive and solve the NCs for the problem \[ \max_{u(t)\in \mathbb{R}}\int_{0}^{1}[x(t)+u(t)^2]\,dt \] s.t. \[ \dot{x}(t)=-u(t),\quad x(0) = 0. \]
+%\end{frame}
 
 \begin{frame}[fragile]
 \frametitle{Readings}
